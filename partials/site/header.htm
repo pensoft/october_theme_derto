@@ -1,0 +1,59 @@
+[menu]
+start = "id-1"
+activeNode = 0
+listItemClasses = "nav-item"
+primaryClasses = "navbar-nav"
+secondaryClasses = "dropdown-menu"
+numberOfLevels = 2
+==
+<nav class="pr-1 pl-1 navbar fixed" id="headernavbar">
+    <div id="menuToggle">
+        <input type="checkbox" />
+        <span></span>
+        <span></span>
+        <span></span>
+        {% component 'menu' %}
+    </div>
+    <a href="{{'home'|page}}" class="navbar-brand" style="background: url('{{ this.theme.site_logo.getPath() }}') center no-repeat; background-size: contain;">
+
+    </a>
+
+    <div class="navbar-collapse collapse end-xs" id="headerNavbarNav" style="display: none;">
+        {% component 'menu' %}
+    </div>
+
+    <div class="search-and-social-media hidden-xs">
+        <ul class="navbar-nav">
+            <li class="nav-item social">
+                <a onclick="showSearchForm();" aria-label="Search" class="search-button-container">
+                    <span class="search-btn"></span>
+                </a>
+            </li>
+            <li class="nav-item social">
+                <div id="google_translate_element"></div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- SEARCH -->
+    {% partial 'components/search-popup' %}
+
+</nav>
+
+<div class="header-image {{page_id}}">
+    <div class="header_image_overlay"></div>
+    {% if page_id == 'home' %}
+    
+    <!-- HERO SECTION -->
+    {% partial 'components/hero' %}
+
+    {% else %}
+    <div class="header-image-bar" {% if user and this.page.id != 'home' %} style="margin-top: 154px!important;" {% endif %}>
+        <h1 class="page-header">{% if page_title %} {{page_title}} {% else %} {{site_name}} {% endif %}</h1>
+        <!-- <video autoplay loop muted playsinline class="header-video">
+            <source src="{{ 'home_intro.mp4'|media }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video> -->
+    </div>
+    {% endif %}
+</div>

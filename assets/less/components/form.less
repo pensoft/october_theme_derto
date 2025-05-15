@@ -1,0 +1,153 @@
+.ui.form {
+    .field + .field {
+        margin-top: 1rem;
+    }
+    .fields {
+        display: flex;
+        margin: 0 -.5rem;
+        flex-direction: column;
+
+        .field + .field {
+            margin-top: 1rem;
+        }
+
+        &.inline {
+            flex-direction: row;
+
+            .field {
+                margin-top: 0;
+            }
+        }
+        .field {
+            padding-left: .5rem;
+            padding-right: .5rem;
+            clear: both;
+            margin: 0;
+        }
+    }
+
+    .field {
+        display: flex;
+        flex-direction: column;
+        &.inline {
+            flex-direction: row;
+            width: auto;
+            align-items: center!important;
+            input, textarea {
+                width: auto;
+            }
+        }
+        & > label {
+            display: block;
+            margin: 0 0 .3rem 9px;
+            white-space: nowrap;
+        }
+        & > input, textarea, select {
+            display: block;
+            width: 100%;
+            font-size: @font-size;
+            color: @border-color;
+            background: #F6F6F6 0% 0% no-repeat padding-box;
+            border-radius: 5px;
+            box-sizing: border-box;
+            padding: .555rem 1rem;
+            .line-height();
+            //border: 0px solid @border-color;
+            //border-right-width: 15px;
+            //border-right-color: white;
+            //box-shadow: 0 0 0 1px @border-color;
+            height: 47px;
+            line-height: 1em;
+            border: none;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
+    .field, .group-holder label{
+        position: relative;
+    }
+
+    /* Hide the default checkbox */
+    input[type="checkbox"] {
+        visibility: hidden;
+        cursor: pointer;
+        margin-right: 10px
+    }
+
+    /* Create a custom checkbox */
+    .mark {
+        position: absolute;
+        top: 8px;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: white;
+        border: 1px solid @link-color;
+        cursor: pointer;
+    }
+
+    .field:hover input ~ .mark {
+        background-color: @link-color;
+        opacity: 0.3;
+    }
+
+    input:checked ~ .mark {
+        background-color: @link-color!important;
+        background-image: none;
+    }
+
+    /* Create the mark/indicator (hidden when not checked) */
+    .mark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the mark when checked */
+    input:checked ~ .mark:after {
+        display: block;
+    }
+
+    /* Style the mark/indicator */
+    .mark:after {
+        left: 6px;
+        top: 2px;
+        width: 5px;
+        height: 8px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+    }
+
+    .align-items-baseline {
+        position: relative;
+    }
+
+}
+
+.login_form_container{
+    border-radius: 10px;
+    border: 1px solid #B9D7DB;
+    margin: 0 auto;
+    padding: 40px 50px!important;
+    .breakpoint-large-down({
+        padding: 20px 0!important;
+    });
+
+    button{
+        border: none;
+    }
+    input{
+        background: #F6F6F6 0% 0% no-repeat padding-box;
+        border-radius: 5px;
+        border: none;
+        width: 80% !important;
+        margin: 0 auto;
+    }
+    a{
+        color: @link-color!important;
+    }
+}

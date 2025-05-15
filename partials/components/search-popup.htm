@@ -1,0 +1,21 @@
+<div class="search-modal-overlay" id="searchModalOverlay">
+    <div class="search-modal">
+        <div class="search-modal-header">
+            <button type="button" class="close-search" onclick="hideSearchForm();">
+                <span class="close-icon">×</span>
+            </button>
+        </div>
+        <div class="search-modal-content">
+            <h3 class="search-title">Search DERTO</h3>
+            <form class="search-form" action="{{ url('search')}}" method="get">
+                <div class="search-input-wrapper">
+                    <input class="form-control search_input" name="q" type="text" autocomplete="on" placeholder="Search the website...">
+                    <button type="submit" class="search-submit"></button>
+                </div>
+                <div class="search-hints">
+                    Press <kbd>Enter</kbd> to search or <kbd>ESC</kbd> to close
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

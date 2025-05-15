@@ -1,0 +1,117 @@
+[menu footer_menu]
+start = "id-10"
+activeNode = 0
+listItemClasses = "footer-menu-item"
+primaryClasses = "footer-menu"
+secondaryClasses = "dropdown-menu"
+numberOfLevels = 1
+
+[cookieConsent]
+message = "This website uses cookies to ensure you get the best experience on our website."
+dismiss = "Got it!"
+learnMore = "Opt-out here"
+link = "/privacy-policy#cookies"
+theme = "dark-bottom"
+
+[jumbotron funding-text]
+jumbotron = "funding-text"
+background = "transperant"
+templates = "template2"
+description_limit = 0
+==
+{% component 'cookieConsent' %}
+<!-- <footer class="site-footer">
+    <div class="footer-main">
+        <div class="container pl-0 pr-0">
+            <div class="row between-xs middle-xs top-side">
+                <div class="col-xs-3 col-md-2 col-sm-3">
+                    <div class="footer-logo">
+                        <a href="{{ 'home'|page }}">
+                            <img src="{{ this.theme.site_logo.getPath() }}" alt="OneSTOP Logo" class="logo-image">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-8 col-sm-6">
+                    <div class="footer-menu-wrapper">
+                        <nav class="footer-navigation">
+                            {% component 'footer_menu' %}
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-2 col-sm-3 end-xs">
+                    <div class="footer-social">
+                        <div class="social-icons">
+                            {% if enable_facebook and facebook_url %}
+                            <a href="{{facebook_url}}" target="_blank" class="pr p-secondary p-facebook normal" target="_blank"></a>
+                            {% endif %}
+                            {% if enable_twitter and twitter_url %}
+                            <a href="{{twitter_url}}" target="_blank" class="pr p-secondary p-twitter normal" target="_blank"></a>
+                            {% endif %}
+                            {% if enable_linkedin and linkedin_url %}
+                            <a  href="{{linkedin_url}}" target="_blank" class="pr p-secondary p-linkedin normal" target="_blank"></a>
+                            {% endif %}
+                            {% if enable_youtube and youtube_url %}
+                            <a  href="{{youtube_url}}" target="_blank" class="pr p-secondary p-youtube normal" target="_blank"></a>
+                            {% endif %}
+                            {% if enable_instagram and instagram_url %}
+                            <a  href="{{instagram_url}}" target="_blank" class="pr p-secondary p-instagram normal" target="_blank"></a>
+                            {% endif %}
+                            {% if enable_bluesky and bluesky_url %}
+                            <a  href="{{bluesky_url}}" target="_blank" class="pr p-secondary p-bluesky normal" target="_blank"></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row middle-xs eu-disclaimer-row">
+                <div class="col-xs-12">
+                    <div class="eu-disclaimer">
+                        <div class="row middle-xs">
+                            {% if footer_funds_flag %}
+                            <div class="col-xs-12 col-md-2">
+                                <div class="eu-flag">
+                                    <img class="text mr-0 mr-lg-1" style="height:38px;" src="{{ footer_funds_flag }}"/>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <div class="col-xs-12 col-md-10">
+                                <div class="disclaimer-text">
+                                    {% component 'funding-text' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+            <div class="row coordinator-row">
+                <div class="col-xs-12">
+                    <div class="project-coordinator row">
+                        <div class="coordinator col-xs-12 col-md-10">
+                            <span class="coordinator-label">PROJECT COORDINATOR:</span>
+                            <span class="coordinator-name">Dr Quentin Groom,</span>
+                            <span class="coordinator-org">Meise Botanic Garden,</span>
+                            <span class="coordinator-email">quentin.groom[at]plantentuinmeise.be</span>
+                        </div>
+                        <div class="privacy col-xs-12 col-md-2 end-xs">
+                            <a class="coordinator-privacy end-xs" href="/privacy-policy">PRIVACY POLICY</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container powered-by-container">
+            <div class="row end-xs middle-xs">
+                <div class="col-xs-12">
+                    <div class="powered-by">
+                        <span>Designed and powered by</span>
+                        <a href="https://pensoft.net/" target="_blank">
+                            <img class="pensoft-logo" src="{{ 'assets/images/pensoft-logo.svg'|theme }}" alt="Pensoft Logo" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer> -->

@@ -1,0 +1,126 @@
+// Language Switcher Styles
+.language-dropdown {
+    position: relative;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    padding: 4px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 120px;
+    
+    .selected-language {
+        display: flex;
+        align-items: center;
+        color: #fff;
+        
+        .flag-icon {
+            width: 18px;
+            height: 12px;
+            margin-right: 8px;
+            background-size: cover;
+            display: inline-block;
+        }
+        
+        .language-text {
+            margin-right: 8px;
+            font-weight: 400;
+        }
+        
+        .dropdown-arrow {
+            width: 6px;
+            height: 6px;
+            border-left: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            transform: rotate(-45deg);
+            margin-top: -3px;
+            margin-left: auto;
+        }
+    }
+    
+    .language-options {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        max-height: 200px;
+        overflow-y: auto;
+        background-color: #222;
+        border: 1px solid #444;
+        z-index: 1000;
+        margin-top: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        
+        .language-option {
+            padding: 8px 10px;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            
+            .flag-icon {
+                margin-right: 8px;
+                width: 18px;
+                height: 12px;
+                background-size: cover;
+                display: inline-block;
+            }
+            
+            &:hover {
+                background-color: #333;
+            }
+            
+            &.selected {
+                background-color: #444;
+            }
+        }
+    }
+    
+    &.open {
+        .language-options {
+            display: block;
+        }
+        
+        .dropdown-arrow {
+            transform: rotate(135deg);
+            margin-top: 3px;
+        }
+    }
+}
+
+// Make scrollbar in dropdown more subtle
+.language-options::-webkit-scrollbar {
+    width: 8px;
+}
+
+.language-options::-webkit-scrollbar-track {
+    background: #222;
+}
+
+.language-options::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+// Hide Google Translate elements
+.goog-te-gadget {
+    font-size: 0 !important;
+}
+
+.goog-te-gadget-simple {
+    display: none !important;
+}
+
+.skiptranslate {
+    display: none !important;
+}
+
+.goog-te-banner-frame {
+    display: none !important;
+}
+
+body {
+    top: 0 !important;
+} 
