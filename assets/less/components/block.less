@@ -1,0 +1,75 @@
+.blocks-grid {
+    .blocks-header {
+        h2 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #262F0E;
+            margin-bottom: 20px;
+        }
+    }
+
+    .block-number {
+        font-size: 36px;
+        color: #A5A5A5;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    .block-header {
+        background: #F0F0E4;
+        padding: 16px 20px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-decoration: none;
+        color: #262F0E;
+        cursor: pointer;
+        
+        &:hover {
+            background: rgba(233, 245, 161, 0.55);
+            
+            .block-arrow {
+                transform: rotate(90deg);
+            }
+        }
+        
+        &.expanded {
+            .block-arrow {
+                transform: rotate(90deg);
+            }
+        }
+        
+        .block-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #262F0E;
+            margin-bottom: 0;
+        }
+        
+        .arrow-right {
+            font-size: 16px;
+            color: #262F0E;
+        }
+    }
+    
+    .block-materials-container {
+        margin-top: 20px;
+        display: none;
+        
+        &.expanded {
+            display: block;
+        }
+    }
+
+    .block-arrow{
+        background: url('/themes/pensoft-derto/assets/images/block-arrow.svg') no-repeat center center;
+        background-size: 100%;
+        width: 22px;
+        height: 22px;
+        transition: transform 0.3s ease;
+    }
+}

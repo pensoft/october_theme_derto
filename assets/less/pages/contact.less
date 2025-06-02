@@ -1,0 +1,77 @@
+.contact_info{
+    justify-content: space-between;
+    display: flex;
+    margin-top: 40px;
+    margin-bottom: 40px;
+
+    .col-md-6, .col-md-5{
+        &:nth-of-type(odd){
+            .coordinator_image{
+                background: url("../../assets/images/Circle-Left.png") right center no-repeat;
+                background-size: contain;
+                display: flex;
+                justify-content: end;
+            }
+            .coordinator_info{
+                display: flex;
+                justify-self: end;
+            }
+        }
+        &:nth-of-type(even){
+            .coordinator_image{
+                background: url("../../assets/images/Circle-Right.png") left center no-repeat;
+                background-size: contain;
+                display: flex;
+                justify-content: start;
+            }
+            .coordinator_info{
+                display: flex;
+                justify-self: start;
+            }
+        }
+
+        .coordinator_image{
+            margin-bottom: 20px;
+            img{
+                width: 235px;
+                height: 235px;
+                border-radius: 50%;
+            }
+        }
+
+        .coordinator_info{
+            width: 235px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            h3{
+                color: #262F0E;
+                text-align: center;
+                font-size: 24px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 115%; /* 27.6px */
+            }
+
+            .card_position{
+                color: rgba(38, 47, 14, 0.65);
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 115%; /* 20.7px */
+            }
+
+            .email{
+                color: rgba(38, 47, 14, 0.65);
+                font-size: 17px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 115%; /* 20.7px */
+                margin-top: 20px;
+            }
+        }
+    }
+
+
+}

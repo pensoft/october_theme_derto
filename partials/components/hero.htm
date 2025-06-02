@@ -1,13 +1,121 @@
+==
+<?php
+use Pensoft\Courses\Models\Topic;
+use Pensoft\Courses\Models\Setting;
+use Pensoft\Courses\Models\Language;
+use Pensoft\Partners\Models\Partners;
+use RainLab\Location\Models\Country;
+
+function onStart(){
+    $this['topics'] = Topic::all();
+    $this['blockLevels'] = Setting::getBlockLevelOptions();
+    $this['materialTypes'] = Setting::getMaterialTypeOptions();
+    
+    // Institutions from Partners where type = 1
+    $this['departments'] = Partners::where('type', 1)
+        ->whereNotNull('instituion')
+        ->where('instituion', '!=', '')
+        ->distinct()
+        ->orderBy('instituion')
+        ->pluck('instituion', 'instituion')
+        ->toArray();
+    
+    // Languages including custom languages like Valencian (featured only for hero)
+    $this['languages'] = Language::getFeaturedLanguageOptions();
+}
+?>
+==
 <div class="container-fluid hero-container">
     <div class="video-bg">
         <video autoplay loop muted playsinline class="video-background">
-            <source src="{{ 'home-video.mp4'|media }}" type="video/mp4">
+            <source src="{{ 'home-flower.mp4'|media }}" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
     <div class="hero-content">
         <div class="container">
-
+            <h1 class="text-center">Digital Ecological<br>Restoration Toolbox</h1>
+            
+            <div class="search-container">
+                <div class="search-outer">
+                    <form id="resource-search-form" data-resource-search="true" method="get">
+                        <input type="text" name="q" placeholder="Search for..." class="form-control">
+                        <button type="submit" class="search-btn">
+                            <img src="{{ 'assets/images/search-dark.svg'|theme }}" alt="Search">
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="filters-container">
+                <div class="filter-group">
+                    <button class="filter-trigger" id="languageTrigger">
+                        Language <i class="filter-arrow"></i>
+                    </button>
+                    <div class="filter-options language-options">
+                        <a href="#" class="filter-tag" data-filter="language" data-value="">All Languages</a>
+                        {% for value, label in languages %}
+                            <a href="#" class="filter-tag" data-filter="language" data-value="{{ value }}">{{ label }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <button class="filter-trigger" id="levelTrigger">
+                        Level <i class="filter-arrow"></i>
+                    </button>
+                    <div class="filter-options level-options">
+                        <a href="#" class="filter-tag" data-filter="level" data-value="">All Levels</a>
+                        {% for value, label in blockLevels %}
+                            <a href="#" class="filter-tag" data-filter="level" data-value="{{ value }}">{{ label }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <button class="filter-trigger" id="topicTrigger">
+                        Topic <i class="filter-arrow"></i>
+                    </button>
+                    <div class="filter-options topic-options">
+                        <a href="#" class="filter-tag" data-filter="topic" data-value="">All Topics</a>
+                        {% for topic in topics %}
+                            <a href="#" class="filter-tag" data-filter="topic" data-value="{{ topic.name }}">{{ topic.name }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <button class="filter-trigger" id="departmentTrigger">
+                        Institution <i class="filter-arrow"></i>
+                    </button>
+                    <div class="filter-options department-options">
+                        <a href="#" class="filter-tag" data-filter="department" data-value="">All Institutions</a>
+                        {% for value, label in departments %}
+                            <a href="#" class="filter-tag" data-filter="department" data-value="{{ value }}">{{ label }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <button class="filter-trigger" id="materialTypeTrigger">
+                        Type of material <i class="filter-arrow"></i>
+                    </button>
+                    <div class="filter-options material-options">
+                        <a href="#" class="filter-tag" data-filter="type" data-value="">All Types</a>
+                        {% for value, label in materialTypes %}
+                            <a href="#" class="filter-tag" data-filter="type" data-value="{{ value }}">{{ label }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="survey-button-container">
+        <a href="{{this.theme.subscribe}}" class="survey-button">
+            <span>Take the<br>Survey</span>
+        </a>
+        <div class="survey-border">
+            <img src="{{ 'assets/images/arround-eclipse.svg'|theme }}" alt="Border">
         </div>
     </div>
 </div>

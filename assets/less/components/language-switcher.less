@@ -9,11 +9,14 @@
     padding: 4px 12px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     min-width: 120px;
+    margin: 0;
+    vertical-align: middle;
     
     .selected-language {
         display: flex;
         align-items: center;
         color: #fff;
+        height: 30px; // Consistent height for proper alignment
         
         .flag-icon {
             width: 18px;
@@ -123,4 +126,38 @@
 
 body {
     top: 0 !important;
+}
+
+// Style the Google Translate container in navbar
+#google_translate_element {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 38px;
+    margin: 0;
+    
+    .goog-te-gadget {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        font-size: 0 !important;
+        
+        .goog-te-combo {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            padding: 4px 12px;
+            color: #fff;
+            font-size: 14px;
+            min-width: 120px;
+            height: 38px;
+            margin: 0;
+            
+            &:focus {
+                outline: none;
+                background: rgba(255, 255, 255, 0.2);
+            }
+        }
+    }
 } 

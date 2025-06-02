@@ -1,0 +1,20 @@
+{% if pagination and pagination.total_pages > 1 %}
+    <div class="pagination">
+        {% if pagination.current_page > 1 %}
+            <a href="javascript:void(0);" class="pagination-prev" data-page="{{ pagination.current_page - 1 }}">&laquo; Previous</a>
+        {% endif %}
+        
+        {% set startPage = max(1, pagination.current_page - 2) %}
+        {% set endPage = min(pagination.total_pages, pagination.current_page + 2) %}
+        
+        {% for i in startPage..endPage %}
+            <a href="javascript:void(0);" 
+               class="pagination-page {% if i == pagination.current_page %}active{% endif %}" 
+               data-page="{{ i }}">{{ i }}</a>
+        {% endfor %}
+        
+        {% if pagination.current_page < pagination.total_pages %}
+            <a href="javascript:void(0);" class="pagination-next" data-page="{{ pagination.current_page + 1 }}">Next &raquo;</a>
+        {% endif %}
+    </div>
+{% endif %} 

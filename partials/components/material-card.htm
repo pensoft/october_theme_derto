@@ -1,0 +1,43 @@
+{% if material %}
+<div class="material-card" 
+     data-material-id="{{ material.id }}"
+     data-material-name="{{ material.name }}"
+     data-material-type="{{ material.type }}"
+     data-material-prefix="{{ material.prefix }}"
+     data-material-duration="{{ material.duration }}"
+     data-material-language="{{ material.language }}"
+     data-material-description="{{ material.description|e }}"
+     data-material-keywords="{{ material.keywords|join(',') }}"
+     data-material-cover="{{ material.cover ? material.cover.getPath() : '' }}"
+     data-material-youtube-url="{{ material.youtube_url }}"
+     data-material-video-file="{{ material.video_file ? material.video_file.getPath() : '' }}"
+     data-material-document-file="{{ material.document_file ? material.document_file.getPath() : '' }}"
+     data-material-quiz="{{ material.quiz|e }}">
+    <div class="card-inner">
+        <div class="card-header">
+            <span class="material-number">{{ material.prefix }}</span>
+            <span class="material-duration">
+                <i class="icon-clock"></i> {{ material.duration}}
+            </span>
+        </div>
+        
+        <div class="material-cover">
+            {% if material.cover %}
+                {% if material.cover.getPath is defined %}
+                    <img src="{{ material.cover.getPath() }}" alt="{{ material.name }}" />
+                {% else %}
+                    <div class="default-cover">
+                        <i class="icon-image"></i>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+        
+        <div class="card-footer">
+            <h3 class="material-title">
+                {{ material.name }}
+            </h3>
+        </div>
+    </div>
+</div>
+{% endif %}

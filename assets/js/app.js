@@ -6,11 +6,24 @@ var documentHasScroll = function() {
 
 window.addEventListener('scroll', function (e) {
     var headernavbar = document.getElementById("headernavbar");
-    if (window.scrollY > headernavbar.offsetHeight){
-        var headerNavbarNav = document.querySelector('#headerNavbarNav')
-        headernavbar.classList.add('scrolled');
-    }else{
-        headernavbar.classList.remove('scrolled');
+    var heroSection = document.querySelector('.header-image');
+
+    if (heroSection) {
+        var heroHeight = heroSection.offsetHeight;
+        if (window.scrollY > heroHeight) {
+            headernavbar.classList.add('scrolled');
+            headernavbar.classList.add('navbar-hidden');
+        } else {
+            headernavbar.classList.remove('scrolled');
+            headernavbar.classList.remove('navbar-hidden');
+        }
+    } else {
+        // Fallback behavior if no header-image exists
+        if (window.scrollY > headernavbar.offsetHeight) {
+            headernavbar.classList.add('scrolled');
+        } else {
+            headernavbar.classList.remove('scrolled');
+        }
     }
 });
 
@@ -24,6 +37,9 @@ $(document).ready(function() {
 	for(var i = 0; i < divs.length; i+=2) {
 		divs.slice(i, i+2).wrapAll( '<div class="col-xs" />');
 	}
+
+    // Initialize block accordion functionality
+    initBlockAccordion();
 
     // Update the mobile menu functionality is now moved to site-search.js
 
@@ -42,7 +58,7 @@ $(document).ready(function() {
     $("nav").removeClass("no-transition");
 
     // Initialize animations
-    setupAnimations();
+    // setupAnimations();
 
     // About page menu - simplified approach
     if ($('.about-menu').length > 0) {
@@ -89,7 +105,7 @@ $(document).ready(function() {
                 });
                 // Make dropdown menu items visible in a proper way
                 $('#menu .dropdown-menu').css('display', 'none');
-                
+
                 $('body', 'html').css({
                     'overflow': 'hidden'
                 });
@@ -101,7 +117,7 @@ $(document).ready(function() {
                 });
             }
         });
-        
+
         // Mobile search button event handling moved to site-search.js
 
         // --- MOBILE SUBMENU TOGGLE LOGIC ---
@@ -113,16 +129,16 @@ $(document).ready(function() {
             var $submenu = $parent.children('.dropdown-menu');
             if ($submenu.length) {
                 e.preventDefault();
-                
+
                 // Toggle expanded class for arrow rotation
                 $(this).toggleClass('expanded');
-                
+
                 // Toggle submenu with smooth animation
                 $submenu.slideToggle(250);
-                
+
                 // Toggle special class on parent for border styling
                 $parent.toggleClass('submenu-open');
-                
+
                 // Close other open submenus and reset their expanded state
                 $parent.siblings('.dropdown').children('.dropdown-menu:visible').slideUp(200);
                 $parent.siblings('.dropdown').children('a').removeClass('expanded');
@@ -149,130 +165,136 @@ $(document).ready(function() {
 
     $("nav").removeClass("no-transition");
 
-
-    $('.events_tabs, .media_tabs').each(function(){
-        // For each set of tabs, we want to keep track of
-        // which tab is active and its associated content
-        var $active, $content, $links = $(this).find('a');
-        var speed = "fast";
-        var activeTab = $(location.hash);
-        // If the location.hash matches one of the links, use that as the active tab.
-        // If no match is found, use the first link as the initial active tab.
-        $active = $($links.filter("[href=\'"+location.hash+"\']")[0] || $links[0]);
-
-
-        if($(this).parent().parent().hasClass('events')){
-            $active.addClass('active');
-        }
-
-        $content = $($active[0].hash);
-
-        // Hide the remaining content
-        $links.not($active).each(function () {
-            $(this.hash).hide();
-        });
-
-        if(activeTab.length){
-            $content.slideDown(speed);
-            //scroll to element
-            $('html, body').animate({
-                scrollTop:  activeTab.offset().top - $('header').height()
-            }, speed);
-        }
-
-        // Bind the click event handler
-        $(this).find("a").click(function (e) {
-            if($(this).hasClass('active')) {
-                $content.slideDown({
-                    scrollTop: $content.offset().top - $('header').height()
-                }, speed);
-                var screenSize = getScreenSize();
-                if (screenSize.width < 800) {
-                    // scroll to element
-                    $('html, body').animate({
-                        scrollTop: $content.offset().top - $('header').height() + 300  // mobile
-                    }, speed);
-                }else{
-                    //scroll to element icons top
-                    $('html, body').animate({
-                        scrollTop:  $content.offset().top - $('header').height() + 300
-                    }, speed);
-                }
-                e.preventDefault();
-                return false;
-            }
-            // Make the old tab inactive.
-            $active.removeClass('active');
-            $content.hide();
-
-            // Update the variables with the new link and content
-            $active = $(this);
-            $content = $(this.hash);
-
-            location.hash = $active[0].hash;
-
-            // Make the tab active.
-            $active.addClass('active');
-            $content.slideDown({
-                scrollTop: $content.offset().top - $('header').height()
-            }, speed);
-
-            // Prevent the anchor\'s default click action
-            e.preventDefault();
-        });
-    });
-
-    // Search form event handlers moved to site-search.js
-
     // Initialize events page functionality
-    initEventsPage();
+    // initEventsPage();
+
+    // Initialize What is DERTO dots navigation
+    setTimeout(function() {
+        initDertoDotsNav();
+    }, 500);
+
 });
 
+// Also add a DOM loaded event listener for extra safety
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        initDertoDotsNav();
+    }, 500);
+});
+
+
+function openTab(evt, tabName, num) {
+    var i, x, tablinks;
+    x = document.getElementsByClassName("tabs_content"+num);
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablink"+num);
+    for (i = 0; i < x.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Initialize the dots navigation for the What is DERTO section
+function initDertoDotsNav() {
+    // Use jQuery for better compatibility
+    $('.what-is-derto .dot').on('click', function() {
+        console.log('Dot clicked:', $(this).data('tab'));
+
+        // Remove active class from all dots
+        $('.what-is-derto .dot').removeClass('active');
+
+        // Add active class to clicked dot
+        $(this).addClass('active');
+
+        // Get tab target
+        const tabTarget = $(this).data('tab');
+
+        // Hide all tab contents
+        $('.what-is-derto .tab-content').removeClass('active');
+
+        // Show target tab content
+        $('#' + tabTarget).addClass('active');
+    });
+
+    // Make sure at least one dot is active at start
+    if ($('.what-is-derto .dot.active').length === 0) {
+        $('.what-is-derto .dot').first().addClass('active');
+        const firstTabId = $('.what-is-derto .dot').first().data('tab');
+        $('#' + firstTabId).addClass('active');
+    }
+}
 
 function isBreakpointLarge() {
     return window.innerWidth <= 991;
 }
 
 
-
 function init() {
-    window.addEventListener('resize', function () {
-        if (isBreakpointLarge()) {
-            $('#card-carousel').slick('unslick');
-        } else {
-            if (typeof cardCarousel === 'function') {
-                cardCarousel({
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    autoplay: true,
-                    autoplaySpeed: 6000,
-                    prevArrow: '<i class="slick-prev"/>',
-                    nextArrow: '<i class="slick-next"/>',
-                });
-             }
-        }
+    // Initialize carousels on page load
+    initCarousels();
 
+    // Reinitialize on window resize
+    window.addEventListener('resize', function() {
+        initCarousels();
     });
-    document.addEventListener('DOMContentLoaded', function () {
-        if (!isBreakpointLarge()) {
-            if (typeof cardCarousel === 'function') {
-                cardCarousel({
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    autoplay: true,
-                    autoplaySpeed: 6000,
-                    prevArrow: '<i class="slick-prev"/>',
-                    nextArrow: '<i class="slick-next"/>',
-                });
-            }
-        }
 
-        // Initialize work packages toggle
-        initWorkPackagesToggle();
+    document.addEventListener('DOMContentLoaded', function() {
+        initCarousels();
+        // appendSearchAndSocialMedia();
+        // requestFormLibrary();
     });
+
 }
 
-// Search-related functions moved to site-search.js
+init()
+
+// Simplified carousel initialization
+function initCarousels() {
+    // Initialize card carousel
+    if ($('#card-carousel').length && !$('#card-carousel').hasClass('slick-initialized')) {
+        $('#card-carousel').slick({
+            slidesToShow: isBreakpointLarge() ? 1 : 3,
+            slidesToScroll: isBreakpointLarge() ? 1 : 3,
+            autoplay: true,
+            autoplaySpeed: 6000,
+            prevArrow: '<i class="slick-prev"/>',
+            nextArrow: '<i class="slick-next"/>'
+        });
+    }
+
+    // Initialize materials carousel
+    if ($('.materials-list').length && !$('.materials-list').hasClass('slick-initialized')) {
+        $('.materials-list').slick({
+            dots: false,
+            infinite: false,
+            speed: 300,
+            slidesToShow: isBreakpointLarge() ? 1 : 3.5,
+            slidesToScroll: 1,
+            centerMode: false,
+            arrows: false,
+            responsive: [
+                {
+                    breakpoint: 1280,
+                    settings: {
+                        slidesToShow: 2.5,
+                        slidesToScroll: 1,
+                        centerPadding: '30px'
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1.2,
+                        slidesToScroll: 1,
+                    }
+                }
+            ]
+        });
+    }
+}
 
 // Handle mobile submenu visibility
 function initMobileMenu() {
@@ -283,7 +305,7 @@ function initMobileMenu() {
             $(this).css('display', 'none');
             $(this).css('visibility', 'visible');
         });
-        
+
         // Ensure all elements in the menu are properly visible
         $('#menu li, #menu a').css('visibility', 'visible');
     }
@@ -293,8 +315,31 @@ function initMobileMenu() {
 $(window).resize(function() {
     // Update width variable
     width = window.innerWidth;
-    
+
     if (width < 992) {
         initMobileMenu();
     }
 });
+
+// Initialize block accordion functionality
+function initBlockAccordion() {
+    $(document).on('click', '.block-header', function(e) {
+        e.preventDefault();
+
+        var $blockHeader = $(this);
+        var $blockContainer = $blockHeader.closest('.col-xs-12');
+        var $materialsContainer = $blockContainer.find('.block-materials-container');
+
+        // Toggle expanded class on header
+        $blockHeader.toggleClass('expanded');
+
+        // Toggle materials container with smooth animation
+        if ($materialsContainer.hasClass('expanded')) {
+            $materialsContainer.slideUp(300, function() {
+                $materialsContainer.removeClass('expanded');
+            });
+        } else {
+            $materialsContainer.addClass('expanded').slideDown(300);
+        }
+    });
+}

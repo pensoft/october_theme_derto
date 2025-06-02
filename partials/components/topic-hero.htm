@@ -1,0 +1,24 @@
+<section class="topic-hero" data-topic-slug="{{ topic.slug }}">
+    <div class="hero-background">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-xs-12 content">
+                    <div class="topic-hero-content">
+                        <p class="topic-subtitle">Course on Ecological Restoration</p>
+                        <h1 class="topic-title">{{ topic.name }}</h1>
+                    </div>
+                </div>
+                <div class="col-md-4 col-xs-12 arrows">
+                    <div class="topic-navigation">
+                        {% if prevTopic %}
+                            <a href="/topic/{{ prevTopic.slug }}" class="nav-arrow prev-arrow" title="Previous Topic"></a>
+                        {% endif %}
+                        {% if nextTopic %}
+                            <a href="/topic/{{ nextTopic.slug }}" class="nav-arrow next-arrow" title="Next Topic"></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

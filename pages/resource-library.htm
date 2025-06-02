@@ -1,0 +1,98 @@
+url = "/resource-library"
+layout = "default"
+title = "Resource Library"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+	
+[siteSearchInclude]
+
+[jumbotron resource-library-intro-text]
+jumbotron = "resource-library-intro-text"
+title = 0
+background = "transperant"
+templates = "template3"
+description_limit = 0
+
+==
+<?php
+use Pensoft\Courses\Models\Topic;
+use Pensoft\Courses\Models\Setting;
+use Pensoft\Courses\Models\Language;
+use RainLab\Location\Models\Country;
+
+function onStart(){
+	$this['topics'] =  Topic::all();
+	
+	// Add filter data for the reusable component
+	$this['blockLevels'] = Setting::getBlockLevelOptions();
+    $this['materialTypes'] = Setting::getMaterialTypeOptions();
+    
+    // Languages including custom languages like Valencian
+    $this['languages'] = Language::getLanguageOptions();
+}
+?>
+==
+{% component 'siteSearchInclude' %}
+
+<main>
+    <div class="container-fluid resource-library-intro-text">
+        {% component 'resource-library-intro-text' %}
+    </div>
+    <section class="filters">
+        <div class="container">
+            <div class="filters-bar">
+                <div class="label center-xs">Filter by</div>
+                {% partial 'components/resource-filters' %}
+            </div>
+        </div>
+    </section>
+
+    <section class="topics-menu">
+        <div class="container">
+            <div class="label center-xs">Select a topic</div>
+            <div class="row topics-grid">
+                {% for topic in topics %}
+                    <div class="col-md-6 col-xs-12">
+                        <a href="/topic/{{ topic.slug}}">
+                            <div class="row topic-card">
+                                <div class="col-md-2">
+                                    <div class="img-container"></div>
+                                </div>
+                                <div class="col-md-10 topic-name">
+                                    {{ topic.name }}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="additional-resources">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <h2>Additional resources</h2>
+                    <div class="col-xs-12">
+                        <p>
+                            Explore extra tools, guides, and references to support hands-on learning across different sectors. A curated selection of materials that offers extended insights and practical support for navigating content beyond the core library.
+                        </p>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="label start-xs">
+                            Filter by
+                        </div>
+                        {% partial 'components/resource-filters' %}
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="col-xs-12">
+                        <img src="/themes/pensoft-derto/assets/images/lilavo_cvete.png" alt="Additional resources"> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

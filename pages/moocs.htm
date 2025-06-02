@@ -1,0 +1,27 @@
+url = "/moocs"
+layout = "default"
+title = "MOOCs"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "moocs.png"
+subtitle = "Course on Ecological Restoration"
+
+[siteSearchInclude]
+
+[jumbotron take-course-online]
+jumbotron = "take-course-online"
+title = 0
+background = "transperant"
+templates = "template3"
+description_limit = 0
+==
+==
+
+{% component 'siteSearchInclude' %}
+
+<main>
+    <section class="moocs">
+        {% component 'take-course-online' %}
+    </section>
+</main>

@@ -1,0 +1,40 @@
+<div class="filter-groups">
+    <!-- Language Filter -->
+    <div class="filter-group">
+        <button type="button" class="filter-trigger" id="language-filter">
+            Language <i class="filter-arrow"></i>
+        </button>
+        <div class="filter-options">
+            <a href="#" class="filter-tag" data-filter="language" data-value="">All Languages</a>
+            {% for value, label in languages %}
+                <a href="#" class="filter-tag" data-filter="language" data-value="{{ value }}">{{ label }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Level Filter -->
+    <div class="filter-group">
+        <button type="button" class="filter-trigger" id="level-filter">
+            Level <i class="filter-arrow"></i>
+        </button>
+        <div class="filter-options">
+            <a href="#" class="filter-tag" data-filter="level" data-value="">All Levels</a>
+            {% for value, label in blockLevels %}
+                <a href="#" class="filter-tag" data-filter="level" data-value="{{ value }}">{{ label }}</a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Type Filter -->
+    <div class="filter-group">
+        <button type="button" class="filter-trigger" id="type-filter">
+            Type of material <i class="filter-arrow"></i>
+        </button>
+        <div class="filter-options">
+            <a href="#" class="filter-tag" data-filter="type" data-value="">All Types</a>
+            {% for value, label in materialTypes %}
+                <a href="#" class="filter-tag" data-filter="type" data-value="{{ value }}">{{ label }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</div> 

@@ -280,10 +280,12 @@ form:
                 tab: 'Typography'
                 type: dropdown
                 assetVar: 'font-family'
-                default: satoshi
+                default: publicsans
                 options:
                     gilroy: Gilroy
                     satoshi: Satoshi
+                    onest: Onest
+                    publicsans: Public Sans
             background:
                 label: Background color
                 comment: Select a custom color to use as background
