@@ -26,19 +26,25 @@ escape = 1
     <link href="{{ ['assets/css/scale.css']|theme }}" rel="stylesheet">
     <link href="{{ ['assets/css/light.css']|theme }}" rel="stylesheet">
     <script src="{{ 'assets/js/jquery.js'|theme }}"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="{{ 'assets/css/slick.css'|theme }}"> -->
     <!--<script src="{{ 'assets/js/popper.min.js'|theme }}"></script>
     <script src="{{ 'assets/js/tippy-bundle.umd.min.js'|theme}}"></script>-->
-    
+
     <script src="{{ 'assets/js/app.js'|theme }}"></script>
     <script src="{{ 'assets/js/translation.js'|theme }}"></script>
     <script src="{{ 'assets/js/site-search.js'|theme }}"></script>
-
+    <script src="{{ 'assets/js/filters.js'|theme }}"></script>
+    <script src="{{ 'assets/js/animations.js'|theme }}"></script>
+    <script src="{{ 'assets/js/material-popup.js'|theme }}"></script>
+    
     <script src="{{ 'assets/js/jquery-ui.js'|theme }}"></script>
     <script src="{{ 'assets/vendor/bootstrap/js/modal.js'|theme  }}"></script>
     <script type="text/javascript" src="{{ 'assets/js/slick.min.js'|theme }}"></script>
     <link rel="stylesheet" href="{{ 'assets/css/aos.css'|theme }}">
     <script src="{{ 'assets/js/aos.js'|theme }}"></script>
     <script src="{{ 'assets/js/ckeditor/ckeditor.js'|theme}}"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 
     <!-- Google Translate Script -->
@@ -54,7 +60,7 @@ escape = 1
                     autoDisplay: false,
                     layout: google.translate.TranslateElement.InlineLayout.SIMPLE
                 }, 'google_translate_element');
-                
+
                 // Also create a hidden element for API access
                 new google.translate.TranslateElement({
                     pageLanguage: 'en',
@@ -62,27 +68,27 @@ escape = 1
                     autoDisplay: false,
                     layout: google.translate.TranslateElement.InlineLayout.SIMPLE
                 }, 'google_translate_element_hidden');
-                
+
                 // Hide the Google Translate banner
                 var style = document.createElement('style');
                 style.textContent = `
-                    .goog-te-banner-frame, .skiptranslate { display: none !important; } 
+                    .goog-te-banner-frame, .skiptranslate { display: none !important; }
                     body { top: 0 !important; position: static !important; }
                     .goog-te-gadget { height: 0 !important; }
                 `;
                 document.head.appendChild(style);
-                
+
                 // After initialization, hide Google's default UI
                 setTimeout(function() {
                     // Hide Google's branding
                     $('.goog-logo-link').hide();
                     $('.goog-te-gadget').css('font-size', '0');
-                    
+
                     // Ensure our custom dropdown is visible
                     if (typeof initCustomGoogleTranslate === 'function') {
                         initCustomGoogleTranslate();
                     }
-                    
+
                     // Check if we need to apply translation based on cookie
                     var match = document.cookie.match(/(^|;)\s*googtrans=([^;]+)/);
                     if (match) {
@@ -102,7 +108,7 @@ escape = 1
         })();
     </script>
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    
+
     <!-- Hidden element for Google Translate API access -->
     <div id="google_translate_element_hidden" style="display: none;"></div>
 
@@ -211,4 +217,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </body>
 
 
+</html>
 </html>

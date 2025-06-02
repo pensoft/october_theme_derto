@@ -4,7 +4,9 @@ title = "Contact"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
-	
+header_image = "contact.png"
+subtitle = "Reach out"
+
 [siteSearchInclude]
 
 ==
@@ -17,3 +19,35 @@ function onStart(){
 ?>
 ==
 {% component 'siteSearchInclude' %}
+
+<div class="container contact_container">
+    <div class="row contact_info">
+        {% for profile in profiles %}
+        <div class="col-md-5 col-xs-12">
+            <div class="profile_item">
+                <div class="coordinator_image">
+                    {% if profile.avatar %}
+                    <img src="{{profile.avatar.thumb(235, 235, {'mode' : 'crop' })}}" class="fr-fic fr-dii">
+                    {% else %}
+                    <img src="{{'avatar.svg'|media}}" class="fr-fic fr-dii">
+                    {% endif %}
+                </div>
+                <div class="coordinator_info">
+                    <h3>{{profile.names}}</h3>
+                    <div class="card_position">
+                        {% if profile.position %}<span>{{profile.position}}</span>{% endif %}
+
+                    </div>
+                    {% if profile.email %}
+                    <a href="mailto:{{profile.email}}" class="email" target="_blank">
+                        {{profile.email}}
+                    </a>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+    </div>

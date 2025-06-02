@@ -6,12 +6,65 @@ meta_description = "Derto"
 robot_index = "index"
 robot_follow = "follow"
 
+[jumbotron home-team-up]
+jumbotron = "home-team-up"
+title = 0
+background = "transperant"
+templates = "template3"
+description_limit = 0
+
 ==
 <?php
+use Pensoft\Courses\Models\Topic;
 
 function onStart(){
-
+    $topics = Topic::with(['blocks.lessons.materials'])->get();
+    $this['topics'] = $topics;
 }
 ?>
 ==
 
+{% component 'siteSearchInclude' %}
+
+<main>
+    <section class="team-up">
+        <div class="container-fluid">
+            {% component 'home-team-up' %}
+        </div>
+    </section>
+
+    <section class="courses">
+        <div class="container-fluid">
+            {% for topic in topics %}
+                <div class="topic">
+                    <div class="topic-container">
+                        <div class="row header">
+                            <div class="col-md-9 col-xs-12">
+                                <h2>{{ topic.name }}</h2>
+                            </div>
+                            <div class="col-md-3 col-xs-12">
+                                <a href="topic/{{ topic.slug }}" class="go-to-course">Go to Resource</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid content">
+                        <div class="materials-list slick-carousel-container" role="list">
+                            {% for block in topic.blocks %}
+                                {% for lesson in block.lessons %}
+                                    {% for material in lesson.materials %}
+                                        <div class="material-item" role="listitem">
+                                            {% partial 'components/material-card' material=material %}
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+</main>
+
+{% partial 'components/material-popup' %}

@@ -43,17 +43,18 @@ numberOfLevels = 2
 <div class="header-image {{page_id}}">
     <div class="header_image_overlay"></div>
     {% if page_id == 'home' %}
-    
+
     <!-- HERO SECTION -->
     {% partial 'components/hero' %}
 
+    {% elseif page_id == 'topic' %}
+
+    <!-- TOPIC HERO SECTION -->
+    {% partial 'components/topic-hero' %}
+
     {% else %}
-    <div class="header-image-bar" {% if user and this.page.id != 'home' %} style="margin-top: 154px!important;" {% endif %}>
-        <h1 class="page-header">{% if page_title %} {{page_title}} {% else %} {{site_name}} {% endif %}</h1>
-        <!-- <video autoplay loop muted playsinline class="header-video">
-            <source src="{{ 'home_intro.mp4'|media }}" type="video/mp4">
-            Your browser does not support the video tag.
-        </video> -->
+    <div class="header-image-bar">
+        {% partial 'components/page-hero' title=this.page.title subtitle=this.page.subtitle header_image=this.page.header_image %}
     </div>
     {% endif %}
 </div>

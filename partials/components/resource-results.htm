@@ -1,0 +1,15 @@
+{% if results %}
+    {% if results.data and results.data|length > 0 %}
+        {% for material in results.data %}
+            {% partial 'components/material-card' material=material %}
+        {% endfor %}
+    {% else %}
+        <div class="no-results">
+            <p>No results found matching your criteria.</p>
+        </div>
+    {% endif %}
+{% else %}
+    <div class="loading-indicator">
+        <p>Select filters or search to see results</p>
+    </div>
+{% endif %} 

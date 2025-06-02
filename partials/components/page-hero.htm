@@ -1,0 +1,13 @@
+<!-- Default Hero Section for Pages -->
+
+
+
+<section class="page-section"
+         {%if header_image %}
+            style="background-image: url('{{header_image|media}}'); background-position: center;"
+         {%endif%}>
+    <div class="page-background">
+        <h2 class="sub">{{ subtitle | default(this.page.subtitle) }}</h2>
+        <h1>{{ title | default(this.page.title) }}</h1>
+    </div>
+</section>

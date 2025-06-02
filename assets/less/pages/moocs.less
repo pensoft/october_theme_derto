@@ -1,0 +1,143 @@
+.moocs {
+    .ser-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .row{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+            .breakpoint-large-down({
+                width: 100%;
+            });
+        }
+
+        a{
+            font-size: 18px;
+            color: #719E05;
+            text-decoration-line: underline;
+            font-weight: 600;
+        }
+
+        .center{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img{
+            width: 177px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+    }
+
+    .mocs-content{
+        p {
+            color: rgba(38, 47, 14, 0.65);
+            font-size: 16px;
+            font-style: normal;
+            line-height: 1.3em;
+        }
+    }
+
+    .mooc-container{
+        h3{
+            color: #262F0E;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .mooc-box{
+            min-height: 329px;
+            height: 329px;
+            border-radius: 8px;
+            padding: 40px;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            
+            .box-content{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+                width: 120px;
+                .link{
+                    padding: 7px 20px;
+                    border-radius: 21px;
+                    color: #F0F0E4;
+                    background: #719E05;
+                    font-size: 12px;
+                    font-style: normal;
+                    font-weight: 700;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                    &:before{
+                        content: '';
+                        position: absolute;
+                        background: url('/themes/pensoft-derto/assets/images/ser-arrow.svg') no-repeat center center;
+                        background-size: 100%;
+                        width: 10px;
+                        height: 10px;
+                        left: 25px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                    }
+                }
+            }
+            
+
+            &.basic{
+                background: #F0F0E4;
+                &::before{
+                    content: '';
+                    position: absolute;
+                    background: url('/themes/pensoft-derto/assets/images/basic-card.svg') no-repeat right bottom;
+                    background-size: 100%;
+                    bottom: 0;
+                    right: 0;
+                    width: 380px;
+                    height: 280px;
+                    transition: transform 0.3s ease-in-out;
+                }
+                
+                &:hover::before{
+                    transform: scale(1.35) translate(-8px, -28px);
+                }
+            }
+            
+            &.advanced{
+                background: rgba(242, 115, 69, 0.05);
+                &::before{
+                    content: '';
+                    position: absolute;
+                    background: url('/themes/pensoft-derto/assets/images/advanced-card.svg') no-repeat right bottom;
+                    background-size: 100%;
+                    bottom: 0;
+                    right: 0;
+                    width: 285px;
+                    height: 249px;
+                    transition: transform 0.3s ease-in-out;
+                }
+                
+                &:hover::before{
+                    transform: scale(1.35) translate(-18px, -8px);
+                }
+
+                .box-content .link{
+                    background: #F27345;
+                }
+            }
+        }
+    }
+    
+}

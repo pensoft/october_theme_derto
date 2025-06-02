@@ -91,41 +91,35 @@ button:not(:disabled) {
 }
 
 .btn-primary {
-    color: @white-color;
-    background-color: #3CBB54;
-    border-color: #3CBB54;
     border-radius: 6px;
-    box-shadow: 0px 1px 2px 0px rgba(198, 228, 246, 0.05);
-    padding-left: 25px;
-    padding-right: 25px;
-    padding-top: 13.6px;
-    padding-bottom: 13.6px;
-    min-width: 129px;
-    font-size: 14px;
-    font-family: 'Satoshi Regular';
+    background: #E9F5A1;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #262F0E;
+    font-size: 18px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
 }
 
 .btn-primary:hover, .btn-primary.active {
-    color: @white-color;
-    background-color: #329B46;
-    border-color: #329B46;
+    background: darken(#E9F5A1, 5%);
 }
 
 .btn-secondary {
-    color: @white-color;
-    background-color: @secondary-btn-color;
-    border-color: @secondary-color;
-    .rounded(7px);
-    padding: 5px 20px;
-    &.width100{
-      width: 100%;
-    }
+    border-radius: 6px;
+    background: #F0F0E4;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #262F0E;
+    font-size: 18px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
 }
 
 .btn-secondary:hover{
-  color: @secondary-btn-color;
-  background-color: @white-color;
-  border-color: @secondary-btn-color;
+    background: darken(#F0F0E4, 5%);
 }
 
 .btn-success {

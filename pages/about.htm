@@ -1,0 +1,67 @@
+url = "/about"
+layout = "default"
+title = "About"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+header_image = "about.png"
+subtitle = "Learn more about DERTO"
+
+[siteSearchInclude]
+
+[jumbotron mission]
+jumbotron = "mission"
+title = 1
+background = "transperant"
+templates = "template3"
+description_limit = 0
+
+[jumbotron teamup]
+jumbotron = "teamup"
+title = 1
+background = "transperant"
+templates = "template3"
+description_limit = 0
+==
+<?php
+use Pensoft\Cardprofiles\Models\Profiles;
+
+function onStart(){
+}
+?>
+==
+{% component 'siteSearchInclude' %}
+
+
+<div class="container mission">
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <img src="{{'about1.png'|media}}">
+        </div>
+        <div class="col-md-6 col-xs-12">
+            {% component 'mission' %}
+        </div>
+    </div>
+</div>
+
+
+<div class="container teamup">
+    <div class="row">
+
+        <div class="col-md-6 col-xs-12">
+            {% component 'teamup' %}
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+            <img src="{{'about2.png'|media}}">
+        </div>
+    </div>
+</div>
+
+
+<div class="container for_more_info">
+    <h3>For more information about other outputs from the TEAMUP project including business plans and case studies, please visit</h3>
+    <img src="{{'teamup_logo.svg'|media}}">
+    <p align="center"><a href="https://teamup2restore.eu/" target="_blank" class="green_link">teamup2restore.eu</a></p>
+    <p align="center"><a href="https://teamup2restore.eu/news" target="_blank" class="green_button">TEAMUP News</a></p>
+</div>
