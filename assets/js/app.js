@@ -171,6 +171,7 @@ $(document).ready(function() {
     // Initialize What is DERTO dots navigation
     setTimeout(function() {
         initDertoDotsNav();
+        initAccordions();
     }, 500);
 
 });
@@ -179,8 +180,36 @@ $(document).ready(function() {
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         initDertoDotsNav();
+        initAccordions();
     }, 500);
 });
+
+// Initialize accordion functionality
+function initAccordions() {    
+    // Remove any existing handlers
+    $(document).off('click.accordion');
+    
+    // Use document delegation with namespace
+    $(document).on('click.accordion', '.accordion-header', function(e) {
+        e.preventDefault();
+        
+        var $header = $(this);
+        var $content = $header.siblings('.accordion-content');
+        var $parentItem = $header.closest('.accordion-item');
+        var $contentAlt = $parentItem.find('.accordion-content');
+
+        $header.toggleClass('expanded');
+        
+        // Try both methods to find content
+        var $targetContent = $content.length > 0 ? $content : $contentAlt;
+        
+        if ($header.hasClass('expanded')) {
+            $targetContent.css('max-height', $targetContent[0].scrollHeight + 'px');
+        } else {
+            $targetContent.css('max-height', '0');
+        }
+    });
+}
 
 
 function openTab(evt, tabName, num) {

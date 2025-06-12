@@ -166,7 +166,7 @@
 
 // Title section
 .material-title-section {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     
     .material-prefix-title {
         display: flex;
@@ -195,57 +195,85 @@
     }
 }
 
-// Language section
-.material-language-section {
-    margin-bottom: 25px;
+// Context section
+.material-context-section {
+    margin-bottom: 12px;
     
-    .material-language-text {
-        font-size: 14px;
+    .context-breadcrumb {
+        font-size: 13px;
         color: #666;
-        font-weight: 400;
+        opacity: 0.8;
         
-        span {
-            color: #262F0E;
+        .context-item {
+            color: #719E05;
             font-weight: 500;
+        }
+        
+        .context-separator {
+            color: #999;
+            margin: 0 8px;
+        }
+    }
+}
+
+// Quick info grid
+.material-quick-info {
+    margin-bottom: 18px;
+    
+    .quick-info-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #262F0E;
+            
+            i {
+                color: #719E05;
+                font-size: 13px;
+            }
+            
+            .info-label {
+                font-weight: 500;
+                opacity: 0.7;
+            }
+            
+            .info-value {
+                font-weight: 600;
+            }
         }
     }
 }
 
 // Description section
 .material-description-section {
-    margin-bottom: 25px;
-    
-    .section-title {
-        margin: 0 0 12px 0;
-        font-size: 14px;
-        font-weight: 600;
-        color: #262F0E;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        opacity: 0.8;
-    }
+    margin-bottom: 18px;
     
     .material-description {
         color: #262F0E;
         line-height: 1.6;
         font-size: 15px;
         margin: 0;
-        opacity: 0.8;
+        opacity: 0.85;
     }
 }
 
 // Keywords section
 .material-keywords-section {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     
     .section-title {
-        margin: 0 0 12px 0;
-        font-size: 14px;
+        margin: 0 0 10px 0;
+        font-size: 13px;
         font-weight: 600;
         color: #262F0E;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        opacity: 0.8;
+        opacity: 0.7;
     }
     
     .keywords-list {
@@ -270,8 +298,12 @@
     }
 }
 
+// Content section
+.material-content-section {
+    margin-bottom: 24px;
+}
+
 .material-content {
-    margin-bottom: 30px;
     
     .video-content {
         .video-player {
@@ -359,12 +391,147 @@
             }
         }
     }
+    
+    .photo-gallery-content {
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+            
+            .gallery-item {
+                border-radius: 8px;
+                overflow: hidden;
+                border: 1px solid rgba(113, 158, 5, 0.2);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                cursor: pointer;
+                
+                &:hover {
+                    transform: scale(1.02);
+                    box-shadow: 0 4px 12px rgba(38, 47, 14, 0.15);
+                }
+                
+                img {
+                    width: 100%;
+                    height: 120px;
+                    object-fit: cover;
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+// Ownership section
+.material-ownership-section {
+    margin-bottom: 20px;
+    
+    .section-title {
+        margin: 0 0 12px 0;
+        font-size: 13px;
+        font-weight: 600;
+        color: #262F0E;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        opacity: 0.7;
+    }
+    
+    .ownership-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        
+        .ownership-item {
+            font-size: 14px;
+            color: #262F0E;
+            
+            strong {
+                font-weight: 600;
+                margin-right: 8px;
+                opacity: 0.8;
+            }
+        }
+    }
+}
+
+// Timeline section
+.material-timeline-section {
+    margin-bottom: 20px;
+    
+    .section-title {
+        margin: 0 0 12px 0;
+        font-size: 13px;
+        font-weight: 600;
+        color: #262F0E;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        opacity: 0.7;
+    }
+    
+    .timeline-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        
+        .timeline-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            
+            .timeline-label {
+                font-size: 12px;
+                font-weight: 600;
+                color: #719E05;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            
+            .timeline-value {
+                font-size: 14px;
+                color: #262F0E;
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+// Related materials section
+.material-related-section {
+    margin-bottom: 20px;
+    
+    .section-title {
+        margin: 0 0 12px 0;
+        font-size: 13px;
+        font-weight: 600;
+        color: #262F0E;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        opacity: 0.7;
+    }
+    
+    .related-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: #719E05;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: color 0.2s ease;
+        
+        &:hover {
+            color: #262F0E;
+        }
+        
+        i {
+            font-size: 12px;
+        }
+    }
 }
 
 // Download section
 .material-download-section {
     text-align: center;
-    padding-top: 25px;
+    padding-top: 20px;
     border-top: 1px solid rgba(233, 245, 161, 0.3);
     
     .download-btn {

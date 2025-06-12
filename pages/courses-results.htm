@@ -1,18 +1,35 @@
 url = "/courses/results"
 layout = "default"
-title = "Courses Results"
+title = "Course Results"
 is_hidden = 0
 meta_description = "Courses Results"
 robot_index = "index"
 robot_follow = "follow"
 
 [coursesResults]
+
+[searchSuggestions]
+maxResults = 10
+minQueryLength = 2
 ==
 
 <main>
     <!-- Filters Section -->
     <section class="courses-filters">
         <div class="container">
+            <div class="search-section">
+                <div class="search-container">
+                    <div class="search-outer">
+                        <form id="resource-search-form" data-resource-search="true" method="get">
+                            <input type="text" name="q" placeholder="Search for..." class="form-control">
+                            <button type="submit" class="search-btn">
+                                <img src="{{ 'assets/images/search-dark.svg'|theme }}" alt="Search">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
             <div class="filters-bar">
                 <a href="/" class="back-link">
                     <i class="back-arrow"></i> Back
@@ -55,7 +72,7 @@ robot_follow = "follow"
     <section class="resource-library-results container">
         <div class="row">
             <div class="col-xs-12">
-                <h2>Courses Results</h2>
+                <h2>Course Results</h2>
                 <div id="results-container" class="grouped-results-container">
                     {% partial 'components/grouped-resource-results' groupedResults=groupedResults %}
                 </div>
@@ -69,4 +86,7 @@ robot_follow = "follow"
     </section>
 
     {% partial 'components/material-popup' %}
+    
+    <!-- Search Suggestions Component -->
+    {% component 'searchSuggestions' %}
 </main>

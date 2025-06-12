@@ -6,8 +6,19 @@ meta_description = "Derto"
 robot_index = "index"
 robot_follow = "follow"
 
+[searchSuggestions]
+maxResults = 8
+minQueryLength = 2
+
 [jumbotron home-team-up]
 jumbotron = "home-team-up"
+title = 0
+background = "transperant"
+templates = "template3"
+description_limit = 0
+
+[jumbotron what-derto]
+jumbotron = "what-derto"
 title = 0
 background = "transperant"
 templates = "template3"
@@ -24,13 +35,15 @@ function onStart(){
 ?>
 ==
 
-{% component 'siteSearchInclude' %}
-
 <main>
     <section class="team-up">
         <div class="container-fluid">
             {% component 'home-team-up' %}
         </div>
+    </section>
+
+    <section class="what-is-derto">
+        {% component 'what-derto' %}
     </section>
 
     <section class="courses">
@@ -64,7 +77,9 @@ function onStart(){
             {% endfor %}
         </div>
     </section>
-
 </main>
 
 {% partial 'components/material-popup' %}
+
+<!-- Search Suggestions Component -->
+{% component 'searchSuggestions' %}

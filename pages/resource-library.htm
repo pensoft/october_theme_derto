@@ -4,7 +4,8 @@ title = "Resource Library"
 is_hidden = 0
 robot_index = "index"
 robot_follow = "follow"
-	
+header_image = "resource-library.png"
+
 [siteSearchInclude]
 
 [jumbotron resource-library-intro-text]
@@ -56,10 +57,10 @@ function onStart(){
                     <div class="col-md-6 col-xs-12">
                         <a href="/topic/{{ topic.slug}}">
                             <div class="row topic-card">
-                                <div class="col-md-2">
+                                <div class="col-md-2 col-xs-12 topic-img">
                                     <div class="img-container"></div>
                                 </div>
-                                <div class="col-md-10 topic-name">
+                                <div class="col-md-10 col-xs-12 topic-name">
                                     {{ topic.name }}
                                 </div>
                             </div>

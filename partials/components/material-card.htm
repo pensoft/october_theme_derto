@@ -3,6 +3,8 @@
      data-material-id="{{ material.id }}"
      data-material-name="{{ material.name }}"
      data-material-type="{{ material.type }}"
+     data-material-target-audience="{{ material.target_audience }}"
+     data-material-target-audiences="{{ material.target_audiences ? material.target_audiences|json_encode : '' }}"
      data-material-prefix="{{ material.prefix }}"
      data-material-duration="{{ material.duration }}"
      data-material-language="{{ material.language }}"
@@ -12,7 +14,19 @@
      data-material-youtube-url="{{ material.youtube_url }}"
      data-material-video-file="{{ material.video_file ? material.video_file.getPath() : '' }}"
      data-material-document-file="{{ material.document_file ? material.document_file.getPath() : '' }}"
-     data-material-quiz="{{ material.quiz|e }}">
+     data-material-quiz="{{ material.quiz|raw }}"
+     data-material-author="{{ material.author }}"
+     data-material-contact-information="{{ material.contact_information }}"
+     data-material-copyright="{{ material.copyright }}"
+     data-material-link-to-other-materials="{{ material.link_to_other_materials }}"
+     data-material-download-possible="{{ material.download_possible ? 'true' : 'false' }}"
+     data-material-date-of-creation="{{ material.date_of_creation ? material.date_of_creation.format('Y-m-d') : '' }}"
+     data-material-date-of-version="{{ material.date_of_version ? material.date_of_version.format('Y-m-d') : '' }}"
+     data-material-date-of-upload="{{ material.date_of_upload ? material.date_of_upload.format('Y-m-d') : '' }}"
+     data-material-lesson-name="{{ material.lesson ? material.lesson.name : '' }}"
+     data-material-block-name="{{ material.lesson.block ? material.lesson.block.name : '' }}"
+     data-material-topic-name="{{ material.lesson.block.topic ? material.lesson.block.topic.name : '' }}"
+     data-material-gallery="{{ material.gallery ? material.gallery|map(file => file.getPath())|json_encode : '' }}">
     <div class="card-inner">
         <div class="card-header">
             <span class="material-number">{{ material.prefix }}</span>

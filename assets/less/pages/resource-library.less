@@ -71,12 +71,12 @@
                 }
                 
                 &:hover {
-                    background: rgba(233, 245, 161, 0.55);
+                    background: #E9F5A1;;
                     color: #262F0E;
                 }
                 
                 &.active {
-                    background: rgba(233, 245, 161, 0.55);
+                    background: #E9F5A1;
                     color: #262F0E;
                     
                     .filter-arrow:after {
@@ -89,11 +89,9 @@
             .filter-options {
                 display: none;
                 position: absolute !important;
-                z-index: 9999 !important;
                 width: max-content;
                 min-width: 100%;
                 margin-top: 5px;
-                
                 &.show {
                     display: flex;
                     flex-direction: column;
@@ -192,9 +190,22 @@
 }
 
 .topics-menu{
-    
     .topics-grid{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
+    .topic-img, .topic-name{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .topic-img{
+        .breakpoint-large-down({
+            margin-bottom: 18px;
+        });
     }
 
     .topic-card{
@@ -236,12 +247,15 @@
     .topics-grid > div:nth-child(1) .img-container:before{
         background: url('/themes/pensoft-derto/assets/images/reload.svg') no-repeat center center;
     }
+
     .topics-grid > div:nth-child(2) .img-container:before{
         background: url('/themes/pensoft-derto/assets/images/shovel.svg') no-repeat center center;
     }
+
     .topics-grid > div:nth-child(3) .img-container:before{   
         background: url('/themes/pensoft-derto/assets/images/img-icon.svg') no-repeat center center;
     }
+    
     .topics-grid > div:nth-child(4) .img-container:before{
         background: url('/themes/pensoft-derto/assets/images/plant-icon.svg') no-repeat center center;
     }
@@ -254,6 +268,7 @@
         font-weight: 600;
     }
 }
+
 .resource-library-intro-text{
     display: flex;
     justify-content: center;
@@ -269,6 +284,7 @@
         font-size: 16px;
     }
 }
+
 @keyframes dropdownFade {
     from {
         opacity: 0;
