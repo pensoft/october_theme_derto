@@ -421,8 +421,20 @@
         const downloadText = popup.querySelector('#popup-download-text');
         
         if (downloadSection && downloadBtn && downloadText) {
-            if (currentMaterial.document_file && currentMaterial.download_possible === 'true') {
+            // Handle gallery downloads differently
+            if (currentMaterial.type === 'photo_gallery' && currentMaterial.gallery && currentMaterial.download_possible === 'true') {
+                downloadBtn.href = '#';
+                downloadBtn.target = '_self';
+                downloadBtn.onclick = (e) => {
+                    e.preventDefault();
+                    downloadGalleryAsZip();
+                };
+                downloadText.textContent = 'Download Gallery (ZIP)';
+                downloadSection.style.display = 'block';
+            } else if (currentMaterial.document_file && currentMaterial.download_possible === 'true') {
                 downloadBtn.href = currentMaterial.document_file;
+                downloadBtn.target = '_blank';
+                downloadBtn.onclick = null;
                 downloadText.textContent = `Download ${getDownloadLabel()}`;
                 downloadSection.style.display = 'block';
             } else {
@@ -436,6 +448,7 @@
         
         switch (type) {
             case 'video_tour':
+            case 'video':
                 return generateVideoContent();
             case 'document':
             case 'textbook_chapter':
@@ -648,6 +661,7 @@
         const typeMap = {
             'interactive_presentation_h5p': 'Interactive Presentation (H5P)',
             'video_tour': 'Video Tour',
+            'video': 'Video',
             'virtual_reality_tour': 'Virtual Reality Tour',
             'podcast': 'Podcast',
             'textbook_chapter': 'Textbook Chapter',
@@ -706,8 +720,91 @@
             case 'document': return 'Document';
             case 'video': return 'Video';
             case 'ppt': return 'Presentation';
+            case 'photo_gallery': return 'Gallery (ZIP)';
             default: return "Material";
         }
+    }
+
+    function downloadGalleryAsZip() {
+        if (!currentMaterial || !currentMaterial.gallery) {
+            alert('No gallery images available for download.');
+            return;
+        }
+
+        let galleryImages = [];
+        
+        // Handle both string and array formats
+        if (typeof currentMaterial.gallery === 'string') {
+            try {
+                galleryImages = JSON.parse(currentMaterial.gallery);
+            } catch (e) {
+                galleryImages = [currentMaterial.gallery];
+            }
+        } else if (Array.isArray(currentMaterial.gallery)) {
+            galleryImages = currentMaterial.gallery;
+        }
+
+        if (galleryImages.length === 0) {
+            alert('No gallery images available for download.');
+            return;
+        }
+
+        // Show downloading indicator
+        const downloadBtn = popup.querySelector('#popup-download-btn');
+        const downloadText = popup.querySelector('#popup-download-text');
+        const originalText = downloadText.textContent;
+        downloadText.textContent = 'Preparing download...';
+        downloadBtn.disabled = true;
+
+        // Create a form and submit it to trigger the download
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/api/courses/download-gallery';
+        form.style.display = 'none';
+
+        // Add CSRF token if available
+        const csrfToken = document.querySelector('meta[name="csrf-token"]');
+        if (csrfToken) {
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = '_token';
+            csrfInput.value = csrfToken.getAttribute('content');
+            form.appendChild(csrfInput);
+        }
+
+        // Add material data
+        const materialIdInput = document.createElement('input');
+        materialIdInput.type = 'hidden';
+        materialIdInput.name = 'material_id';
+        materialIdInput.value = currentMaterial.id || '';
+        form.appendChild(materialIdInput);
+
+        const materialNameInput = document.createElement('input');
+        materialNameInput.type = 'hidden';
+        materialNameInput.name = 'material_name';
+        materialNameInput.value = currentMaterial.name || 'Gallery';
+        form.appendChild(materialNameInput);
+
+        // Add gallery URLs
+        galleryImages.forEach((imageUrl, index) => {
+            const urlInput = document.createElement('input');
+            urlInput.type = 'hidden';
+            urlInput.name = `gallery_urls[${index}]`;
+            urlInput.value = imageUrl;
+            form.appendChild(urlInput);
+        });
+
+        document.body.appendChild(form);
+
+        // Submit form
+        form.submit();
+
+        // Clean up
+        setTimeout(() => {
+            document.body.removeChild(form);
+            downloadText.textContent = originalText;
+            downloadBtn.disabled = false;
+        }, 2000);
     }
 
     function open() {

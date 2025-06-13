@@ -246,13 +246,31 @@ function initDertoDotsNav() {
 
         // Show target tab content
         $('#' + tabTarget).addClass('active');
+
+        // Update the header text from data attribute
+        const newHeader = $(this).data('header');
+        if (newHeader) {
+            $('.what-is-derto .header h2').html(newHeader);
+        }
     });
 
-    // Make sure at least one dot is active at start
+    // Make sure at least one dot is active at start and set initial header
     if ($('.what-is-derto .dot.active').length === 0) {
         $('.what-is-derto .dot').first().addClass('active');
         const firstTabId = $('.what-is-derto .dot').first().data('tab');
         $('#' + firstTabId).addClass('active');
+        
+        // Set initial header from data attribute
+        const initialHeader = $('.what-is-derto .dot').first().data('header');
+        if (initialHeader) {
+            $('.what-is-derto .header h2').html(initialHeader);
+        }
+    } else {
+        // If there's already an active dot, set its corresponding header
+        const activeHeader = $('.what-is-derto .dot.active').data('header');
+        if (activeHeader) {
+            $('.what-is-derto .header h2').html(activeHeader);
+        }
     }
 }
 

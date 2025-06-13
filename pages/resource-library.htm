@@ -18,7 +18,8 @@ description_limit = 0
 ==
 <?php
 use Pensoft\Courses\Models\Topic;
-use Pensoft\Courses\Models\Setting;
+use Pensoft\Courses\Models\Block;
+use Pensoft\Courses\Models\Material;
 use Pensoft\Courses\Models\Language;
 use RainLab\Location\Models\Country;
 
@@ -26,8 +27,8 @@ function onStart(){
 	$this['topics'] =  Topic::all();
 	
 	// Add filter data for the reusable component
-	$this['blockLevels'] = Setting::getBlockLevelOptions();
-    $this['materialTypes'] = Setting::getMaterialTypeOptions();
+	$this['blockLevels'] = Block::getLevelOptions();
+    $this['materialTypes'] = Material::getTypeOptions();
     
     // Languages including custom languages like Valencian
     $this['languages'] = Language::getLanguageOptions();

@@ -1,15 +1,16 @@
 ==
 <?php
 use Pensoft\Courses\Models\Topic;
-use Pensoft\Courses\Models\Setting;
+use Pensoft\Courses\Models\Block;
+use Pensoft\Courses\Models\Material;
 use Pensoft\Courses\Models\Language;
 use Pensoft\Partners\Models\Partners;
 use RainLab\Location\Models\Country;
 
 function onStart(){
     $this['topics'] = Topic::all();
-    $this['blockLevels'] = Setting::getBlockLevelOptions();
-    $this['materialTypes'] = Setting::getMaterialTypeOptions();
+    $this['blockLevels'] = Block::getLevelOptions();
+    $this['materialTypes'] = Material::getTypeOptions();
     
     // Institutions from Partners where type = 1
     $this['departments'] = Partners::where('type', 1)
