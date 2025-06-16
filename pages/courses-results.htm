@@ -76,11 +76,6 @@ minQueryLength = 2
                 <div id="results-container" class="grouped-results-container">
                     {% partial 'components/grouped-resource-results' groupedResults=groupedResults %}
                 </div>
-                <div id="pagination-container" class="pagination-wrapper">
-                    {% if results.meta.pagination is defined %}
-                        {% partial 'components/resource-pagination' pagination=results.meta.pagination %}
-                    {% endif %}
-                </div>
             </div>
         </div>
     </section>

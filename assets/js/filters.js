@@ -56,8 +56,7 @@ class FilterManager {
             department: '',
             type: '',
             topic: '',
-            search: '',
-            page: 1
+            search: ''
         };
         
         this.elements = this.initializeElements();
@@ -75,7 +74,6 @@ class FilterManager {
             surveyButtonContainer: document.querySelector('.survey-button-container'),
             resultsContainer: document.getElementById('results-container'),
             blocksContainer: document.getElementById('blocks-container'),
-            paginationContainer: document.getElementById('pagination-container'),
             searchForm: document.getElementById('resource-search-form'),
             filterForms: document.querySelectorAll('form[data-filter]'),
             filterTags: document.querySelectorAll('.filter-tag')
@@ -100,7 +98,6 @@ class FilterManager {
     init() {
         this.initializeFromURL();
         this.attachEventListeners();
-        this.initializePaginationListeners();
         
         // Load initial results on courses results page (regardless of filters)
         if (this.pageContext.isCoursesResultsPage) {
@@ -133,11 +130,6 @@ class FilterManager {
             this.filterValues.search = urlParams.get('search') || urlParams.get('q');
             // Ensure search input is populated (this is a backup to the early population)
             this.updateSearchInput(this.filterValues.search);
-        }
-
-        // Handle page parameter
-        if (urlParams.has('page')) {
-            this.filterValues.page = parseInt(urlParams.get('page'), 10) || 1;
         }
 
         // Update UI to reflect URL state
@@ -174,8 +166,7 @@ class FilterManager {
      */
     hasActiveFilters() {
         return CONFIG.FILTER_TYPES.some(type => this.filterValues[type]) ||
-               this.filterValues.search ||
-               this.filterValues.page > 1;
+               this.filterValues.search;
     }
 
     /**
@@ -410,7 +401,6 @@ class FilterManager {
      */
     handleCoursesResultsFilter(filterType, filterValue) {
         this.filterValues[filterType] = filterValue;
-        this.filterValues.page = 1;
         this.loadResources({ ...this.filterValues });
     }
 
@@ -453,7 +443,6 @@ class FilterManager {
         
         const searchInput = e.target.querySelector('input[name="q"]');
         this.filterValues.search = searchInput.value;
-        this.filterValues.page = 1;
         
         this.loadResources({ ...this.filterValues });
     }
@@ -478,7 +467,6 @@ class FilterManager {
             Array.from(formData.entries()).filter(([_, value]) => value)
         );
         
-        params.page = 1;
         this.loadResources(params);
     }
 
@@ -533,7 +521,6 @@ class FilterManager {
             this.updateResourcesUI(data);
             this.updateURL(params);
             this.updateGlobalFilterValues(params);
-            this.initializePaginationListeners();
             
         } catch (error) {
             this.handleLoadError('Error loading results. Please try again.');
@@ -583,10 +570,6 @@ class FilterManager {
     updateResourcesUI(data) {
         if (data['#results-container']) {
             this.elements.resultsContainer.innerHTML = data['#results-container'];
-        }
-        
-        if (data['#pagination-container'] && this.elements.paginationContainer) {
-            this.elements.paginationContainer.innerHTML = data['#pagination-container'];
         }
     }
 
@@ -687,29 +670,6 @@ class FilterManager {
     }
 
     /**
-     * Initialize pagination event listeners
-     */
-    initializePaginationListeners() {
-        const paginationLinks = document.querySelectorAll('.pagination a');
-        
-        paginationLinks.forEach(link => {
-            link.addEventListener('click', (e) => this.handlePaginationClick(e, link));
-        });
-    }
-
-    /**
-     * Handle pagination click
-     */
-    handlePaginationClick(e, link) {
-        e.preventDefault();
-        
-        const currentParams = { ...this.filterValues };
-        currentParams.page = link.dataset.page;
-        
-        this.loadResources(currentParams);
-    }
-
-    /**
      * Redirect to courses results page with parameters
      */
     redirectToCoursesResults(params) {
@@ -743,7 +703,7 @@ class FilterManager {
         
         // Update UI for each active filter
         Object.entries(values).forEach(([filterType, filterValue]) => {
-            if (filterValue && filterType !== 'search' && filterType !== 'page') {
+            if (filterValue && filterType !== 'search') {
                 this.activateFilterTag(filterType, filterValue);
             }
         });

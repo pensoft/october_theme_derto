@@ -183,7 +183,7 @@
                     min-width: 100%;
                     max-width: 360px;
                     margin-top: 0;
-
+                
                     &.show {
                         display: flex;
                         flex-direction: column;
@@ -195,7 +195,8 @@
                         backdrop-filter: blur(5px);
                         color: #3A451E;
                         animation: dropdownFade 0.2s ease;
-                        overflow: hidden;
+                        overflow: auto;
+                        max-height: 320px;
                     }
 
                     .popper-arrow {
