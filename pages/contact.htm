@@ -11,8 +11,8 @@ subtitle = "Reach out"
 
 [SimpleContactFormComponent]
 templates = "template1"
+recaptcha_key = "6LeZ6l0rAAAAAKJHIt2QNw8JNeZjXXhc5WybT516"
 message_label = "Contact Form"
-
 ==
 <?php
 use Pensoft\Cardprofiles\Models\Profiles;
@@ -22,6 +22,8 @@ function onStart(){
 }
 ?>
 ==
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 {% component 'siteSearchInclude' %}
 
 <div class="container contact_container">
@@ -101,7 +103,9 @@ function onStart(){
                                 <textarea id="message" name="message" rows="6" placeholder="Type your message here..." required></textarea>
                             </div>
                             
-                            <input type="hidden" name="g-recaptcha-response" value="external-recaptcha-handled">
+                            <div class="form-group">
+                                <div class="g-recaptcha" data-sitekey="{{ SimpleContactFormComponent.property('recaptcha_key') }}"></div>
+                            </div>
                             
                             <button type="submit" class="submit-btn">Submit Enquiry</button>
                         </form>
