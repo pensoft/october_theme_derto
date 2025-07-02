@@ -90,10 +90,34 @@
     align-items: center;
     padding: 60px 0;
     width: 100%;
+    position: relative;
+    overflow: hidden;
+    
+    // Move flower decoration to main section for better visual hierarchy
+    &::before{
+        content: '';
+        position: absolute;
+        bottom: -80px;
+        right: -80px;
+        width: 500px;
+        height: 400px;
+        background: url("../../assets/images/flower-contact.svg") no-repeat center center;
+        background-size: contain;
+        z-index: 0;
+        opacity: 0.9;
+    }
     
     .breakpoint-large-down({
         padding: 40px 15px;
         box-sizing: border-box;
+        
+        &::before{
+            bottom: -60px;
+            right: -120px;
+            width: 300px;
+            height: 240px;
+            opacity: 0.6;
+        }
     });
 
     .form-container{
@@ -103,21 +127,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        z-index: 1;
         
-        &::before{
-            content: '';
-            position: absolute;
-            bottom: -150px;
-            right: -150px;
-            width: 420px;
-            height: 338px;
-            background: url("../../assets/images/flower-contact.svg") no-repeat center center;
-            background-size: contain;
-        }
         .breakpoint-large-down({
-            &::before{
-                display: none;
-            }
             width: 100%;
             max-width: 100%;
         });
@@ -125,6 +137,8 @@
     .header{
         margin-bottom: 20px;
         text-align: center;
+        position: relative;
+        z-index: 2;
 
         span{
             font-family: Onest;
@@ -155,6 +169,8 @@
         color: rgba(38, 38, 38, 0.65);
         margin-bottom: 40px;
         text-align: center;
+        position: relative;
+        z-index: 2;
         
         .breakpoint-large-down({
             font-size: 18px;
@@ -179,6 +195,8 @@
         padding: 40px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         min-width: 600px;
+        position: relative;
+        z-index: 2;
 
         .container{
             width: 100% !important;

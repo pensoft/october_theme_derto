@@ -29,19 +29,54 @@ use Pensoft\Courses\Models\Topic;
 
 function onStart(){
     $topics = Topic::with(['blocks.lessons.materials'])->get();
+    
+    // Sort materials by prefix within each lesson using version_compare
+    foreach ($topics as $topic) {
+        foreach ($topic->blocks as $block) {
+            foreach ($block->lessons as $lesson) {
+                if ($lesson->materials && $lesson->materials->count() > 0) {
+                    $materialsArray = $lesson->materials->all();
+                    
+                    usort($materialsArray, function($a, $b) {
+                        $prefixA = $a->prefix ?? '';
+                        $prefixB = $b->prefix ?? '';
+                        
+                        // Handle empty prefixes - put them at the end
+                        if (empty($prefixA) && empty($prefixB)) {
+                            return 0;
+                        }
+                        if (empty($prefixA)) {
+                            return 1;
+                        }
+                        if (empty($prefixB)) {
+                            return -1;
+                        }
+                        
+                        // Use version_compare for natural sorting of version-like strings
+                        // This will properly sort 1.1, 1.2, 1.12, etc.
+                        return version_compare($prefixA, $prefixB);
+                    });
+                    
+                    // Replace the collection with sorted array
+                    $lesson->setRelation('materials', collect($materialsArray));
+                }
+            }
+        }
+    }
+    
     $this['topics'] = $topics;
 }
 ?>
 ==
 <main>
+    <section class="what-is-derto">
+        {% component 'what-derto' %}
+    </section>
+    
     <section class="team-up">
         <div class="container-fluid">
             {% component 'home-team-up' %}
         </div>
-    </section>
-
-    <section class="what-is-derto">
-        {% component 'what-derto' %}
     </section>
 
     <section class="courses">
@@ -69,6 +104,18 @@ function onStart(){
                                     {% endfor %}
                                 {% endfor %}
                             {% endfor %}
+                        </div>
+                        <div class="carousel-controls">
+                            <button class="materials-carousel-arrow materials-carousel-prev" data-topic="{{ topic.slug }}" aria-label="Previous materials">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <button class="materials-carousel-arrow materials-carousel-next" data-topic="{{ topic.slug }}" aria-label="Next materials">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="m9 18 6-6-6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </div>

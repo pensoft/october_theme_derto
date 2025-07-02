@@ -1,8 +1,13 @@
 .hero-container {
     position: relative;
     width: 100%;
-    height: 90vh;
+    height: 60vh;
+    min-height: 507px;
     overflow: visible;
+
+    .breakpoint-large-down({
+        height: 100vh;
+    });
 
     .video-bg {
         position: absolute;

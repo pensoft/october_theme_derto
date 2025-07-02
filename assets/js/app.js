@@ -31,6 +31,13 @@ $(document).ready(function() {
     // $("nav").removeClass("no-transition");
 	/* MENU */
 	$('.navbar-nav').attr('id', 'menu'); // please don't remove this line
+	
+	// Add survey tooltip class to "Take the Survey" menu item
+	$('.navbar-nav .nav-item a').each(function() {
+        if ($(this).text().trim() === 'Take the Survey' || $(this).attr('href').indexOf('forms.cloud.microsoft') !== -1) {
+            $(this).closest('.nav-item').addClass('survey-nav-item');
+        }
+    });
 	$( '<div class="calendar-top"></div>' ).insertBefore( "#calendar" );
 	$( '<div class="card-profile-top"></div>' ).insertBefore( ".card.profile.card-profile" );
 	var divs = $(".card-profiles > div");
@@ -319,15 +326,15 @@ function initCarousels() {
             infinite: false,
             speed: 300,
             slidesToShow: isBreakpointLarge() ? 1 : 3.5,
-            slidesToScroll: 1,
+            slidesToScroll: isBreakpointLarge() ? 1 : 3,
             centerMode: false,
-            arrows: false,
+            arrows: false, // Disabled built-in arrows since we have custom header arrows
             responsive: [
                 {
                     breakpoint: 1280,
                     settings: {
                         slidesToShow: 2.5,
-                        slidesToScroll: 1,
+                        slidesToScroll: 2,
                         centerPadding: '30px'
                     }
                 },
@@ -340,6 +347,80 @@ function initCarousels() {
                 }
             ]
         });
+        
+        // Add event listeners for carousel state changes
+        $('.materials-list').on('afterChange', function(event, slick, currentSlide) {
+            updateCarouselArrowStates($(this));
+        });
+        
+        $('.materials-list').on('init', function(event, slick) {
+            updateCarouselArrowStates($(this));
+        });
+    }
+    
+    // Initialize custom header carousel controls
+    initCarouselControls();
+}
+
+// Initialize custom header carousel controls
+function initCarouselControls() {
+    // Handle custom carousel arrow clicks
+    $(document).on('click', '.materials-carousel-prev', function(e) {
+        e.preventDefault();
+        var $button = $(this);
+        var topicSlug = $button.data('topic');
+        var $carousel = $button.closest('.topic').find('.materials-list');
+        
+        if ($carousel.hasClass('slick-initialized')) {
+            $carousel.slick('slickPrev');
+            updateCarouselArrowStates($carousel);
+        }
+    });
+    
+    $(document).on('click', '.materials-carousel-next', function(e) {
+        e.preventDefault();
+        var $button = $(this);
+        var topicSlug = $button.data('topic');
+        var $carousel = $button.closest('.topic').find('.materials-list');
+        
+        if ($carousel.hasClass('slick-initialized')) {
+            $carousel.slick('slickNext');
+            updateCarouselArrowStates($carousel);
+        }
+    });
+    
+    // Update arrow states after carousel initialization
+    setTimeout(function() {
+        $('.materials-list.slick-initialized').each(function() {
+            updateCarouselArrowStates($(this));
+        });
+    }, 100);
+}
+
+// Update carousel arrow states based on current slide
+function updateCarouselArrowStates($carousel) {
+    if (!$carousel.hasClass('slick-initialized')) return;
+    
+    var $topic = $carousel.closest('.topic');
+    var $prevButton = $topic.find('.materials-carousel-prev');
+    var $nextButton = $topic.find('.materials-carousel-next');
+    
+    var currentSlide = $carousel.slick('slickCurrentSlide');
+    var slideCount = $carousel.slick('getSlick').slideCount;
+    var slidesToShow = $carousel.slick('getSlick').options.slidesToShow;
+    
+    // Update prev button state
+    if (currentSlide === 0) {
+        $prevButton.addClass('slick-disabled').attr('disabled', true);
+    } else {
+        $prevButton.removeClass('slick-disabled').attr('disabled', false);
+    }
+    
+    // Update next button state  
+    if (currentSlide >= slideCount - slidesToShow) {
+        $nextButton.addClass('slick-disabled').attr('disabled', true);
+    } else {
+        $nextButton.removeClass('slick-disabled').attr('disabled', false);
     }
 }
 
