@@ -30,38 +30,45 @@ use Pensoft\Courses\Models\Topic;
 function onStart(){
     $topics = Topic::with(['blocks.lessons.materials'])->get();
     
-    // Sort materials by prefix within each lesson using version_compare
+    // Sort ALL materials for each topic globally by prefix
     foreach ($topics as $topic) {
+        // Collect all materials for this topic from all blocks and lessons
+        $allMaterials = [];
+        
         foreach ($topic->blocks as $block) {
             foreach ($block->lessons as $lesson) {
                 if ($lesson->materials && $lesson->materials->count() > 0) {
-                    $materialsArray = $lesson->materials->all();
-                    
-                    usort($materialsArray, function($a, $b) {
-                        $prefixA = $a->prefix ?? '';
-                        $prefixB = $b->prefix ?? '';
-                        
-                        // Handle empty prefixes - put them at the end
-                        if (empty($prefixA) && empty($prefixB)) {
-                            return 0;
-                        }
-                        if (empty($prefixA)) {
-                            return 1;
-                        }
-                        if (empty($prefixB)) {
-                            return -1;
-                        }
-                        
-                        // Use version_compare for natural sorting of version-like strings
-                        // This will properly sort 1.1, 1.2, 1.12, etc.
-                        return version_compare($prefixA, $prefixB);
-                    });
-                    
-                    // Replace the collection with sorted array
-                    $lesson->setRelation('materials', collect($materialsArray));
+                    foreach ($lesson->materials as $material) {
+                        $allMaterials[] = $material;
+                    }
                 }
             }
         }
+        
+        // Sort all materials globally by prefix using version_compare
+        if (!empty($allMaterials)) {
+            usort($allMaterials, function($a, $b) {
+                $prefixA = $a->prefix ?? '';
+                $prefixB = $b->prefix ?? '';
+                
+                // Handle empty prefixes - put them at the end
+                if (empty($prefixA) && empty($prefixB)) {
+                    return 0;
+                }
+                if (empty($prefixA)) {
+                    return 1;
+                }
+                if (empty($prefixB)) {
+                    return -1;
+                }
+                
+                // Use version_compare for natural sorting of version-like strings
+                // This will properly sort 1.1, 1.2, 1.12, etc.
+                return version_compare($prefixA, $prefixB);
+            });
+        }
+        
+        $topic->sorted_materials = collect($allMaterials);
     }
     
     $this['topics'] = $topics;
@@ -95,14 +102,10 @@ function onStart(){
                     </div>
                     <div class="container-fluid content">
                         <div class="materials-list slick-carousel-container" role="list">
-                            {% for block in topic.blocks %}
-                                {% for lesson in block.lessons %}
-                                    {% for material in lesson.materials %}
-                                        <div class="material-item" role="listitem">
-                                            {% partial 'components/material-card' material=material %}
-                                        </div>
-                                    {% endfor %}
-                                {% endfor %}
+                            {% for material in topic.sorted_materials %}
+                                <div class="material-item" role="listitem">
+                                    {% partial 'components/material-card' material=material %}
+                                </div>
                             {% endfor %}
                         </div>
                         <div class="carousel-controls">

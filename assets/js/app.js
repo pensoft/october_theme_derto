@@ -34,8 +34,13 @@ $(document).ready(function() {
 	
 	// Add survey tooltip class to "Take the Survey" menu item
 	$('.navbar-nav .nav-item a').each(function() {
-        if ($(this).text().trim() === 'Take the Survey' || $(this).attr('href').indexOf('forms.cloud.microsoft') !== -1) {
-            $(this).closest('.nav-item').addClass('survey-nav-item');
+        var $this = $(this);
+        var href = $this.attr('href') || '';
+        var text = $this.text().trim();
+        
+        // Check if this is a "Take the Survey" link
+        if (text === 'Take the Survey' || (href && href.length > 0 && href.indexOf('forms.cloud.microsoft') !== -1)) {
+            $this.closest('.nav-item').addClass('survey-nav-item');
         }
     });
 	$( '<div class="calendar-top"></div>' ).insertBefore( "#calendar" );
@@ -451,23 +456,30 @@ $(window).resize(function() {
 
 // Initialize block accordion functionality
 function initBlockAccordion() {
-    $(document).on('click', '.block-header', function(e) {
+    $(document).off('click.blockAccordion', '.block-header');
+    
+    // Attach the block accordion handler
+    $(document).on('click.blockAccordion', '.block-header', function(e) {
         e.preventDefault();
+        e.stopPropagation();
 
         var $blockHeader = $(this);
         var $blockContainer = $blockHeader.closest('.col-xs-12');
         var $materialsContainer = $blockContainer.find('.block-materials-container');
 
-        // Toggle expanded class on header
-        $blockHeader.toggleClass('expanded');
+        // Only proceed if we found the materials container
+        if ($materialsContainer.length > 0) {
+            $blockHeader.toggleClass('expanded');
 
-        // Toggle materials container with smooth animation
-        if ($materialsContainer.hasClass('expanded')) {
-            $materialsContainer.slideUp(300, function() {
-                $materialsContainer.removeClass('expanded');
-            });
-        } else {
-            $materialsContainer.addClass('expanded').slideDown(300);
+            if ($materialsContainer.hasClass('expanded')) {
+                $materialsContainer.slideUp(300, function() {
+                    $materialsContainer.removeClass('expanded');
+                });
+            } else {
+                $materialsContainer.addClass('expanded').slideDown(300);
+            }
         }
+        
+        return false;
     });
 }
