@@ -52,6 +52,9 @@ $(document).ready(function() {
 
     // Initialize block accordion functionality
     initBlockAccordion();
+    
+    // Initialize partner content truncation
+    initPartnerContentTruncation();
 
     // Update the mobile menu functionality is now moved to site-search.js
 
@@ -176,7 +179,14 @@ $(document).ready(function() {
     });
 
     $("nav").removeClass("no-transition");
-
+    
+    if(width >= 1024 && $('#partners .key_0').length){
+        // First column: items 0, 2, 4, 6, etc. (even numbers)
+        $('#partners .key_0, #partners .key_2, #partners .key_4, #partners .key_6, #partners .key_8, #partners .key_10, #partners .key_12, #partners .key_14, #partners .key_16, #partners .key_18').wrapAll('<div class="col-md-6 col-xs-12" />');
+        
+        // Second column: items 1, 3, 5, 7, etc. (odd numbers)
+        $('#partners .key_1, #partners .key_3, #partners .key_5, #partners .key_7, #partners .key_9, #partners .key_11, #partners .key_13, #partners .key_15, #partners .key_17, #partners .key_19').wrapAll('<div class="col-md-6 col-xs-12" />');
+    }
     // Initialize events page functionality
     // initEventsPage();
 
@@ -481,5 +491,70 @@ function initBlockAccordion() {
         }
         
         return false;
+    });
+}
+
+/**
+ * Initialize partner content truncation
+ * Truncates partner descriptions to 255 characters without breaking words
+ */
+function initPartnerContentTruncation() {
+    $('.partner-content').each(function() {
+        var $partnerContent = $(this);
+        var $fullContent = $partnerContent.find('.partner-description-full');
+        var $truncatedContent = $partnerContent.find('.partner-description-truncated');
+        var $button = $partnerContent.find('.read-more-partner');
+        
+        var fullText = $fullContent.data('full-content');
+        var maxLength = 255;
+        
+        if (fullText && fullText.length > maxLength) {
+            // Find the last space before the 255 character limit to avoid breaking words
+            var truncatedText = fullText.substring(0, maxLength);
+            var lastSpaceIndex = truncatedText.lastIndexOf(' ');
+            
+            if (lastSpaceIndex > 0) {
+                truncatedText = truncatedText.substring(0, lastSpaceIndex);
+            }
+            
+            // Add ellipsis to indicate there's more content
+            truncatedText += '...';
+            
+            // Set the truncated content
+            $truncatedContent.html(truncatedText);
+            
+            // Show truncated content initially and show button
+            $truncatedContent.show();
+            $fullContent.hide();
+            $button.show();
+        } else {
+            // Content is short enough, show full content and hide button
+            $truncatedContent.html(fullText);
+            $truncatedContent.show();
+            $fullContent.hide();
+            $button.hide();
+        }
+    });
+    
+    // Handle read more/less toggle with smooth animation
+    $('.read-more-partner').off('click').on('click', function(e) {
+        e.preventDefault();
+        
+        var $button = $(this);
+        var $partnerContent = $button.closest('.partner-content');
+        var $truncatedContent = $partnerContent.find('.partner-description-truncated');
+        var $fullContent = $partnerContent.find('.partner-description-full');
+        
+        if ($fullContent.is(':visible')) {
+            // Currently showing full content, switch to truncated
+            $fullContent.hide();
+            $truncatedContent.show();
+            $button.text('Read more').removeClass('expanded');
+        } else {
+            // Currently showing truncated content, switch to full
+            $truncatedContent.hide();
+            $fullContent.show();
+            $button.text('Read less').addClass('expanded');
+        }
     });
 }

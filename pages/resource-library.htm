@@ -8,6 +8,10 @@ header_image = "resource-library.png"
 
 [siteSearchInclude]
 
+[searchSuggestions]
+maxResults = 10
+minQueryLength = 2
+
 [jumbotron resource-library-intro-text]
 jumbotron = "resource-library-intro-text"
 title = 0
@@ -22,6 +26,7 @@ use Pensoft\Courses\Models\Block;
 use Pensoft\Courses\Models\Material;
 use Pensoft\Courses\Models\Language;
 use RainLab\Location\Models\Country;
+use Pensoft\Partners\Models\Partners as Partner;
 
 function onStart(){
 	$this['topics'] =  Topic::all();
@@ -32,6 +37,7 @@ function onStart(){
     
     // Languages including custom languages like Valencian
     $this['languages'] = Language::getLanguageOptions();
+    $this['partners'] = Partner::where('type', 2)->get();
 }
 ?>
 ==
@@ -41,8 +47,25 @@ function onStart(){
     <div class="container-fluid resource-library-intro-text">
         {% component 'resource-library-intro-text' %}
     </div>
-    <section class="filters">
+    
+    <!-- Combined Search and Filters Section -->
+    <section class="courses-filters">
         <div class="container">
+            <!-- Search Section - Right Aligned -->
+            <div class="search-section" style="text-align: right; margin-bottom: 20px;">
+                <div class="search-container" style="display: inline-block;">
+                    <div class="search-outer">
+                        <form id="resource-search-form" data-resource-search="true" method="get">
+                            <input type="text" name="q" placeholder="Search for educational resources" class="form-control">
+                            <button type="submit" class="search-btn">
+                                <img src="{{ 'assets/images/search-dark.svg'|theme }}" alt="Search">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Filters Bar -->
             <div class="filters-bar">
                 <div class="label center-xs">Filter by</div>
                 {% partial 'components/resource-filters' %}
@@ -72,29 +95,49 @@ function onStart(){
         </div>
     </section>
 
-    <section class="additional-resources">
+    <section class="partners">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-xs-12">
-                    <h2>Additional resources</h2>
-                    <div class="col-xs-12">
-                        <p>
-                            Explore extra tools, guides, and references to support hands-on learning across different sectors. A curated selection of materials that offers extended insights and practical support for navigating content beyond the core library.
-                        </p>
-                    </div>
-                    <div class="col-xs-12">
-                        <div class="label start-xs">
-                            Filter by
+            <h2 class="center-xs">Additional resources</h2>
+            <div id="partners" class="tab-content">
+                <div class="container partners-container pt-0">
+                    <div class="row">
+                        {% for partner in partners %}
+                        <div class="col-xs-12 key_{{ loop.index0 }}">
+                            <div class="partner-record">
+                                <div class="row header-row">
+                                    <div class="col-xs-4 img-container">
+                                        <img src="{{ partner.cover.path }}" alt="{{ partner.title }}">
+                                    </div>
+                                    <div class="col-xs-8">
+                                        {% if partner.instituion_url %}
+                                            <a href="{{ partner.instituion_url }}" target="_blank">{{ partner.instituion }}</a>
+                                        {% else %}
+                                            {{ partner.instituion }}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="partner-content">
+                                    <div class="partner-description-truncated">
+                                        <!-- Truncated content will be set by JavaScript -->
+                                    </div>
+                                    <div class="partner-description-full" style="display: none;" data-full-content="{{ partner.content|raw|e }}">
+                                        {{ partner.content|raw }}
+                                    </div>
+                                    <a href="javascript:void(0)" class="read-more-partner">
+                                        Read more
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        {% partial 'components/resource-filters' %}
+                        {% endfor %}
                     </div>
                 </div>
-                <div class="col-md-6 col-xs-12">
-                    <div class="col-xs-12">
-                        <img src="/themes/pensoft-derto/assets/images/lilavo_cvete.png" alt="Additional resources"> 
-                    </div>
-                </div>
-            </div>
-        </div>
+            </div>    
+        </div>    
     </section>
+
+    {% partial 'components/material-popup' %}
+    
+    <!-- Search Suggestions Component -->
+    {% component 'searchSuggestions' %}
 </main>

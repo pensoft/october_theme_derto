@@ -42,10 +42,31 @@ description_limit = 0
         <div class="col-md-6 col-xs-12">
             {% component 'explore' %}
             <div class="container">
-                <div class="choose_label">Choose between</div>
+                <div class="choose_label">Choose a country from the dropdown</div>
                 <div class="choose_buttons">
-                    <a href="" class="btn-primary">Virtual Demonstration</a>
-                    <a href="" class="btn-secondary">Resources</a>
+                    <div class="demo-dropdown filter-group">
+                        <button class="filter-trigger btn-primary-dropdown" id="demoTrigger">
+                            Explore resources <i class="filter-arrow"></i>
+                        </button>
+                        <div class="filter-options demo-options">
+                            <a href="topic/forest-restoration-and-disaster-risk-management" class="demo-option" data-country="spain">
+                                <span class="country-name">Spain</span>
+                                <span class="topic-description">Forest Restoration and Disaster Risk Management</span>
+                            </a>
+                            <a href="topic/restoration-across-urban-and-rural-landscapes" class="demo-option" data-country="czech">
+                                <span class="country-name">Czech Republic</span>
+                                <span class="topic-description">Restoration Across Urban and Rural Landscapes</span>
+                            </a>
+                            <a href="topic/restoration-old-infrastructures-ecological-compensation-and-landscaping" class="demo-option" data-country="norway">
+                                <span class="country-name">Norway</span>
+                                <span class="topic-description">Restoration of Old Infrastructure, Ecological Compensation and Landscaping</span>
+                            </a>
+                            <a href="topic/multifunctional-and-sustainable-land-use-in-agriculture" class="demo-option" data-country="germany">
+                                <span class="country-name">Germany</span>
+                                <span class="topic-description">Multifunctional and Sustainable Land Use in Agriculture</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
