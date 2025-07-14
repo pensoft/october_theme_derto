@@ -95,6 +95,7 @@ function onStart(){
         </div>
     </section>
 
+    {% if partners.count > 0 %}
     <section class="partners">
         <div class="container">
             <h2 class="center-xs">Additional resources</h2>
@@ -135,7 +136,8 @@ function onStart(){
             </div>    
         </div>    
     </section>
-
+    {% endif %}
+    
     {% partial 'components/material-popup' %}
     
     <!-- Search Suggestions Component -->
