@@ -2,27 +2,27 @@
     background: url('../images/multifunctional.png') no-repeat center center;
     background-size: cover;
     color: #fff;
-    padding: 140px 0 60px 80px;
+    padding: 280px 0 0 0;
     position: relative;
     
     // Topic-specific background images
     &[data-topic-slug="multifunctional-and-sustainable-land-use-agriculture"] {
-        background: url('../images/forest-restoration-and-disaster.png') no-repeat center center;
+        background: url('../images/maslin.png') no-repeat center center;
         background-size: cover;
     }
     
     &[data-topic-slug="restoration-old-infrastructures-ecological-compensation-and-landscaping"] {
-        background: url('../images/restoration-of-old.png') no-repeat center center;
+        background: url('../images/roo.png') no-repeat center center;
         background-size: cover;
     }
     
     &[data-topic-slug="restoration-across-urban-and-rural-landscapes"] {
-        background: url('../images/restoration-across-urban.png') no-repeat center center;
+        background: url('../images/rau.png') no-repeat center center;
         background-size: cover;
     }
     
     &[data-topic-slug="forest-restoration-and-disaster-risk-management"] {
-        background: url('../images/forest-restoration-and-disaster.png') no-repeat center center;
+        background: url('../images/frad.png') no-repeat center center;
         background-size: cover;
     }
     
@@ -30,9 +30,16 @@
     h1{
         color: #fff !important;
     }
+    .hero-background{
+        border-radius: 0px 65px 0px 0px;
+        background: rgba(255, 255, 255, 0.11);
+        backdrop-filter: blur(34.099998474121094px);
+        padding-bottom: 32px;
+    }
 
     .container {
         position: relative;
+        padding-bottom: 0px;
         z-index: 2;
     }
 
@@ -52,7 +59,7 @@
         .topic-title {
             font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 0px !important;
         }
         
         .topic-institution {
