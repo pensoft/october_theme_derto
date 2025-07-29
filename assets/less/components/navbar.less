@@ -139,12 +139,13 @@
 
     .dropdown{
         .dropdown-menu {
-            background: #273554;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
             animation: rotateX 500ms ease-in-out forwards;
             transform-origin: top center;
             opacity: 0;
             border-radius: 0px 0px 10px 10px;
-
+            min-width: 220px;
 
             &:nth-of-type(1) {
                 animation-delay: 0ms;
@@ -347,28 +348,37 @@
                         position: relative;
                         margin-right: 20px;
 
-
-
-
-                        &:after {
-                            content: '';
-                            display: block;
-                            position: absolute;
-                            right: 0px;
-                            top: 50%;
-                            margin-top: -5px;
-                            width: 10px;
-                            height: 10px;
-                            background: url('../../assets/images/arrow-down-white.svg') no-repeat center center;
-                            background-size: contain;
-                            pointer-events: none;
-                            transition: transform 0.3s ease;
+                        // Target dropdown-toggle elements specifically
+                        .dropdown-toggle {
+                            &::after {
+                                content: '';
+                                display: inline-block;
+                                margin-left: 4px;
+                                width: 16px;
+                                height: 16px;
+                                background: url('../../assets/images/chevron-down.svg') no-repeat center center;
+                                background-size: contain;
+                                transition: transform 0.3s ease;
+                                vertical-align: middle;
+                            }
                         }
 
+                        // Fallback for dropdowns without dropdown-toggle class
+                        &:not(:has(.dropdown-toggle)):after {
+                            content: '';
+                            display: inline-block;
+                            margin-left: 4px;
+                            width: 16px;
+                            height: 16px;
+                            background: url('../../assets/images/chevron-down.svg') no-repeat center center;
+                            background-size: contain;
+                            transition: transform 0.3s ease;
+                            vertical-align: middle;
+                        }
+
+                        &:hover .dropdown-toggle::after,
                         &:hover:after {
                             transform: rotate(180deg);
-                            margin-top: -5px;
-                            opacity: 0.6;
                         }
 
                         .dropdown-menu {
@@ -378,6 +388,7 @@
                             top: 55px;
                             padding: 15px !important;
                             margin-left: 10px;
+                            min-width: 220px;
 
                             &:before{
                                 content: '';
@@ -396,7 +407,7 @@
                                 line-height: 1.6em;
                                 letter-spacing: 0px;
                                 margin-bottom: 5px;
-                                color: @white-color !important;
+                                color: #333 !important;
                                 &:hover{
                                     opacity: 0.6;
                                 }
@@ -526,7 +537,7 @@
         text-align: center;
         width: 100%;
         .breakpoint-large-down({
-            padding: 18px  0 0 0;
+            padding: 24px  0 0 0;
         })
     }
 
@@ -538,7 +549,7 @@
 
     #menu li:not(.social) a{
         color: @white-color;
-        padding: 5px 0;
+        padding: 8px 0;
         float: left;
         width: 100%;
         font-size: 20px;
@@ -557,18 +568,61 @@
 
         .dropdown-menu{
             padding-left: 0!important;
+            margin-top: 15px;
         }
     }
 
     #menu .dropdown-menu li a{
-        padding: 2px 0;
-        font-size: 15px;
-        font-weight: 400;
+        padding: 8px 0;
+        font-size: 16px;
+        font-weight: 300;
         margin-top: 0px;
+        color: @white-color !important;
+        text-align: center;
     }
 
     #menu li.sign-in a{
         color: @date-text-color!important;
+    }
+    
+    // Mobile dropdown arrows - target dropdown-toggle elements
+    #menu .dropdown .dropdown-toggle {
+        &::after {
+            content: '';
+            display: inline-block;
+            margin-left: 4px;
+            width: 16px;
+            height: 16px;
+            background: url('../../assets/images/chevron-down.svg') no-repeat center center;
+            background-size: contain;
+            transition: transform 0.3s ease;
+            vertical-align: middle;
+        }
+        
+        &.expanded::after {
+            transform: rotate(180deg);
+        }
+    }
+    
+    // Fallback for mobile dropdowns without dropdown-toggle class
+    #menu .dropdown > a:not(.dropdown-toggle) {
+        position: relative;
+        
+        &::after {
+            content: '';
+            display: inline-block;
+            margin-left: 4px;
+            width: 16px;
+            height: 16px;
+            background: url('../../assets/images/chevron-down.svg') no-repeat center center;
+            background-size: contain;
+            transition: transform 0.3s ease;
+            vertical-align: middle;
+        }
+        
+        &.expanded::after {
+            transform: rotate(180deg);
+        }
     }
 
     #menuToggle input:checked ~ ul

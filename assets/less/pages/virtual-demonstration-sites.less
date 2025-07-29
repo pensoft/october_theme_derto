@@ -1,0 +1,174 @@
+.vr-intro{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    p{
+        color: rgba(38, 47, 14, 0.65);
+        font-size: 16px;
+        font-style: normal;
+    }
+}
+
+.virtual-img-container{
+    background: url('../images/vr-menu-image.png') center no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 532px;
+    position: relative;
+    
+    .vr-menu-header{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+
+        h3{
+            color: #262F0E;
+            font-size: 24px;
+            font-weight: 600;
+            padding: 20px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            &:after{
+                content: '';
+                display: inline-block;
+                width: 28.5px;
+                height: 33.5px;
+                margin-top: -10px;
+                background: url('../images/fluent-click.svg') no-repeat center center;
+            }
+        }
+    }
+
+    .vr-button{
+        position: absolute;
+        border-radius: 6px;
+        background: #F0F0E4;
+        display: inline-flex;
+        padding: 8px 22px;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        color: #262F0E;
+        &:before{
+            content: '';
+            display: inline-block;
+            width: 21.5px;
+            height: 16px;
+        }
+        &.germany{
+            top: 280px;
+            left: 160px;
+            .breakpoint-large-down({
+                top: 45%;
+                left: 30%;
+            });
+            &:before{
+                background: url('../images/flag-germany.svg') no-repeat center center;
+            }
+        }
+        &.norway{
+            top: 157px;
+            right: 205px;
+            .breakpoint-large-down({
+                top: 30%;
+                right: 32%;
+            });
+            &:before{
+                background: url('../images/flag-norway.svg') no-repeat center center;
+            }
+        }
+        &.czech{
+            top: 273px;
+            right: 68px;
+            .breakpoint-large-down({
+                top: 54%;
+                right: 0;
+            });
+            &:before{
+                background: url('../images/flag-czech.svg') no-repeat center center;
+            }
+        }
+        &.spain{
+            bottom: 100px;
+            left: 100px;
+            .breakpoint-large-down({
+                bottom: 20%;
+                left: 0;
+            });
+            &:before{
+                background: url('../images/flag-spain.svg') no-repeat center center;
+            }
+        }
+        &:hover{
+            box-shadow: 0 7px 13px 0 rgba(233, 245, 161, 0.75);
+        }
+    }
+}
+
+.demonstration-sites-detailed{
+    .back-to{
+        a{
+            color: rgba(38, 47, 14, 0.45);
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            opacity: 0.65;
+            gap: 10px;
+            &:before{
+                content: '';
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                background: url('../images/chevron-left.svg') no-repeat center center;
+            }
+            &:hover{
+                color: #4A7C2A;
+            }
+        }
+    }
+    .vr-germany-intro{
+        .container{
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+    }
+    .demo-item{
+        margin-bottom: 60px;
+        .text-content{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h3{
+            font-family: Onest;
+            font-weight: 600;
+            color: #262F0E;
+            font-size: 36px;
+        }
+
+        p{
+            color: rgba(38, 47, 14, 0.65);
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .breakpoint-large-down({
+            .embedded-content {
+                order: 1;
+            }
+            .text-content {
+                order: 2;
+            }
+        });
+    }
+}

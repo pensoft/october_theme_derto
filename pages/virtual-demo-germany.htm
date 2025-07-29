@@ -1,0 +1,43 @@
+url = "/virtual-demonstration-sites/germany"
+layout = "default"
+title = "Germany"
+subtitle = "Virtual Demonstration Site"
+header_image = "germany-demo.png"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[jumbotron vr-germany-content]
+jumbotron = "vr-germany-content"
+title = 0
+background = "transperant"
+templates = "template3"
+description_limit = 0
+
+[jumbotron vr-germany-intro]
+jumbotron = "vr-germany-intro"
+title = 0
+background = "transperant"
+templates = "template3"
+description_limit = 0
+
+
+[siteSearchInclude]
+==
+{% component 'siteSearchInclude' %}
+
+<main class="demonstration-sites-detailed">
+    <div class="container">
+        <div class="back-to">
+            <a href="/virtual-demonstration-sites">Back</a>
+        </div>
+    </div>
+
+    <div class="container-flluid vr-germany-intro">
+        {% component 'vr-germany-intro' %}
+    </div>
+
+    <div class="container-flluid vr-germany-content">
+        {% component 'vr-germany-content' %}
+    </div>
+</main>

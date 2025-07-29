@@ -21,8 +21,19 @@ title = 1
 background = "transperant"
 templates = "template3"
 description_limit = 0
+
+[jumbotron vr-intro]
+jumbotron = "vr-intro"
+title = 0
+background = "transperant"
+templates = "template3"
+description_limit = 0
 ==
 {% component 'siteSearchInclude' %}
+
+<div class="container-fluid vr-intro">
+    {% component 'vr-intro' %}
+</div>
 
 <div class="container purpose">
     <div class="row">
@@ -35,10 +46,8 @@ description_limit = 0
     </div>
 </div>
 
-
 <div class="container explore">
     <div class="row">
-
         <div class="col-md-6 col-xs-12">
             {% component 'explore' %}
             <div class="container">
@@ -69,11 +78,18 @@ description_limit = 0
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="col-md-6 col-xs-12 virt-image-container">
-            <img src="{{'virt-image-2.png'|media}}">
+            <div class="virtual-img-container">
+                <div class="vr-menu-header">
+                    <h3>Try out the sites!</h3>
+                </div>
+                <a href="virtual-demonstration-sites/germany" class="vr-button germany">Germany</a>
+                <a href="#" class="vr-button norway">Norway</a>
+                <a href="#" class="vr-button czech">Czech Republic</a>
+                <a href="#" class="vr-button spain">Spain</a>
+            </div>
         </div>
     </div>
 </div>
