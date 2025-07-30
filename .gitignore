@@ -36,3 +36,6 @@ Thumbs.db
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+#Embed H5P
+/assets/embed
