@@ -22,8 +22,10 @@ slug = "{{ :slug }}"
                             Institutions responsible for the module: {{ topicInstitutions|join(', ') }}
                         {% endif %}
                     </p>
+                    <div class="topic-introduction">
+                        {{ topic.topic_introduction|raw }}
+                    </div>
                 </div>
-                
                 <a href="/resource-library" class="back-link">
                     <i class="back-arrow"></i> Back
                 </a>

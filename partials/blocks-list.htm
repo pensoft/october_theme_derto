@@ -30,6 +30,24 @@
                                     {% endfor %}
                                 {% endfor %}
                             </div>
+                            {% set hasDownloadableMaterials = false %}
+                            {% for lesson in block.lessons %}
+                                {% for material in lesson.materials %}
+                                    {% if material.cover or material.video_file or material.document_file or (material.gallery and material.gallery|length > 0) %}
+                                        {% set hasDownloadableMaterials = true %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                            
+                            {% if hasDownloadableMaterials %}
+                            <div class="block-actions">
+                                <a href="#" class="download-block-btn" 
+                                   data-block-id="{{ block.id }}" 
+                                   data-block-name="{{ block.name }}">
+                                   Download Materials
+                                </a>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

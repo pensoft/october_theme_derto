@@ -736,6 +736,8 @@ class FilterManager {
             trigger.innerHTML = `${baseText} <i class="filter-arrow"></i>`;
         }
     }
+
+
 }
 
 // Immediately populate search input from URL if present (before DOM ready)

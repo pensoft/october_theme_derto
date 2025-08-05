@@ -101,10 +101,20 @@
         }
     }
 }
-
+.topic-introduction{
+    p {
+        // text-align: center !important;
+        opacity: 0.45;
+        color: #262F0E;
+        font-size: 16px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+}
 .topic-page, .resource-library-results {
 
     .topic-institution{
+        font-weight: bold;
         opacity: 0.45;
         color: #262F0E;
     }
@@ -345,6 +355,69 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+// Block download button styling
+.block-actions {
+    padding: 20px 0;
+    text-align: center;
+    // border-top: 1px solid rgba(38, 47, 14, 0.1);
+    margin-top: 20px;
+    
+    .download-block-btn {
+        border-radius: 6px;
+        background: #E9F5A1;
+        padding: 12px 20px;
+        text-decoration: none;
+        color: #262F0E;
+        font-size: 16px;
+        font-weight: 500;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        
+        &:after {
+            content: '';
+            display: inline-block;
+            background: url(../images/download.svg) no-repeat center center;
+            background-size: contain;
+            width: 16px;
+            height: 16px;
+            margin-left: 8px;
+            filter: brightness(0.2);
+        }
+        
+        &:hover {
+            background: #CEDA8B;
+            transform: translateY(-2px);
+            text-decoration: none;
+            color: #262F0E;
+            box-shadow: 0 4px 12px rgba(38, 47, 14, 0.15);
+        }
+        
+        &:active {
+            transform: translateY(0);
+        }
+        
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        
+        .breakpoint-small-down({
+            font-size: 14px;
+            padding: 10px 16px;
+            
+            &:after {
+                width: 14px;
+                height: 14px;
+            }
+        });
     }
 }
 

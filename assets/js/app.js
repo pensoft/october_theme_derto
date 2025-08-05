@@ -55,6 +55,9 @@ $(document).ready(function() {
     
     // Initialize partner content truncation
     initPartnerContentTruncation();
+    
+    // Initialize block download functionality
+    initBlockDownloads();
 
     // Update the mobile menu functionality is now moved to site-search.js
 
@@ -203,6 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
         initDertoDotsNav();
         initAccordions();
+        initBlockDownloads();
     }, 500);
 });
 
@@ -252,7 +256,7 @@ function openTab(evt, tabName, num) {
 function initDertoDotsNav() {
     // Use jQuery for better compatibility
     $('.what-is-derto .dot').on('click', function() {
-        console.log('Dot clicked:', $(this).data('tab'));
+        // console.log('Dot clicked:', $(this).data('tab'));
 
         // Remove active class from all dots
         $('.what-is-derto .dot').removeClass('active');
@@ -558,3 +562,162 @@ function initPartnerContentTruncation() {
         }
     });
 }
+
+/**
+ * Initialize block download functionality
+ */
+function initBlockDownloads() {
+    // Use event delegation to handle dynamically loaded content
+    $(document).off('click.blockDownload').on('click.blockDownload', '.download-block-btn', function(e) {
+        handleBlockDownload(e);
+    });
+}
+
+/**
+ * Handle block download
+ */
+async function handleBlockDownload(e) {
+    e.preventDefault();
+    
+    const btn = e.target.closest('.download-block-btn');
+    if (!btn) return;
+    
+    const blockId = btn.dataset.blockId;
+    const blockName = btn.dataset.blockName;
+    
+    // Disable button and show loading state
+    btn.style.pointerEvents = 'none';
+    btn.style.opacity = '0.6';
+    const originalHtml = btn.innerHTML;
+    btn.innerHTML = 'Preparing download...';
+    
+    try {
+        // Collect all materials from the specific block
+        const materials = collectBlockMaterials(btn);
+        
+        if (materials.length === 0) {
+            alert('No downloadable materials found for this block.');
+            return;
+        }
+        
+        // Send download request
+        await downloadBlockMaterials(materials, blockName, blockId);
+        
+    } catch (error) {
+        console.error('Download failed:', error);
+        alert('Download failed. Please try again.');
+    } finally {
+        // Reset button state
+        btn.style.pointerEvents = '';
+        btn.style.opacity = '';
+        btn.innerHTML = originalHtml;
+    }
+}
+
+/**
+ * Collect all materials from a specific block
+ */
+function collectBlockMaterials(button) {
+    // Find the block materials container that contains this button
+    const blockMaterialsContainer = button.closest('.block-materials-container');
+    if (!blockMaterialsContainer) return [];
+    
+    // Find all material cards within this specific block
+    const materialCards = blockMaterialsContainer.querySelectorAll('.material-card');
+    const materials = [];
+    
+    materialCards.forEach(card => {
+        const materialData = {
+            id: card.dataset.materialId,
+            name: card.dataset.materialName,
+            type: card.dataset.materialType,
+            prefix: card.dataset.materialPrefix,
+            resources: []
+        };
+        
+        // Collect downloadable resources
+        if (card.dataset.materialCover) {
+            materialData.resources.push({
+                type: 'cover',
+                url: card.dataset.materialCover,
+                name: 'cover'
+            });
+        }
+        
+        if (card.dataset.materialVideoFile) {
+            materialData.resources.push({
+                type: 'video',
+                url: card.dataset.materialVideoFile,
+                name: 'video'
+            });
+        }
+        
+        if (card.dataset.materialDocumentFile) {
+            materialData.resources.push({
+                type: 'document',
+                url: card.dataset.materialDocumentFile,
+                name: 'document'
+            });
+        }
+        
+        // Add gallery images
+        if (card.dataset.materialGallery) {
+            try {
+                const gallery = JSON.parse(card.dataset.materialGallery);
+                if (Array.isArray(gallery)) {
+                    gallery.forEach((imageUrl, index) => {
+                        materialData.resources.push({
+                            type: 'gallery',
+                            url: imageUrl,
+                            name: `gallery_image_${index + 1}`
+                        });
+                    });
+                }
+            } catch (e) {
+                console.warn('Failed to parse gallery data for material:', materialData.id);
+            }
+        }
+        
+        // Only include materials that have downloadable resources
+        if (materialData.resources.length > 0) {
+            materials.push(materialData);
+        }
+    });
+    
+    return materials;
+}
+
+/**
+ * Download block materials
+ */
+async function downloadBlockMaterials(materials, blockName, blockId) {
+    const response = await fetch('/api/courses/download-block', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify({
+            block_id: blockId,
+            block_name: blockName,
+            materials: materials
+        })
+    });
+    
+    if (!response.ok) {
+        throw new Error(`Download failed: ${response.statusText}`);
+    }
+    
+    // Handle the download
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${blockName.replace(/[^a-zA-Z0-9_-]/g, '_')}_materials.zip`;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+}
+
+
