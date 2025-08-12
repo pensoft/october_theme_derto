@@ -12,6 +12,7 @@
      data-material-keywords="{{ material.keywords|join(',') }}"
      data-material-cover="{{ material.cover ? material.cover.getPath() : '' }}"
      data-material-youtube-url="{{ material.youtube_url }}"
+     data-material-slideshare-url="{{ material.slideshare_url|e('html_attr') }}"
      data-material-video-file="{{ material.video_file ? material.video_file.getPath() : '' }}"
      data-material-document-file="{{ material.document_file ? material.document_file.getPath() : '' }}"
      data-material-quiz="{{ material.quiz|raw }}"
@@ -29,10 +30,42 @@
      data-material-gallery="{{ material.gallery ? material.gallery|map(file => file.getPath())|json_encode : '' }}">
     <div class="card-inner">
         <div class="card-header">
-            <span class="material-number">{{ material.prefix }}</span>
-            <span class="material-duration">
-                <i class="icon-clock"></i> {{ material.duration}}
-            </span>
+            {% set docType = '' %}
+            {% if material.document_file %}
+                {% if material.document_file.file_name %}
+                    {% set parts = material.document_file.file_name|split('.') %}
+                    {% set docType = parts|last|lower %}
+                {% else %}
+                    {% if material.document_file.getPath is defined %}
+                        {% set docPath = material.document_file.getPath() %}
+                        {% if docPath %}
+                            {% set docType = docPath|split('?')|first|split('.')|last|lower %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+
+            {% set docVariant = '' %}
+            {% if docType in ['pdf'] %}
+                {% set docVariant = 'pdf' %}
+            {% elseif docType in ['ppt','pptx'] %}
+                {% set docVariant = 'ppt' %}
+            {% elseif docType in ['docx'] %}
+                {% set docVariant = 'docx' %}
+            {% endif %}
+
+            <div class="meta-chips">
+                <span class="material-number">{{ material.prefix }}</span>
+                <span class="material-duration">
+                    <i class="icon-clock"></i> {{ material.duration }}
+                </span>
+                {% if material.language %}
+                <span class="material-language"><i class="icon-globe"></i> {{ material.language }}</span>
+            {% endif %}
+                {% if docVariant %}
+                    <span class="material-doc-type material-doc-type--{{ docVariant }}">{{ docType|upper }}</span>
+                {% endif %}
+            </div>
         </div>
         
         <div class="material-cover">

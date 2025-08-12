@@ -67,6 +67,7 @@
             keywords: card.dataset.materialKeywords,
             cover: card.dataset.materialCover,
             youtube_url: card.dataset.materialYoutubeUrl,
+            slideshare_url: card.dataset.materialSlideshareUrl,
             video_file: card.dataset.materialVideoFile,
             document_file: card.dataset.materialDocumentFile,
             quiz: card.dataset.materialQuiz,
@@ -431,12 +432,51 @@
                 };
                 downloadText.textContent = 'Download Gallery (ZIP)';
                 downloadSection.style.display = 'block';
-            } else if (currentMaterial.document_file && currentMaterial.download_possible === 'true') {
-                downloadBtn.href = currentMaterial.document_file;
-                downloadBtn.target = '_blank';
-                downloadBtn.onclick = null;
-                downloadText.textContent = `Download ${getDownloadLabel()}`;
-                downloadSection.style.display = 'block';
+            } else if (currentMaterial.document_file) {
+                    const rawUrl = currentMaterial.document_file;
+                    const absoluteUrl = /^https?:\/\//i.test(rawUrl)
+                        ? rawUrl
+                        : `${window.location.origin}${rawUrl.startsWith('/') ? '' : '/'}${rawUrl}`;
+
+                    // Determine extension from URL path
+                    let ext = '';
+                    try {
+                        const urlObj = new URL(absoluteUrl);
+                        const pathname = urlObj.pathname.toLowerCase();
+                        const match = pathname.match(/\.([a-z0-9]+)$/);
+                        ext = match ? match[1] : '';
+                    } catch (e) {
+                        // Fallback if URL() fails
+                        const lowerUrl = absoluteUrl.toLowerCase().split('?')[0].split('#')[0];
+                        const parts = lowerUrl.split('.');
+                        ext = parts.length > 1 ? parts.pop() : '';
+                    }
+
+                    // Determine behavior by extension
+                    const directDownloadExts = new Set(['doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'zip']);
+                    const isDirectDownload = directDownloadExts.has(ext);
+
+                    // Reset any previous click handler
+                    downloadBtn.onclick = null;
+                    downloadBtn.removeAttribute('rel');
+                    downloadBtn.removeAttribute('download');
+
+                    if (!isDirectDownload) {
+                        // Open in new tab for preview (no direct download)
+                        downloadBtn.href = absoluteUrl;
+                        downloadBtn.target = '_blank';
+                        downloadBtn.setAttribute('rel', 'noopener noreferrer');
+                        downloadText.textContent = 'Preview Document';
+                        downloadSection.style.display = 'block';
+                    } else {
+                        // Direct download for office documents and other non-previewable files
+                        downloadBtn.href = absoluteUrl;
+                        downloadBtn.target = '_self';
+                        // Hint download when possible (may be ignored cross-origin)
+                        downloadBtn.setAttribute('download', '');
+                        downloadText.textContent = 'Download';
+                        downloadSection.style.display = 'block';
+                    }
             } else {
                 downloadSection.style.display = 'none';
             }
@@ -445,31 +485,90 @@
 
     function generateContentByType() {
         const type = currentMaterial.type;
-        
+        const parts = [];
+
         switch (type) {
             case 'video_tour':
             case 'video':
-                return generateVideoContent();
+                parts.push(generateVideoContent());
+                break;
+            case 'presentation':
+                parts.push(generateSlideshareContent());
+                break;
             case 'document':
             case 'textbook_chapter':
             case 'worksheet':
             case 'guideline':
             case 'standard_of_practice':
-                return generateDocumentContent();
+                parts.push(generateDocumentContent());
+                break;
             case 'interactive_presentation_h5p':
             case 'evaluation':
-                return generateQuizContent();
+                parts.push(generateQuizContent());
+                break;
             case 'podcast':
-                return generatePodcastContent();
+                parts.push(generatePodcastContent());
+                break;
             case 'photo_gallery':
-                return generatePhotoGalleryContent();
+                parts.push(generatePhotoGalleryContent());
+                break;
             case 'image':
-                return generateImageContent();
+                parts.push(generateImageContent());
+                break;
             case 'virtual_reality_tour':
-                return generateVRContent();
+                parts.push(generateVRContent());
+                break;
             default:
-                return generateCustomContent();
+                parts.push(generateCustomContent());
         }
+
+        // Append slideshare preview when available, even if type isn't 'presentation'
+        if (currentMaterial.slideshare_url && type !== 'presentation') {
+            const slide = generateSlideshareContent();
+            if (slide) parts.push(slide);
+        }
+
+        return parts.filter(Boolean).join('');
+    }
+
+    function generateSlideshareContent() {
+        if (!currentMaterial.slideshare_url || currentMaterial.slideshare_url.trim() === '') {
+            return '';
+        }
+
+        // Decode HTML entities if they exist (in case admin pasted embed HTML)
+        let urlOrEmbed = currentMaterial.slideshare_url.trim();
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = urlOrEmbed;
+
+        // If it looks like full embed HTML with an iframe, use it directly
+        const iframe = tempDiv.querySelector('iframe');
+        if (iframe && iframe.src) {
+            const safeSrc = iframe.src;
+            return `
+                <div class="slideshare-content">
+                    <div class="slideshare-embed">
+                        <iframe src="${safeSrc}" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Otherwise treat it as a URL and embed it
+        const decoded = tempDiv.textContent || tempDiv.innerText || '';
+        const contentToCheck = decoded.trim();
+        const isUrl = /^https?:\/\/[^^\s<>"']+/.test(contentToCheck);
+        if (!isUrl) {
+            return '';
+        }
+
+        return `
+            <div class="slideshare-content">
+                <div class="slideshare-embed">
+                    <iframe src="${contentToCheck}" frameborder="0" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                </div>
+            </div>
+        `;
     }
 
     function generateVideoContent() {
@@ -533,15 +632,17 @@
         const isUrl = /^https?:\/\/[^\s<>"]+\.[^\s<>"]+/.test(contentToCheck);
         
         if (isUrl) {
-            // Render as H5P embed
             return `
                 <div class="quiz-content">
                     <div class="h5p-embed-container">
-                        <embed type="text/html" 
-                               src="${contentToCheck}" 
-                               width="100%" 
-                               height="370"
-                               style="border: none; display: block;">
+                        <iframe 
+                            src="${contentToCheck}" 
+                            width="100%" 
+                            height="370"
+                            style="border: none; display: block;"
+                            allow="fullscreen"
+                            allowfullscreen>
+                        </iframe>
                     </div>
                 </div>
             `;
@@ -635,15 +736,18 @@
         const isUrl = /^https?:\/\/[^\s<>"]+\.[^\s<>"]+/.test(contentToCheck);
         
         if (isUrl) {
-            // Render as H5P embed for VR content
+            // Render as H5P iframe for VR content (allows fullscreen)
             return `
                 <div class="vr-content">
                     <div class="h5p-embed-container">
-                        <embed type="text/html" 
+                        <iframe 
                                src="${contentToCheck}" 
                                width="100%" 
                                height="500"
-                               style="border: none; display: block;">
+                               style="border: none; display: block;"
+                               allow="fullscreen"
+                               allowfullscreen>
+                        </iframe>
                     </div>
                 </div>
             `;
