@@ -45,25 +45,39 @@ function onStart(){
             }
         }
         
-        // Sort all materials globally by prefix using version_compare
         if (!empty($allMaterials)) {
             usort($allMaterials, function($a, $b) {
+                $lessonOrderA = isset($a->lesson) && (int)($a->lesson->sort_order ?? 0) > 0
+                    ? (int) $a->lesson->sort_order
+                    : PHP_INT_MAX;
+                $lessonOrderB = isset($b->lesson) && (int)($b->lesson->sort_order ?? 0) > 0
+                    ? (int) $b->lesson->sort_order
+                    : PHP_INT_MAX;
+
+                if ($lessonOrderA !== $lessonOrderB) {
+                    return $lessonOrderA <=> $lessonOrderB;
+                }
+
+                $materialOrderA = (int)($a->sort_order ?? 0) > 0 ? (int) $a->sort_order : PHP_INT_MAX;
+                $materialOrderB = (int)($b->sort_order ?? 0) > 0 ? (int) $b->sort_order : PHP_INT_MAX;
+
+                if ($materialOrderA !== $materialOrderB) {
+                    return $materialOrderA <=> $materialOrderB;
+                }
+
                 $prefixA = $a->prefix ?? '';
                 $prefixB = $b->prefix ?? '';
-                
-                // Handle empty prefixes - put them at the end
-                if (empty($prefixA) && empty($prefixB)) {
+
+                if ($prefixA === '' && $prefixB === '') {
                     return 0;
                 }
-                if (empty($prefixA)) {
+                if ($prefixA === '') {
                     return 1;
                 }
-                if (empty($prefixB)) {
+                if ($prefixB === '') {
                     return -1;
                 }
-                
-                // Use version_compare for natural sorting of version-like strings
-                // This will properly sort 1.1, 1.2, 1.12, etc.
+
                 return version_compare($prefixA, $prefixB);
             });
         }
