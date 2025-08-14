@@ -30,7 +30,7 @@ use Pensoft\Courses\Models\Topic;
 function onStart(){
     $topics = Topic::with(['blocks.lessons.materials'])->get();
     
-    // Sort ALL materials for each topic globally by prefix
+    // Sort ALL materials for each topic globally by lesson and material sort_order
     foreach ($topics as $topic) {
         // Collect all materials for this topic from all blocks and lessons
         $allMaterials = [];
@@ -65,20 +65,7 @@ function onStart(){
                     return $materialOrderA <=> $materialOrderB;
                 }
 
-                $prefixA = $a->prefix ?? '';
-                $prefixB = $b->prefix ?? '';
-
-                if ($prefixA === '' && $prefixB === '') {
-                    return 0;
-                }
-                if ($prefixA === '') {
-                    return 1;
-                }
-                if ($prefixB === '') {
-                    return -1;
-                }
-
-                return version_compare($prefixA, $prefixB);
+                return 0;
             });
         }
         

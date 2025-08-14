@@ -30,29 +30,24 @@
      data-material-gallery="{{ material.gallery ? material.gallery|map(file => file.getPath())|json_encode : '' }}">
     <div class="card-inner">
         <div class="card-header">
-            {% set docType = '' %}
-            {% if material.document_file %}
-                {% if material.document_file.file_name %}
-                    {% set parts = material.document_file.file_name|split('.') %}
-                    {% set docType = parts|last|lower %}
-                {% else %}
-                    {% if material.document_file.getPath is defined %}
-                        {% set docPath = material.document_file.getPath() %}
-                        {% if docPath %}
-                            {% set docType = docPath|split('?')|first|split('.')|last|lower %}
-                        {% endif %}
-                    {% endif %}
-                {% endif %}
-            {% endif %}
-
-            {% set docVariant = '' %}
-            {% if docType in ['pdf'] %}
-                {% set docVariant = 'pdf' %}
-            {% elseif docType in ['ppt','pptx'] %}
-                {% set docVariant = 'ppt' %}
-            {% elseif docType in ['docx'] %}
-                {% set docVariant = 'docx' %}
-            {% endif %}
+            {# Display the material type selected in the model, not the file extension #}
+            {% set typeMap = {
+                'interactive_presentation_h5p': 'Interactive Presentation (H5P)',
+                'video_tour': 'Video Tour',
+                'video': 'Video',
+                'virtual_reality_tour': 'Virtual Reality Tour',
+                'podcast': 'Podcast',
+                'textbook_chapter': 'Textbook Chapter',
+                'worksheet': 'Worksheet',
+                'photo_gallery': 'Photo Gallery',
+                'image': 'Image',
+                'guideline': 'Guideline',
+                'standard_of_practice': 'Standard of Practice',
+                'document': 'Document',
+                'evaluation': 'Evaluation',
+                'presentation': 'Presentation'
+            } %}
+            {% set typeLabel = typeMap[material.type] is defined ? typeMap[material.type] : (material.type ? material.type|capitalize : '') %}
 
             <div class="meta-chips">
                 <span class="material-number">{{ material.prefix }}</span>
@@ -62,8 +57,8 @@
                 {% if material.language %}
                 <span class="material-language"><i class="icon-globe"></i> {{ material.language }}</span>
             {% endif %}
-                {% if docVariant %}
-                    <span class="material-doc-type material-doc-type--{{ docVariant }}">{{ docType|upper }}</span>
+                {% if typeLabel %}
+                    <span class="material-doc-type material-doc-type--{{ material.type }}">{{ typeLabel }}</span>
                 {% endif %}
             </div>
         </div>

@@ -478,8 +478,10 @@ function initBlockAccordion() {
         e.stopPropagation();
 
         var $blockHeader = $(this);
-        var $blockContainer = $blockHeader.closest('.col-xs-12');
-        var $materialsContainer = $blockContainer.find('.block-materials-container');
+        // Find the materials container relative to the header row to avoid
+        // relying on specific column classes (e.g. col-xs-11 vs col-xs-12)
+        var $headerRow = $blockHeader.closest('.row');
+        var $materialsContainer = $headerRow.nextAll('.row').first().find('.block-materials-container');
 
         // Only proceed if we found the materials container
         if ($materialsContainer.length > 0) {

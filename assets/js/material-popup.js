@@ -95,9 +95,17 @@
         const titleEl = popup.querySelector('#popup-material-title');
         if (titleEl) titleEl.textContent = currentMaterial.name || 'Material';
 
-        // Set type
+        // Set type with variant class
         const typeEl = popup.querySelector('#popup-material-type');
-        if (typeEl) typeEl.textContent = getDisplayType(currentMaterial.type);
+        if (typeEl) {
+            typeEl.textContent = getDisplayType(currentMaterial.type);
+            // remove previous variant classes
+            const classes = typeEl.className.split(' ').filter(c => !/^material-type--/.test(c));
+            typeEl.className = classes.join(' ').trim() || 'material-type';
+            if (currentMaterial.type) {
+                typeEl.classList.add(`material-type--${currentMaterial.type}`);
+            }
+        }
 
         // Set prefix
         const prefixEl = popup.querySelector('#popup-material-prefix');
