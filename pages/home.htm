@@ -30,7 +30,7 @@ use Pensoft\Courses\Models\Topic;
 function onStart(){
     $topics = Topic::with(['blocks.lessons.materials'])->get();
     
-    // Sort ALL materials for each topic globally by lesson and material sort_order
+    // Sort ALL materials for each topic globally by material prefix (ignore any custom sort_order)
     foreach ($topics as $topic) {
         // Collect all materials for this topic from all blocks and lessons
         $allMaterials = [];
@@ -46,26 +46,11 @@ function onStart(){
         }
         
         if (!empty($allMaterials)) {
+            // Simpler and centralized: rely on model accessor `prefix_sort_key`
             usort($allMaterials, function($a, $b) {
-                $lessonOrderA = isset($a->lesson) && (int)($a->lesson->sort_order ?? 0) > 0
-                    ? (int) $a->lesson->sort_order
-                    : PHP_INT_MAX;
-                $lessonOrderB = isset($b->lesson) && (int)($b->lesson->sort_order ?? 0) > 0
-                    ? (int) $b->lesson->sort_order
-                    : PHP_INT_MAX;
-
-                if ($lessonOrderA !== $lessonOrderB) {
-                    return $lessonOrderA <=> $lessonOrderB;
-                }
-
-                $materialOrderA = (int)($a->sort_order ?? 0) > 0 ? (int) $a->sort_order : PHP_INT_MAX;
-                $materialOrderB = (int)($b->sort_order ?? 0) > 0 ? (int) $b->sort_order : PHP_INT_MAX;
-
-                if ($materialOrderA !== $materialOrderB) {
-                    return $materialOrderA <=> $materialOrderB;
-                }
-
-                return 0;
+                $ka = $a->prefix_sort_key ?? '';
+                $kb = $b->prefix_sort_key ?? '';
+                return strcmp($ka, $kb);
             });
         }
         
