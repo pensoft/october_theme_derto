@@ -111,7 +111,9 @@ function onStart(){
                                     </div>
                                     <div class="col-xs-8">
                                         {% if partner.instituion_url %}
-                                            <a href="{{ partner.instituion_url }}" target="_blank">{{ partner.instituion }}</a>
+                                            <a href="{{ partner.instituion_url }}" target="_blank">
+                                                {{ partner.instituion }}
+                                            </a>
                                         {% else %}
                                             {{ partner.instituion }}
                                         {% endif %}

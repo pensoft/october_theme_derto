@@ -45,21 +45,26 @@ subtitle = "Get to know"
 <div class="container how-to-use-derto">
     <div class="row between-md around-xs how-to-use-derto-row">
         <div class="col-md-6 col-xs-12 start-md around-xs how-to-use-item">
-            <div class="container_bg_small">
-                 <div class="purple-flower-bg"></div>
-                <div class="bottom-right-corner-bg"></div>
-                <div class="subtitle">Get the Basics and Beyond on</div>
-                <h2>How-to make your own h5P files</h2>
-                <img src="{{'how-to-4.png'|media}}">
-            </div>
+            {% partial 'components/card' 
+                variant = 'purple'
+                subtitle = 'Get the Basics and Beyond on'
+                title = 'How-to make your own h5P files'
+                image = 'how-to-4.png'
+                showDownload = true
+                downloadHref = 'how_to_make_h5p.zip'
+                downloadLabel = 'Download Tutorial'
+            %}
         </div>
         <div class="col-md-6 col-xs-12 end-md around-xs">
-            <div class="container_bg_small">
-                <div class="green-field-bg"></div>
-                <div class="subtitle">Explore Your Options</div>
-                <h2>How-to Make your own virtual demonstration site</h2>
-                <img src="{{'how-to-3.png'|media}}">
-            </div>
+            {% partial 'components/card' 
+                variant = 'green'
+                subtitle = 'Explore Your Options'
+                title = 'How-to Make your own virtual demonstration site'
+                image = 'how-to-3.png'
+                showDownload = false
+                downloadHref = 'how_to_make_vr.zip'
+                downloadLabel = 'Download Tutorial'
+            %}
         </div>
     </div>
 </div>

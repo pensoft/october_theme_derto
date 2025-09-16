@@ -216,8 +216,6 @@
                 cursor: pointer;
                 text-align: center;
 
-                &:not(.social) a{
-                }
 
                 &>a {
                     padding-left: 0.5rem;
@@ -346,7 +344,7 @@
 
                         /* navbar arrows**/
                         position: relative;
-                        margin-right: 20px;
+                        margin-right: 0px;
 
                         // Target dropdown-toggle elements specifically
                         .dropdown-toggle {
@@ -431,7 +429,7 @@
     display: none;
 }
 
-@media (max-width:1000px) {
+@media (max-width:1024px) {
 
     /* menu toggle effect mobile */
 
@@ -517,7 +515,7 @@
         width: 100vw;
         height: 100vh;
         margin: -40px 0 0 -93vw;
-        padding: 17px 0 0 0;
+        padding: 60px 0 0 0;
         background-color: @dark-color;
         color: @white-color!important;
         font-size: 16px!important;
@@ -611,6 +609,25 @@
         &::after {
             content: '';
             display: inline-block;
+            margin-left: 4px;
+            width: 16px;
+            height: 16px;
+            background: url('../../assets/images/chevron-down.svg') no-repeat center center;
+            background-size: contain;
+            transition: transform 0.3s ease;
+            vertical-align: middle;
+        }
+        
+        &.expanded::after {
+            transform: rotate(180deg);
+        }
+    }
+    
+    // Ensure all dropdown arrows are visible on mobile
+    #menu .dropdown > a {
+        &::after {
+            content: '';
+            display: inline-block !important;
             margin-left: 4px;
             width: 16px;
             height: 16px;

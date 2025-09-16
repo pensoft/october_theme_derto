@@ -248,21 +248,24 @@
 
 // Context section
 .material-context-section {
-    margin-bottom: 12px;
+    margin-bottom: 18px;
     
     .context-breadcrumb {
-        font-size: 13px;
-        color: #666;
-        opacity: 0.8;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 14px;
+        color: #262F0E;
+        
+        .context-label {
+            color: #262F0E;
+            font-weight: 500;
+            opacity: 0.7;
+        }
         
         .context-item {
             color: #719E05;
-            font-weight: 500;
-        }
-        
-        .context-separator {
-            color: #999;
-            margin: 0 8px;
+            font-weight: 600;
         }
     }
 }
@@ -279,7 +282,6 @@
         .info-item {
             display: flex;
             align-items: center;
-            gap: 6px;
             font-size: 14px;
             color: #262F0E;
             

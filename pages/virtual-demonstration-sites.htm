@@ -28,7 +28,16 @@ title = 0
 background = "transperant"
 templates = "template3"
 description_limit = 0
+
 ==
+<?php
+use Pensoft\Courses\Models\Topic;
+function onStart(){
+    $this['topics'] = Topic::all();
+}
+?>
+==
+
 {% component 'siteSearchInclude' %}
 
 <div class="container-fluid vr-intro">
@@ -58,22 +67,12 @@ description_limit = 0
                             Explore resources <i class="filter-arrow"></i>
                         </button>
                         <div class="filter-options demo-options">
-                            <a href="topic/forest-restoration-and-disaster-risk-management" class="demo-option" data-country="spain">
-                                <span class="country-name">Spain</span>
-                                <span class="topic-description">Forest Restoration and Disaster Risk Management</span>
+                            {% for topic in topics %}
+                            <a href="topic/{{ topic.slug }}" class="demo-option" data-country="{{ topic.slug|replace({'-': ''})|slice(0, 6) }}">
+                                <span class="country-name">{{ topic.country.name }}</span>
+                                <span class="topic-description">{{ topic.description }}</span>
                             </a>
-                            <a href="topic/restoration-across-urban-and-rural-landscapes" class="demo-option" data-country="czech">
-                                <span class="country-name">Czech Republic</span>
-                                <span class="topic-description">Restoration Across Urban and Rural Landscapes</span>
-                            </a>
-                            <a href="topic/restoration-old-infrastructure-ecological-compensation-and-landscaping" class="demo-option" data-country="norway">
-                                <span class="country-name">Norway</span>
-                                <span class="topic-description">Restoration of Old Infrastructure, Ecological Compensation and Landscaping</span>
-                            </a>
-                            <a href="topic/multifunctional-and-sustainable-land-use-agriculture" class="demo-option" data-country="germany">
-                                <span class="country-name">Germany</span>
-                                <span class="topic-description">Multifunctional and Sustainable Land Use in Agriculture</span>
-                            </a>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -98,21 +97,26 @@ description_limit = 0
 <div class="container how-to-use-derto">
     <div class="row between-md around-xs how-to-use-derto-row">
         <div class="col-md-6 col-xs-12 start-md around-xs how-to-use-item">
-            <div class="container_bg_small">
-                <div class="green-field-bg"></div>
-                <div class="subtitle">Explore Your Options</div>
-                <h2>How-to Make your own virtual demonstration site</h2>
-                <img src="{{'how-to-3.png'|media}}">
-            </div>
+            {% partial 'components/card' 
+                variant = 'green'
+                subtitle = 'Explore Your Options'
+                title = 'How-to Make your own virtual demonstration site'
+                image = 'how-to-3.png'
+                showDownload = false
+                downloadHref = 'how_to_make_vr.zip'
+                downloadLabel = 'Download Tutorial'
+            %}
         </div>
         <div class="col-md-6 col-xs-12   end-md around-xs">
-            <div class="container_bg_small">
-                 <div class="purple-flower-bg"></div>
-                <div class="bottom-right-corner-bg"></div>
-                <div class="subtitle">Get the Basics and Beyond on</div>
-                <h2>How-to make your own h5P files</h2>
-                <img src="{{'how-to-4.png'|media}}">
-            </div>
+            {% partial 'components/card' 
+                variant = 'purple'
+                subtitle = 'Get the Basics and Beyond on'
+                title = 'How-to make your own h5P files'
+                image = 'how-to-4.png'
+                showDownload = true
+                downloadHref = 'how_to_make_h5p.zip'
+                downloadLabel = 'Download Tutorial'
+            %}
         </div>
     </div>
 </div>

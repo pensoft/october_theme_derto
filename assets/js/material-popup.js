@@ -214,46 +214,16 @@
         
         if (!contextSection) return;
 
-        let hasContext = false;
-
         // Handle topic
         const topicEl = popup.querySelector('#popup-topic-name');
-        const topicSeparator = popup.querySelector('#popup-topic-separator');
         if (currentMaterial.topic_name && topicEl) {
             topicEl.textContent = currentMaterial.topic_name;
             topicEl.style.display = 'inline';
-            hasContext = true;
-        } else if (topicEl) {
-            topicEl.style.display = 'none';
+            contextSection.style.display = 'block';
+        } else {
+            if (topicEl) topicEl.style.display = 'none';
+            contextSection.style.display = 'none';
         }
-
-        // Handle block
-        const blockEl = popup.querySelector('#popup-block-name');
-        const blockSeparator = popup.querySelector('#popup-block-separator');
-        if (currentMaterial.block_name && blockEl) {
-            blockEl.textContent = currentMaterial.block_name;
-            blockEl.style.display = 'inline';
-            if (hasContext && topicSeparator) topicSeparator.style.display = 'inline';
-            hasContext = true;
-        } else if (blockEl) {
-            blockEl.style.display = 'none';
-            if (topicSeparator) topicSeparator.style.display = 'none';
-        }
-
-        // Handle lesson
-        const lessonEl = popup.querySelector('#popup-lesson-name');
-        if (currentMaterial.lesson_name && lessonEl) {
-            lessonEl.textContent = currentMaterial.lesson_name;
-            lessonEl.style.display = 'inline';
-            if (hasContext && blockSeparator) blockSeparator.style.display = 'inline';
-            hasContext = true;
-        } else if (lessonEl) {
-            lessonEl.style.display = 'none';
-            if (blockSeparator) blockSeparator.style.display = 'none';
-        }
-
-        // Show/hide entire context section
-        contextSection.style.display = hasContext ? 'block' : 'none';
     }
 
     function populateQuickInfo() {

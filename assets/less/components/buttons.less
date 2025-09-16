@@ -454,6 +454,29 @@ button:not(:disabled) {
     animation: desplode 0.5s forwards;
 }
 
+.dwn-btn-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px; // Reserve space for download button
+    margin-top: auto; // Push to bottom of flex container
+    a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    .breakpoint-large-down({
+        margin-top: 20px;
+        justify-content: flex-start;
+    });
+}
+.btn-download{
+    .breakpoint-large-down({
+        width: 95%;
+    });
+}
+
 @keyframes explode {
     0% {
         width: 0px;

@@ -1,45 +1,35 @@
 .topic-hero {
-    background: url('../images/multifunctional.png') no-repeat center center;
+    background: var(--topic-bg-image, url('../images/multifunctional.png')) no-repeat center center;
     background-size: cover;
     color: #fff;
-    padding: 280px 0 0 0;
+    height: 560px;
     position: relative;
-    
-    // Topic-specific background images
-    &[data-topic-slug="multifunctional-and-sustainable-land-use-agriculture"] {
-        background: url('../images/maslin.png') no-repeat center center;
-        background-size: cover;
-    }
-    
-    &[data-topic-slug="restoration-old-infrastructure-ecological-compensation-and-landscaping"] {
-        background: url('../images/roo.png') no-repeat center center;
-        background-size: cover;
-    }
-    
-    &[data-topic-slug="restoration-across-urban-and-rural-landscapes"] {
-        background: url('../images/rau.png') no-repeat center center;
-        background-size: cover;
-    }
-    
-    &[data-topic-slug="forest-restoration-and-disaster-risk-management"] {
-        background: url('../images/frad.png') no-repeat center center;
-        background-size: cover;
-    }
-    
+    display: flex;
+    align-items: flex-end;
     
     h1{
         color: #fff !important;
+        .breakpoint-large-down({
+            font-size: 32px !important;
+        });
     }
+
     .hero-background{
         border-radius: 0px 65px 0px 0px;
         background: rgba(255, 255, 255, 0.11);
-        backdrop-filter: blur(34.099998474121094px);
-        padding-bottom: 32px;
+        backdrop-filter: blur(34px);
+        padding: 15px 0 20px 0;
+        width: 100%;
+        min-height: 140px;
+        display: flex;
+        // justify-content: center;
+        align-items: center;
     }
 
     .container {
         position: relative;
         padding-bottom: 0px;
+        padding-top: 0px;
         z-index: 2;
     }
 
@@ -47,6 +37,11 @@
         display: flex;
         align-items: end;
         justify-content: end;
+    }
+    .content {
+        .breakpoint-large-down({
+            padding-bottom: 20px;
+        });
     }
 
     .topic-hero-content {
@@ -100,6 +95,9 @@
             }
         }
     }
+    .breakpoint-large-down({
+        height: 60vh;
+    });
 }
 .topic-introduction{
     p {
@@ -235,7 +233,11 @@
                         z-index: 9999 !important;
                         width: max-content;
                         min-width: 100%;
+                        max-width: 300px;
                         margin-top: 5px;
+                        max-height: 300px;
+                        overflow-y: auto;
+                        overflow-x: hidden;
                         
                         &.show {
                             display: flex;
@@ -247,7 +249,37 @@
                             border: 1px solid rgba(46, 90, 27, 0.15);
                             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
                             animation: dropdownFade 0.2s ease;
-                            overflow: hidden;
+                            overflow-y: auto;
+                            overflow-x: hidden;
+                            max-width: 300px;
+                            
+                            // Responsive max-width for smaller screens
+                            @media (max-width: 768px) {
+                                max-width: 280px;
+                            }
+                            
+                            @media (max-width: 480px) {
+                                max-width: 250px;
+                            }
+                            
+                            // Custom scrollbar styling
+                            &::-webkit-scrollbar {
+                                width: 6px;
+                            }
+                            
+                            &::-webkit-scrollbar-track {
+                                background: #f1f1f1;
+                                border-radius: 3px;
+                            }
+                            
+                            &::-webkit-scrollbar-thumb {
+                                background: #c1c1c1;
+                                border-radius: 3px;
+                                
+                                &:hover {
+                                    background: #a8a8a8;
+                                }
+                            }
                         }
                         
                         .popper-arrow {
@@ -271,7 +303,7 @@
                     
                     .filter-tag {
                         display: flex;
-                        align-items: center;
+                        align-items: flex-start;
                         width: 100%;
                         padding: 10px 14px;
                         background: transparent;
@@ -280,10 +312,18 @@
                         font-size: 0.85rem;
                         text-decoration: none;
                         transition: all 0.2s;
-                        white-space: nowrap;
+                        white-space: normal;
+                        word-wrap: break-word;
+                        flex-shrink: 0;
+                        line-height: 1.4;
+                        
+                        &:first-child {
+                            padding-top: 12px;
+                        }
                         
                         &:last-child {
                             border-bottom: none;
+                            padding-bottom: 12px;
                         }
                         
                         .flag-icon {

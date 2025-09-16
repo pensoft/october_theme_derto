@@ -1,4 +1,4 @@
-<section class="topic-hero" data-topic-slug="{{ topic.slug }}">
+<section class="topic-hero" data-topic-slug="{{ topic.slug }}" style="--topic-bg-image: url('{% if topic.cover %}{{ topic.cover.path }}{% else %}{{ 'assets/images/multifunctional.png'|theme }}{% endif %}')">
     <div class="hero-background">
         <div class="container">
             <div class="row">
@@ -10,12 +10,8 @@
                 </div>
                 <div class="col-md-2 col-xs-12 arrows">
                     <div class="topic-navigation">
-                        {% if prevTopic %}
-                            <a href="/topic/{{ prevTopic.slug }}" class="nav-arrow prev-arrow" title="Previous Topic"></a>
-                        {% endif %}
-                        {% if nextTopic %}
-                            <a href="/topic/{{ nextTopic.slug }}" class="nav-arrow next-arrow" title="Next Topic"></a>
-                        {% endif %}
+                        <a href="/topic/{{ prevTopic.slug }}" class="nav-arrow prev-arrow" title="Previous Topic"></a>
+                        <a href="/topic/{{ nextTopic.slug }}" class="nav-arrow next-arrow" title="Next Topic"></a>
                     </div>
                 </div>
             </div>

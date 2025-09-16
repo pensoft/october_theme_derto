@@ -111,26 +111,40 @@ $(document).ready(function() {
         }
     }
 
-    if (width < 992) { // mobile
+    if (width <= 1024) { // mobile
         $('#menuToggle input[type="checkbox"]').change(function(){
             var checked = $(this).is(":checked");
             if(checked){
                 $('#menu').show("slide", { direction: "right" }, 400);
                 $('#search').hide();
-                // Fix: Make all elements in menu visible immediately, including dropdown menu items
-                $('#menu, #menu *, #menu .dropdown-menu, #menu .dropdown-menu *').css({
-                    'visibility': 'visible'
+                
+                // Ensure menu is properly visible and interactive
+                $('#menu').css({
+                    'visibility': 'visible',
+                    'pointer-events': 'auto'
                 });
-                // Make dropdown menu items visible in a proper way
-                $('#menu .dropdown-menu').css('display', 'none');
+                
+                // Make all menu items visible and clickable
+                $('#menu a, #menu li').css({
+                    'visibility': 'visible',
+                    'pointer-events': 'auto',
+                    'opacity': '1'
+                });
+                
+                // Hide dropdown menus initially but keep them accessible
+                $('#menu .dropdown-menu').css({
+                    'display': 'none',
+                    'visibility': 'visible',
+                    'pointer-events': 'auto'
+                });
 
-                $('body', 'html').css({
+                $('body, html').css({
                     'overflow': 'hidden'
                 });
             }else{
                 $('#menu').hide("slide", { direction: "right" }, 400);
                 $('#search').hide();
-                $('body', 'html').css({
+                $('body, html').css({
                     'overflow': 'auto'
                 });
             }
@@ -142,25 +156,44 @@ $(document).ready(function() {
         // Only for mobile: clicking a parent with submenu toggles its dropdown-menu
         $(document).on('click', '#menu .dropdown > a', function(e) {
             // Only act if in mobile
-            if (window.innerWidth >= 992) return;
+            if (window.innerWidth > 1024) return;
+            
             var $parent = $(this).parent('.dropdown');
             var $submenu = $parent.children('.dropdown-menu');
+            
+            // Check if this is a parent link with submenu
             if ($submenu.length) {
+                var href = $(this).attr('href');
+                var isParentOnlyLink = !href || href === '#' || href === '';
+                
+                // Always prevent default for items with submenus to expand first
                 e.preventDefault();
+                
+                // Check if submenu is already open
+                var isSubmenuOpen = $submenu.is(':visible');
+                
+                if (isSubmenuOpen) {
+                    // If submenu is open and it's a parent-only link, do nothing
+                    // If submenu is open and it has a real href, navigate to the link
+                    if (!isParentOnlyLink && href) {
+                        window.location.href = href;
+                    }
+                } else {
+                    // If submenu is closed, expand it
+                    // Toggle expanded class for arrow rotation
+                    $(this).addClass('expanded');
 
-                // Toggle expanded class for arrow rotation
-                $(this).toggleClass('expanded');
+                    // Show submenu with smooth animation
+                    $submenu.slideDown(250);
 
-                // Toggle submenu with smooth animation
-                $submenu.slideToggle(250);
+                    // Add special class on parent for border styling
+                    $parent.addClass('submenu-open');
 
-                // Toggle special class on parent for border styling
-                $parent.toggleClass('submenu-open');
-
-                // Close other open submenus and reset their expanded state
-                $parent.siblings('.dropdown').children('.dropdown-menu:visible').slideUp(200);
-                $parent.siblings('.dropdown').children('a').removeClass('expanded');
-                $parent.siblings('.dropdown').removeClass('submenu-open');
+                    // Close other open submenus and reset their expanded state
+                    $parent.siblings('.dropdown').children('.dropdown-menu:visible').slideUp(200);
+                    $parent.siblings('.dropdown').children('a').removeClass('expanded');
+                    $parent.siblings('.dropdown').removeClass('submenu-open');
+                }
             }
         });
         // Hide all submenus when menu closes
@@ -170,6 +203,19 @@ $(document).ready(function() {
                 // Reset expanded state
                 $('#menu .dropdown > a').removeClass('expanded');
                 $('#menu .dropdown').removeClass('submenu-open');
+            }
+        });
+        
+        // Ensure regular menu links work properly on mobile
+        $(document).on('click', '#menu a:not(.dropdown > a)', function(e) {
+            // Only for mobile and only for links that have actual href values
+            if (window.innerWidth <= 1024) {
+                var href = $(this).attr('href');
+                if (href && href !== '#' && href !== '') {
+                    // Allow normal navigation for regular links (non-dropdown links)
+                    // Don't prevent default - let the link work normally
+                    return true;
+                }
             }
         });
     }
@@ -301,7 +347,7 @@ function initDertoDotsNav() {
 }
 
 function isBreakpointLarge() {
-    return window.innerWidth <= 991;
+    return window.innerWidth <= 1024;
 }
 
 
@@ -446,15 +492,28 @@ function updateCarouselArrowStates($carousel) {
 // Handle mobile submenu visibility
 function initMobileMenu() {
     // If we're in mobile view
-    if (width < 992) {
+    if (width <= 1024) {
         // Make sure dropdown menus are properly set up
         $('#menu .dropdown-menu').each(function() {
-            $(this).css('display', 'none');
-            $(this).css('visibility', 'visible');
+            $(this).css({
+                'display': 'none',
+                'visibility': 'visible',
+                'pointer-events': 'auto'
+            });
         });
 
-        // Ensure all elements in the menu are properly visible
-        $('#menu li, #menu a').css('visibility', 'visible');
+        // Ensure all elements in the menu are properly visible and clickable
+        $('#menu li, #menu a').css({
+            'visibility': 'visible',
+            'pointer-events': 'auto',
+            'opacity': '1'
+        });
+        
+        // Ensure the main menu container is properly set up
+        $('#menu').css({
+            'visibility': 'visible',
+            'pointer-events': 'auto'
+        });
     }
 }
 
@@ -463,7 +522,7 @@ $(window).resize(function() {
     // Update width variable
     width = window.innerWidth;
 
-    if (width < 992) {
+    if (width <= 1024) {
         initMobileMenu();
     }
 });

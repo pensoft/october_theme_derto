@@ -116,7 +116,12 @@
                 position: absolute !important;
                 width: max-content;
                 min-width: 100%;
+                max-width: 300px;
                 margin-top: 5px;
+                max-height: 300px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                
                 &.show {
                     display: flex;
                     flex-direction: column;
@@ -127,7 +132,37 @@
                     border: 1px solid rgba(46, 90, 27, 0.15);
                     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
                     animation: dropdownFade 0.2s ease;
-                    overflow: hidden;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    max-width: 300px;
+                    
+                    // Responsive max-width for smaller screens
+                    @media (max-width: 768px) {
+                        max-width: 280px;
+                    }
+                    
+                    @media (max-width: 480px) {
+                        max-width: 250px;
+                    }
+                    
+                    // Custom scrollbar styling
+                    &::-webkit-scrollbar {
+                        width: 6px;
+                    }
+                    
+                    &::-webkit-scrollbar-track {
+                        background: #f1f1f1;
+                        border-radius: 3px;
+                    }
+                    
+                    &::-webkit-scrollbar-thumb {
+                        background: #c1c1c1;
+                        border-radius: 3px;
+                        
+                        &:hover {
+                            background: #a8a8a8;
+                        }
+                    }
                 }
                 
                 .popper-arrow {
@@ -151,7 +186,7 @@
             
             .filter-tag {
                 display: flex;
-                align-items: center;
+                align-items: flex-start;
                 width: 100%;
                 padding: 10px 14px;
                 background: transparent;
@@ -160,10 +195,18 @@
                 font-size: 0.85rem;
                 text-decoration: none;
                 transition: all 0.2s;
-                white-space: nowrap;
+                white-space: normal;
+                word-wrap: break-word;
+                flex-shrink: 0;
+                line-height: 1.4;
+                
+                &:first-child {
+                    padding-top: 12px;
+                }
                 
                 &:last-child {
                     border-bottom: none;
+                    padding-bottom: 12px;
                 }
                 
                 .flag-icon {

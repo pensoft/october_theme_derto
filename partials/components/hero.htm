@@ -10,7 +10,9 @@ use RainLab\Location\Models\Country;
 function onStart(){
     $this['topics'] = Topic::all();
     $this['blockLevels'] = Block::getLevelOptions();
-    $this['materialTypes'] = Material::getTypeOptions();
+    $materialTypes = Material::getTypeOptions();
+    asort($materialTypes);
+    $this['materialTypes'] = $materialTypes;
     
     // Institutions from Partners where type = 1
     $this['departments'] = Partners::where('type', 1)

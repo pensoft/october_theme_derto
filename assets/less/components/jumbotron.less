@@ -11,6 +11,7 @@
   color: #ffffff!important;
 }
 
+
 .virtual-demonstration-sites{
     embed{
         overflow: hidden;
@@ -19,19 +20,22 @@
         width: 93%;
     }
     .how-to-use-item{
-        .breakpoint-large-down({
-            margin-bottom: 80px;
-        });
+        // .breakpoint-large-down({
+        //     margin-bottom: 80px;
+        // });
     }
     .purpose{
         .container{
             padding-top: 0;
             padding-bottom: 0;
             padding-left: 7%;
+            .breakpoint-large-down({
+                padding-left: 0;
+            });
         }
-        .breakpoint-large-down({
-            margin-bottom: 80px;
-        });
+        // .breakpoint-large-down({
+        //     margin-bottom: 80px;
+        // });
     }
     .virt-image-container{
         img{
@@ -150,6 +154,9 @@
                         line-height: 1.3;
                     }
                 }
+                .breakpoint-large-down({
+                    max-width: 100%;
+                });
             }
         }
     }
@@ -159,6 +166,9 @@
             padding-top: 0;
             padding-bottom: 0;
             padding-right: 7%;
+            .breakpoint-large-down({
+                padding-right: 0;
+            });
         }
 
         .choose_label{
@@ -324,13 +334,25 @@
 
     .how-to-use-derto-row{
         padding: 0;
+        display: flex;
         .col-md-6{
             padding: 0;
             display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+            flex: 1; // Make columns equal width
             .breakpoint-large-down({
                 margin-bottom: 40px;
             });
         }
+    }
+
+    .card-wrapper{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
     }
 
     .container_bg_small{
@@ -340,12 +362,11 @@
         border-radius: 10px;
         padding: 48px 48px 155px 48px;
         width: calc(~'95.5% - 96px');
-        height: calc(~'100% - 203px');
+        flex: 1; // Take up available space
         display: flex;
         flex-direction: column;
         position: relative;
         overflow: hidden;
-
         .subtitle{
             color: rgba(38, 47, 14, 0.45);
             text-align: left;
@@ -390,7 +411,7 @@
             background-size: 100%;
             content: ' ';
             right: 0;
-            bottom: 0;
+            bottom: -10px;
         }
 
         .bottom-right-corner-bg {
@@ -409,6 +430,14 @@
             z-index: 3;
         }
     }
+
+    .breakpoint-large-down({
+        .col-md-6 {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+    });
 }
 
 .group1_steps{
@@ -539,6 +568,9 @@
     .mission{
         .container{
             padding-left: 7%;
+            .breakpoint-large-down({
+                padding-left: 0;
+            });
         }
     }
     .teamup{
@@ -548,8 +580,21 @@
 
         .container{
             padding-right: 7%;
+            .breakpoint-large-down({
+                padding-right: 0;
+            });
         }
     }
+    .breakpoint-large-down({
+        .container{
+            padding-bottom: 0;
+        }
+        .col-md-6 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    });
 }
 
 

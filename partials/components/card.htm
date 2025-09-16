@@ -1,0 +1,34 @@
+{% set title = title is defined ? title : '' %}
+{% set subtitle = subtitle is defined ? subtitle : '' %}
+{% set image = image is defined ? image : '' %}
+{% set variant = variant is defined ? variant : 'left' %}
+{% set showDownload = showDownload is defined ? showDownload : false %}
+{% set downloadLabel = downloadLabel is defined ? downloadLabel : 'Download Files' %}
+{% set downloadHref = downloadHref is defined ? downloadHref : '' %}
+
+<div class="card-wrapper">
+<div class="container_bg_small">
+    {% if variant == 'purple' %}
+        <div class="purple-flower-bg"></div>
+        <div class="bottom-right-corner-bg"></div>
+    {% elseif variant == 'green' %}
+        <div class="green-field-bg"></div>
+    {% endif %}
+    {% if subtitle %}
+        <div class="subtitle">{{ subtitle }}</div>
+    {% endif %}
+    {% if title %}
+        <h2>{{ title }}</h2>
+    {% endif %}
+    {% if image %}
+        <img src="{{ image|media }}">
+    {% endif %}
+</div>
+<div class="row dwn-btn-row">
+    {% if showDownload and downloadHref %}
+        <a href="{{ downloadHref|media }}" class="btn btn-primary btn-download" download>
+            {{ downloadLabel }}
+        </a>
+    {% endif %}
+</div>
+</div>

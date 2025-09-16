@@ -1,3 +1,11 @@
+.virtual-demonstration-sites{
+    .display-1 {
+        .breakpoint-large-down({
+            text-align: center;
+        });
+    }
+}
+
 .vr-intro{
     display: flex;
     text-align: center;
@@ -8,6 +16,27 @@
         font-size: 16px;
         font-style: normal;
     }
+    .breakpoint-large-down({
+        .container{
+            padding-bottom: 0;
+        }
+    });
+}
+
+.purpose{
+    .breakpoint-large-down({
+        .virt-image-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            order: 1;
+        }
+        .container{
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+    });
 }
 
 .virtual-img-container{
@@ -66,7 +95,15 @@
         &.germany{
             top: 280px;
             left: 160px;
-            .breakpoint-large-down({
+            @media (max-width: 1200px) and (min-width: 913px) {
+                top: 239px;
+                left: 221px;
+            }
+            @media (max-width: 931px) and (min-width: 500px) {
+                top: 49%;
+                left: 43%;
+            }
+            .breakpoint-small-down({
                 top: 45%;
                 left: 30%;
             });
@@ -77,7 +114,15 @@
         &.norway{
             top: 157px;
             right: 205px;
-            .breakpoint-large-down({
+            @media (max-width: 1200px) and (min-width: 913px) {
+                top: 181px;
+                right: 164px;
+            }
+            @media (max-width: 931px) and (min-width: 500px) {
+                top: 30%;
+                right: 32%;
+            }
+            .breakpoint-small-down({
                 top: 30%;
                 right: 32%;
             });
@@ -88,7 +133,15 @@
         &.czech{
             top: 273px;
             right: 68px;
-            .breakpoint-large-down({
+            @media (max-width: 1200px) and (min-width: 913px) {
+                top: 284px;
+                right: 10px;
+            }
+            @media (max-width: 931px) and (min-width: 500px) {
+                top: 51%;
+                right: 10%;
+            }
+            .breakpoint-small-down({
                 top: 54%;
                 right: 0;
             });
@@ -99,7 +152,14 @@
         &.spain{
             bottom: 100px;
             left: 100px;
-            .breakpoint-large-down({
+            @media (max-width: 1200px) and (min-width: 913px) {
+                left: 75px;
+            }
+            @media (max-width: 931px) and (min-width: 500px) {
+                bottom: 15%;
+                left: 25%;
+            }
+            .breakpoint-small-down({
                 bottom: 20%;
                 left: 0;
             });
