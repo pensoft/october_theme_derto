@@ -753,7 +753,8 @@
             'guideline': 'Guideline',
             'standard_of_practice': 'Standard of Practice',
             'document': 'Document',
-            'evaluation': 'Evaluation'
+            'evaluation': 'Evaluation',
+            'presentation': 'Presentation'
         };
         
         return typeMap[type] || (type ? type.charAt(0).toUpperCase() + type.slice(1) : 'Material');
