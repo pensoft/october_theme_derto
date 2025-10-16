@@ -12,6 +12,45 @@
         }
     }
 
+    .block-flag {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        .language-flag {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            border-radius: 4px;
+
+            .breakpoint-large-down({
+                width: 40px;
+                height: 40px;
+            });
+
+            .breakpoint-small-down({
+                width: 32px;
+                height: 32px;
+            });
+        }
+
+        .block-number-fallback {
+            font-size: 36px;
+            color: #A5A5A5;
+            font-weight: 700;
+
+            .breakpoint-large-down({
+                font-size: 28px;
+            });
+
+            .breakpoint-small-down({
+                font-size: 24px;
+            });
+        }
+    }
+
+    // Legacy support - keep old class for backward compatibility
     .block-number {
         font-size: 36px;
         color: #A5A5A5;
