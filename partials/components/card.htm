@@ -5,6 +5,8 @@
 {% set showDownload = showDownload is defined ? showDownload : false %}
 {% set downloadLabel = downloadLabel is defined ? downloadLabel : 'Download Files' %}
 {% set downloadHref = downloadHref is defined ? downloadHref : '' %}
+{% set showComingSoon = showComingSoon is defined ? showComingSoon : false %}
+{% set comingSoonLabel = comingSoonLabel is defined ? comingSoonLabel : 'Coming in January 2026' %}
 
 <div class="card-wrapper">
 <div class="container_bg_small">
@@ -22,6 +24,11 @@
     {% endif %}
     {% if image %}
         <img src="{{ image|media }}">
+    {% endif %}
+    {% if showComingSoon %}
+    <div class="coming-soon-btn">
+        <span>{{ comingSoonLabel }}</span>
+    </div>
     {% endif %}
 </div>
 <div class="row dwn-btn-row">

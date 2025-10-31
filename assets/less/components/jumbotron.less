@@ -11,6 +11,63 @@
   color: #ffffff!important;
 }
 
+.coming-soon-btn {
+    position: absolute;
+    padding: 14px 19px;
+    background: linear-gradient(103deg, #F2EEE7 -11.87%, #B0C536 77.89%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: linear-gradient(103deg, #F2EEE7 -11.87%, #B0C536 77.89%);
+    }
+
+    span {
+        font-family: 'Onest', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        color: #262F0E;
+        text-transform: capitalize; 
+        line-height: 1.15;
+        white-space: nowrap;
+    }
+}
+
+.guide-to{
+    position: relative;
+    .coming-soon-btn{
+        position: absolute;
+        top: 135px;
+        right: 40px;
+    }
+    .breakpoint-large-down({
+        .coming-soon-btn{
+            top: auto;
+            bottom: 20px;
+            right: 20px;
+        }
+    });
+}
+
+.explore-options{
+    position: relative;
+    .coming-soon-btn{
+        position: absolute;
+        top: 135px;
+        left: 40px;
+    }
+    .breakpoint-large-down({
+        .coming-soon-btn{
+            top: auto;
+            bottom: 20px;
+            left: 20px;
+        }
+    });
+}
 
 .virtual-demonstration-sites{
     embed{
@@ -353,6 +410,7 @@
         flex-direction: column;
         height: 100%;
         width: 100%;
+        position: relative;
     }
 
     .container_bg_small{
@@ -367,6 +425,12 @@
         flex-direction: column;
         position: relative;
         overflow: hidden;
+        
+        .coming-soon-btn{
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+        }
         .subtitle{
             color: rgba(38, 47, 14, 0.45);
             text-align: left;
