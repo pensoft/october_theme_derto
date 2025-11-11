@@ -233,13 +233,19 @@ function setMobileMenuStyles() {
         visibility: 'visible',
         'pointer-events': 'auto'
     });
-    
+
     $(`${APP_SELECTORS.MENU} a, ${APP_SELECTORS.MENU} li`).css({
         visibility: 'visible',
         'pointer-events': 'auto',
         opacity: '1'
     });
-    
+
+    // Fix for Google Translate wrapper elements
+    $(`${APP_SELECTORS.MENU} a *, ${APP_SELECTORS.MENU} li *`).css({
+        visibility: 'visible',
+        opacity: '1'
+    });
+
     $(`${APP_SELECTORS.MENU} ${APP_SELECTORS.DROPDOWN_MENU}`).css({
         display: 'none',
         visibility: 'visible',

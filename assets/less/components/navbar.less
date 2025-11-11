@@ -687,6 +687,11 @@
         li, a, .dropdown-menu {
             visibility: visible !important;
         }
+
+        // Fix for Google Translate wrapper elements
+        li *, a *, .dropdown-menu * {
+            visibility: visible !important;
+        }
     }
 
     .hidden-xs{
