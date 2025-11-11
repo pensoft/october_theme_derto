@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-xs-11">
                         <a href="{{ block.url }}" class="block-header">
-                            <h3 class="block-title">{{ block.name }}</h3>
+                            <h3 class="block-title">{% if block.block_number %} Block {{ block.block_number }} - {% endif %}{{ block.name }}</h3>
                             <i class="block-arrow"></i>
                         </a>
                     </div>
