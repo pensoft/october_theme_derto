@@ -11,26 +11,56 @@
     min-width: 120px;
     margin: 0;
     vertical-align: middle;
-    
+
+    @media (max-width: 480px) {
+        min-width: 90px;
+        padding: 4px 8px;
+        font-size: 13px;
+    }
+
+    @media (max-width: 360px) {
+        min-width: 75px;
+        padding: 4px 6px;
+        font-size: 12px;
+    }
+
     .selected-language {
         display: flex;
         align-items: center;
         color: #fff;
         height: 30px; // Consistent height for proper alignment
-        
+
+        @media (max-width: 480px) {
+            height: 28px;
+        }
+
         .flag-icon {
             width: 18px;
             height: 12px;
             margin-right: 8px;
             background-size: cover;
             display: inline-block;
+
+            @media (max-width: 480px) {
+                width: 16px;
+                height: 11px;
+                margin-right: 6px;
+            }
+
+            @media (max-width: 360px) {
+                margin-right: 4px;
+            }
         }
-        
+
         .language-text {
             margin-right: 8px;
             font-weight: 400;
+
+            @media (max-width: 360px) {
+                display: none;
+            }
         }
-        
+
         .dropdown-arrow {
             width: 6px;
             height: 6px;
@@ -39,6 +69,11 @@
             transform: rotate(-45deg);
             margin-top: -3px;
             margin-left: auto;
+
+            @media (max-width: 480px) {
+                width: 5px;
+                height: 5px;
+            }
         }
     }
     
@@ -135,14 +170,18 @@ body {
     justify-content: center;
     height: 38px;
     margin: 0;
-    
+
+    @media (max-width: 480px) {
+        height: 32px;
+    }
+
     .goog-te-gadget {
         display: flex;
         align-items: center;
         justify-content: center;
         height: 100%;
         font-size: 0 !important;
-        
+
         .goog-te-combo {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -153,7 +192,20 @@ body {
             min-width: 120px;
             height: 38px;
             margin: 0;
-            
+
+            @media (max-width: 480px) {
+                min-width: 90px;
+                height: 32px;
+                padding: 4px 8px;
+                font-size: 13px;
+            }
+
+            @media (max-width: 360px) {
+                min-width: 75px;
+                padding: 4px 6px;
+                font-size: 12px;
+            }
+
             &:focus {
                 outline: none;
                 background: rgba(255, 255, 255, 0.2);
