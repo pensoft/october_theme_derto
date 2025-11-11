@@ -266,6 +266,10 @@
     .search-and-social-media{
         min-width: fit-content;
 
+        .breakpoint-large-down({
+            margin-right: 16px;
+        });
+
         ul{
             padding: 0 30px!important;
             margin: 0;
@@ -307,13 +311,15 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            gap: 6px;
+            .breakpoint-large-down({
+                gap: 2px;
+            });
             li{
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
                 margin: 0;
-                position: relative;
-                top: 50%;
                 height: 34px;
 
                 @media (max-width: 480px) {
@@ -460,8 +466,8 @@
         flex-direction: column;
         position: absolute;
         right: 24px;
-        top: 50%;
-        // transform: translateY(-50%);
+        top: 60%;
+        transform: translateY(-50%);
         height: 34px;
         z-index: 1;
         -webkit-user-select: none;
