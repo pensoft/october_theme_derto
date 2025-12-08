@@ -478,6 +478,7 @@
             case 'worksheet':
             case 'guideline':
             case 'standard_of_practice':
+            case 'business_case_studies':
                 parts.push(generateDocumentContent());
                 break;
             case 'interactive_presentation_h5p':
@@ -754,7 +755,8 @@
             'standard_of_practice': 'Standard of Practice',
             'document': 'Document',
             'evaluation': 'Evaluation',
-            'presentation': 'Presentation'
+            'presentation': 'Presentation',
+            'business_case_studies': 'Business Case Studies'
         };
         
         return typeMap[type] || (type ? type.charAt(0).toUpperCase() + type.slice(1) : 'Material');
