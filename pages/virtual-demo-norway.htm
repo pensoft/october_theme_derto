@@ -1,0 +1,43 @@
+url = "/virtual-demonstration-sites/norway"
+layout = "default"
+title = "Norway"
+subtitle = "Virtual Demonstration Site"
+header_image = "germany-demo.png"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[jumbotron vr-norway-content]
+jumbotron = "vr-norway-content"
+title = 0
+background = "transperant"
+templates = "template3"
+description_limit = 0
+
+[jumbotron vr-norway-intro]
+jumbotron = "vr-norway-intro"
+title = 0
+background = "transperant"
+templates = "template3"
+description_limit = 0
+
+
+[siteSearchInclude]
+==
+{% component 'siteSearchInclude' %}
+
+<main class="demonstration-sites-detailed">
+    <div class="container">
+        <div class="back-to">
+            <a href="/virtual-demonstration-sites">Back</a>
+        </div>
+    </div>
+
+    <div class="container-flluid vr-germany-intro">
+        {% component 'vr-norway-intro' %}
+    </div>
+
+    <div class="container-flluid vr-germany-content">
+        {% component 'vr-norway-content' %}
+    </div>
+</main>

@@ -1,0 +1,43 @@
+url = "/virtual-demonstration-sites/czech-republic"
+layout = "default"
+title = "Czech Republic"
+subtitle = "Virtual Demonstration Site"
+header_image = "germany-demo.png"
+is_hidden = 0
+robot_index = "index"
+robot_follow = "follow"
+
+[jumbotron vr-czech-republic-content]
+jumbotron = "vr-czech-republic-content"
+title = 0
+background = "transperant"
+templates = "template3"
+description_limit = 0
+
+[jumbotron vr-czech-republic-intro]
+jumbotron = "vr-czech-republic-intro"
+title = 0
+background = "transperant"
+templates = "template3"
+description_limit = 0
+
+
+[siteSearchInclude]
+==
+{% component 'siteSearchInclude' %}
+
+<main class="demonstration-sites-detailed">
+    <div class="container">
+        <div class="back-to">
+            <a href="/virtual-demonstration-sites">Back</a>
+        </div>
+    </div>
+
+    <div class="container-flluid vr-germany-intro">
+        {% component 'vr-czech-republic-intro' %}
+    </div>
+
+    <div class="container-flluid vr-germany-content">
+        {% component 'vr-czech-republic-content' %}
+    </div>
+</main>
