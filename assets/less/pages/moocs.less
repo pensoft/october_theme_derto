@@ -45,6 +45,16 @@
         }
     }
 
+    > h3 {
+        font-family: 'Onest', sans-serif;
+        font-weight: 600;
+        font-size: 36px;
+        color: #262F0E;
+        text-transform: capitalize;
+        text-align: center;
+        line-height: 1;
+    }
+
     .mooc-container{
         h3{
             color: #262F0E;
@@ -62,85 +72,85 @@
             overflow: hidden;
             text-decoration: none;
             color: inherit;
-            
+            margin-bottom: 18px;
+
+            .mooc-image {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                height: auto;
+                object-fit: cover;
+                object-position: bottom center;
+                pointer-events: none;
+                z-index: 0;
+                transition: transform 0.3s ease-in-out;
+            }
+
+            &:hover .mooc-image {
+                transform: scale(1.05);
+            }
+
             .box-content{
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
                 height: 100%;
-                width: 120px;
+                width: 100%;
+                z-index: 1;
+                position: relative;
+
                 .link{
-                    padding: 7px 20px;
-                    border-radius: 21px;
+                    padding: 10px 20px;
+                    border-radius: 8px;
                     color: #F0F0E4;
                     background: #719E05;
                     font-size: 12px;
                     font-style: normal;
                     font-weight: 700;
-                    display: flex;
+                    display: inline-flex;
                     justify-content: center;
                     align-items: center;
-                    position: relative;
+                    width: fit-content;
                     &:before{
                         content: '';
-                        position: absolute;
+                        position: relative;
                         background: url('/themes/pensoft-derto/assets/images/ser-arrow.svg') no-repeat center center;
                         background-size: 100%;
                         width: 10px;
                         height: 10px;
-                        left: 25px;
-                        top: 50%;
-                        transform: translateY(-50%);
+                        margin-right: 8px;
                     }
                 }
             }
-            
 
-            &.basic{
+            &.dryland{
                 background: #F0F0E4;
-                &::before{
-                    content: '';
-                    position: absolute;
-                    background: url('/themes/pensoft-derto/assets/images/basic-card.svg') no-repeat right bottom;
-                    background-size: 100%;
-                    bottom: 0;
-                    right: 0;
-                    width: 380px;
-                    height: 280px;
-                    transition: transform 0.3s ease-in-out;
-                }
-                
-                &:hover::before{
-                    transform: scale(1.35) translate(-8px, -28px);
-                }
                 .breakpoint-large-down({
                     margin-bottom: 40px;
                 });
             }
-            
-            &.advanced{
-                background: rgba(242, 115, 69, 0.05);
-                &::before{
-                    content: '';
-                    position: absolute;
-                    background: url('/themes/pensoft-derto/assets/images/advanced-card.svg') no-repeat right bottom;
-                    background-size: 100%;
-                    bottom: 0;
-                    right: 0;
-                    width: 285px;
-                    height: 249px;
-                    transition: transform 0.3s ease-in-out;
-                }
-                
-                &:hover::before{
-                    transform: scale(1.35) translate(-18px, -8px);
-                }
 
+            &.peatland{
+                background: rgba(242, 115, 69, 0.05);
+                .box-content .link{
+                    background: #F27345;
+                }
+            }
+
+            &.urban{
+                background: rgba(180, 152, 170, 0.15);
+                .breakpoint-large-down({
+                    margin-bottom: 40px;
+                });
+            }
+
+            &.agricultural{
+                background: rgba(163, 189, 215, 0.15);
                 .box-content .link{
                     background: #F27345;
                 }
             }
         }
     }
-    
+
 }
