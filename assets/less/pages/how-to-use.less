@@ -1,0 +1,1238 @@
+// ==========================================================================
+// How-To Use Page - Guide Section
+// ==========================================================================
+
+.how-to-guide-section {
+    padding: 0;
+
+    .breakpoint-large-down({
+        .row {
+            flex-direction: column;
+        }
+    });
+}
+
+// --------------------------------------------------------------------------
+// Guide Card (Left Column)
+// --------------------------------------------------------------------------
+
+.guide-card {
+    background: radial-gradient(104% 79% at center, #A3BDD7 0%, #F5F0E8 96.46%);
+    border-radius: 8px;
+    height: 575px;
+    position: relative;
+    overflow: hidden;
+
+    .breakpoint-large-down({
+        height: 400px;
+        margin-bottom: 30px;
+    });
+}
+
+.guide-card__corner-tl {
+    position: absolute;
+    width: 431px;
+    height: 253px;
+    transform: rotate(-135.56deg);
+    background: rgba(228, 232, 243, 0.40);
+    box-shadow: 0px 1.241px 2.481px 0px rgba(87, 90, 148, 0.10) inset;
+    backdrop-filter: blur(25px);
+    border-radius: 50%;
+    left: -100px;
+    top: -100px;
+    z-index: 1;
+}
+
+.guide-card__corner-br {
+    position: absolute;
+    width: 431px;
+    height: 253px;
+    transform: rotate(-47.88deg);
+    background: rgba(228, 232, 243, 0.40);
+    box-shadow: 0px 1.241px 2.481px 0px rgba(87, 90, 148, 0.10) inset;
+    backdrop-filter: blur(25px);
+    border-radius: 50%;
+    right: -100px;
+    bottom: -100px;
+    z-index: 1;
+}
+
+// Decorative flower/plant image (left side)
+// flower.png is 190x575 - sits naturally on the left side of the card
+.guide-card__flower {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: auto;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.guide-card__badge {
+    position: absolute;
+    top: 42px;
+    right: 0;
+    background: linear-gradient(103deg, #B0C536, #E0E3E3);
+    border-radius: 8px;
+    padding: 10px 15px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 185px;
+
+    span {
+        font-family: 'Onest', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        color: #3F4011;
+        line-height: 1.25;
+        text-align: center;
+    }
+
+    .breakpoint-large-down({
+        top: 20px;
+        width: 155px;
+        padding: 8px 12px;
+
+        span {
+            font-size: 12px;
+        }
+    });
+}
+
+.guide-card__content {
+    position: absolute;
+    left: 3.6%;
+    top: 122px;
+    width: 92.8%;
+    z-index: 5;
+    text-align: center;
+
+    .breakpoint-large-down({
+        top: 80px;
+        left: 3%;
+        width: 94%;
+    });
+}
+
+.guide-card__subtitle {
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 40px;
+    color: #262F0E;
+    opacity: 0.45;
+    margin-bottom: 20px;
+
+    .breakpoint-large-down({
+        font-size: 16px;
+        line-height: 30px;
+        margin-bottom: 10px;
+    });
+}
+
+.guide-card__title {
+    font-family: 'Onest', sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.15;
+    color: #262F0E;
+    text-transform: capitalize;
+
+    .breakpoint-large-down({
+        font-size: 28px;
+    });
+}
+
+// --------------------------------------------------------------------------
+// Dashed connecting lines between inner cards
+// Figma: left=99.5, top=236.91, w=407, h=233 (in 625x575 card)
+// --------------------------------------------------------------------------
+
+.guide-card__lines {
+    position: absolute;
+    left: 15.92%;
+    top: 41.2%;
+    width: 65.12%;
+    height: 40.54%;
+    z-index: 3;
+    pointer-events: none;
+}
+
+// --------------------------------------------------------------------------
+// Inner SVG Cards (absolute positioned within guide-card)
+// Positions derived from Figma (625x575 card), converted to percentages
+// --------------------------------------------------------------------------
+
+.guide-card__inner {
+    position: absolute;
+    z-index: 6;
+    pointer-events: none;
+    height: auto;
+}
+
+// "Access The DERTO Platform" - left-center area
+// Figma: center-x at calc(50%-179.5px) with translateX(-50%), top=263, w=156, h=110
+.guide-card__inner--platform {
+    left: 8.8%;
+    top: 45.7%;
+    width: 24.96%;
+}
+
+// "Browse The Resource Library" - center-left, above platform
+// Figma: left=227, top=224, w=156, h=110
+.guide-card__inner--library {
+    left: 36.32%;
+    top: 38.96%;
+    width: 24.96%;
+}
+
+// "Explore Virtual Demonstration Sites" - right area
+// Figma: left=399, top=263, w=172, h=97
+.guide-card__inner--demo {
+    left: 63.84%;
+    top: 45.7%;
+    width: 27.52%;
+}
+
+// "Access MOOCs" - center-bottom area
+// Figma: left=218, top=366, w=156, h=88
+.guide-card__inner--moocs {
+    left: 34.88%;
+    top: 63.65%;
+    width: 24.96%;
+}
+
+// "Download And Use Materials" - bottom-right
+// Figma: left=362, top=444, w=180, h=59
+.guide-card__inner--download {
+    left: 57.92%;
+    top: 77.22%;
+    width: 28.8%;
+}
+
+// --------------------------------------------------------------------------
+// Guide Info (Right Column)
+// --------------------------------------------------------------------------
+
+.guide-info {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    padding-left: 40px;
+
+    .breakpoint-large-down({
+        padding-left: 0;
+        gap: 40px;
+    });
+
+    .breakpoint-small-down({
+        gap: 30px;
+    });
+}
+
+.guide-info__text {
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-info__title {
+    font-family: 'Onest', sans-serif;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: normal;
+    color: #262F0E;
+    text-transform: capitalize;
+    margin-bottom: 40px;
+
+    .breakpoint-large-down({
+        font-size: 28px;
+        margin-bottom: 24px;
+    });
+
+    .breakpoint-small-down({
+        font-size: 24px;
+        margin-bottom: 20px;
+    });
+}
+
+.guide-info__description {
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.55;
+    color: rgba(38, 47, 14, 0.65);
+
+    p + p {
+        margin-top: 1em;
+    }
+
+    .breakpoint-large-down({
+        font-size: 15px;
+    });
+}
+
+.guide-info__download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #719E05;
+    color: #FFFCF7;
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.25;
+    padding: 10px 15px;
+    border-radius: 8px;
+    height: 40px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    align-self: flex-start;
+    box-sizing: border-box;
+
+    &:hover {
+        background: darken(#719E05, 5%);
+        color: #FFFCF7;
+    }
+
+    .breakpoint-small-down({
+        align-self: stretch;
+        font-size: 16px;
+    });
+}
+
+// ==========================================================================
+// H5P Guide Section (How To Make H5P)
+// ==========================================================================
+.for_more_info{
+    padding-bottom: 0;
+}
+.h5p-guide-section {
+    padding: 0;
+    padding-bottom: 50px;
+    .breakpoint-large-down({
+        .for_more_info {
+            margin-bottom: 20px;
+        }
+    });
+}
+
+.h5p-card {
+    background: radial-gradient(52.5% 79% at center, #A3BDD7 0%, #F5F0E8 96.46%);
+    border-radius: 8px;
+    height: 575px;
+    position: relative;
+    overflow: hidden;
+
+    .breakpoint-large-down({
+        height: auto;
+        min-height: 620px;
+        display: flex;
+        flex-direction: column;
+    });
+}
+
+
+// Purple flower decoration (left side)
+// purple-flower.png is 358x470px, placed at left side
+// Figma: x=39.15, y=105, w=405.5, h=612 in 1250x575 card
+.h5p-card__flower {
+    position: absolute;
+    left: 3.13%;
+    top: 18.26%;
+    width: 32.44%;
+    height: auto;
+    z-index: 2;
+    pointer-events: none;
+
+    .breakpoint-large-down({
+        width: 28%;
+        top: 12%;
+        left: -3%;
+        opacity: 0.25;
+    });
+
+    .breakpoint-small-down({
+        display: none;
+    });
+}
+
+// "Coming in 2026" badge — top-right
+// Figma: x=1065, y=42 → right=0, top=42
+.h5p-card__badge {
+    position: absolute;
+    top: 42px;
+    right: 0;
+    background: linear-gradient(103deg, #B0C536, #E0E3E3);
+    border-radius: 8px;
+    padding: 10px 15px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 185px;
+
+    span {
+        font-family: 'Onest', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        color: #3F4011;
+        line-height: 1.25;
+        text-align: center;
+    }
+
+    .breakpoint-large-down({
+        top: auto;
+        bottom: 10px;
+        left: 0;
+        right: auto;
+        width: 145px;
+        padding: 8px 12px;
+        z-index: 11;
+
+        span {
+            font-size: 12px;
+        }
+    });
+}
+
+// Text content — subtitle + title
+// Figma: x=372, y=100, w=580
+.h5p-card__content {
+    position: absolute;
+    left: 29.76%;
+    top: 100px;
+    width: 46.4%;
+    z-index: 5;
+    text-align: center;
+
+    .breakpoint-large-down({
+        position: relative;
+        left: auto;
+        top: auto;
+        width: auto;
+        padding: 20px 20px 10px;
+    });
+}
+
+.h5p-card__subtitle {
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 40px;
+    color: #262F0E;
+    opacity: 0.45;
+    margin-bottom: 20px;
+
+    .breakpoint-large-down({
+        font-size: 14px;
+        line-height: 1.3;
+        margin-bottom: 6px;
+    });
+}
+
+.h5p-card__title {
+    font-family: 'Onest', sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.15;
+    color: #262F0E;
+    text-transform: capitalize;
+
+    .breakpoint-large-down({
+        font-size: 22px;
+    });
+
+    .breakpoint-small-down({
+        font-size: 20px;
+    });
+}
+
+// Dashed connecting lines between inner cards
+// Figma: x=319.33+57.62=376.95, y=231.21+50.54=281.75, w=675.7, h=131.54
+.h5p-card__lines {
+    position: absolute;
+    left: 30.16%;
+    top: 48.96%;
+    width: 54.06%;
+    height: 22.88%;
+    z-index: 3;
+    pointer-events: none;
+
+    .breakpoint-large-down({
+        display: none;
+    });
+}
+
+// Inner SVG cards
+.h5p-card__inner {
+    position: absolute;
+    z-index: 6;
+    pointer-events: none;
+    height: auto;
+}
+
+// "Download and install LUMI" — bottom-left of inner area
+// Figma: x=319.33+0=319.33, y=231.21+108.95=340.16, w=165.29
+.h5p-card__inner--lumi {
+    left: 25.55%;
+    top: 59.16%;
+    width: 13.22%;
+
+    // Mobile: bottom-left of 2x2 grid
+    .breakpoint-large-down({
+        left: 4%;
+        bottom: 15%;
+        top: auto;
+        width: 42%;
+    });
+}
+
+// "Create new H5P content" — center-top of inner area
+// Figma: x=319.33+182.97=502.3, y=231.21+0=231.21, w=195.87
+.h5p-card__inner--create {
+    left: 40.18%;
+    top: 40.21%;
+    width: 15.67%;
+
+    // Mobile: top-left of 2x2 grid
+    .breakpoint-large-down({
+        left: 4%;
+        bottom: 38%;
+        top: auto;
+        width: 42%;
+    });
+}
+
+// "Edit and customise your content" — center-bottom of inner area
+// Figma: x=319.33+385.12=704.45, y=231.21+108.95=340.16, w=162.55
+.h5p-card__inner--edit {
+    left: 56.36%;
+    top: 59.16%;
+    width: 13.00%;
+
+    // Mobile: bottom-right of 2x2 grid
+    .breakpoint-large-down({
+        left: 52%;
+        bottom: 15%;
+        top: auto;
+        width: 42%;
+    });
+}
+
+// "Save or export your file" — right of inner area
+// Figma: x=319.33+553.67=873, y=231.21+9.79=241, w=180
+.h5p-card__inner--save {
+    left: 69.84%;
+    top: 41.91%;
+    width: 14.40%;
+
+    // Mobile: top-right of 2x2 grid
+    .breakpoint-large-down({
+        left: 52%;
+        bottom: 38%;
+        top: auto;
+        width: 42%;
+    });
+}
+
+// Language flags section
+// Figma: x=42, y=491, w=300, h=55
+.h5p-card__flags {
+    position: absolute;
+    left: 3.36%;
+    top: 85.39%;
+    z-index: 10;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: rgba(228, 232, 243, 0.40);
+    box-shadow: 0px 1.241px 2.481px 0px rgba(87, 90, 148, 0.10) inset;
+    -webkit-backdrop-filter: blur(24.81px);
+    backdrop-filter: blur(24.81px);
+
+    .breakpoint-large-down({
+        position: relative;
+        left: auto;
+        top: auto;
+        padding: 12px 15px;
+        margin: 0 20px 10px;
+        display: inline-block;
+        background: none;
+        box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        border-radius: 0;
+    });
+}
+
+.h5p-card__flag-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 12px;
+
+    .breakpoint-large-down({
+        gap: 10px;
+        margin-bottom: 8px;
+    });
+}
+
+.h5p-card__flag-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+
+    &:hover {
+        transform: scale(1.15);
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.h5p-card__flag-hint {
+    font-family: 'Onest', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.35;
+    color: rgba(38, 47, 14, 0.65);
+    font-feature-settings: 'liga' off, 'clig' off;
+
+    .breakpoint-large-down({
+        font-size: 12px;
+    });
+}
+
+// ==========================================================================
+// VR Guide Section (How To Make Your Own Virtual Demonstration Site)
+// ==========================================================================
+
+.vr-guide-section {
+    padding: 0;
+    padding-bottom: 50px;
+
+    .breakpoint-large-down({
+        .for_more_info {
+            margin-bottom: 20px;
+        }
+    });
+}
+
+.vr-card {
+    background: radial-gradient(52.5% 79% at center, #A3BDD7 0%, #F5F0E8 96.46%);
+    border-radius: 8px;
+    height: 575px;
+    position: relative;
+    overflow: hidden;
+
+    .breakpoint-large-down({
+        height: auto;
+        min-height: 750px;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 50px;
+    });
+}
+
+// "Coming in 2026" badge — top-left
+// Figma: x=0, y=42, w=185, h=38
+.vr-card__badge {
+    position: absolute;
+    top: 42px;
+    left: 0;
+    background: linear-gradient(103deg, #B0C536, #E0E3E3);
+    border-radius: 8px;
+    padding: 10px 15px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 185px;
+
+    span {
+        font-family: 'Onest', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        color: #3F4011;
+        line-height: 1.25;
+        text-align: center;
+    }
+
+    .breakpoint-large-down({
+        top: auto;
+        bottom: 10px;
+        width: 145px;
+        padding: 8px 12px;
+        z-index: 11;
+
+        span {
+            font-size: 12px;
+        }
+    });
+}
+
+// Language flags — top-right
+// Figma: x=919, y=42, w=300, h=55
+.vr-card__flags {
+    position: absolute;
+    right: 0;
+    top: 42px;
+    z-index: 10;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: rgba(228, 232, 243, 0.40);
+    box-shadow: 0px 1.241px 2.481px 0px rgba(87, 90, 148, 0.10) inset;
+    -webkit-backdrop-filter: blur(24.81px);
+    backdrop-filter: blur(24.81px);
+
+    .breakpoint-large-down({
+        position: relative;
+        right: auto;
+        top: auto;
+        padding: 12px 15px;
+        margin: 20px 20px 10px;
+        display: inline-block;
+        background: none;
+        box-shadow: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        border-radius: 0;
+    });
+}
+
+.vr-card__flag-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 12px;
+
+    .breakpoint-large-down({
+        gap: 10px;
+        margin-bottom: 8px;
+    });
+}
+
+.vr-card__flag-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+
+    &:hover {
+        transform: scale(1.15);
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.vr-card__flag-hint {
+    font-family: 'Onest', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.35;
+    color: rgba(38, 47, 14, 0.65);
+    font-feature-settings: 'liga' off, 'clig' off;
+
+    .breakpoint-large-down({
+        font-size: 12px;
+    });
+}
+
+// Text content — subtitle + title
+// Figma: x=335.5, y=100, w=580 in 1250x575 card
+.vr-card__content {
+    position: absolute;
+    left: 26.84%;
+    top: 100px;
+    width: 46.4%;
+    z-index: 5;
+    text-align: center;
+
+    .breakpoint-large-down({
+        position: relative;
+        left: auto;
+        top: auto;
+        width: auto;
+        padding: 0 20px 10px;
+    });
+}
+
+.vr-card__subtitle {
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 40px;
+    color: #3A451E;
+    opacity: 0.45;
+    margin-bottom: 20px;
+
+    .breakpoint-large-down({
+        font-size: 14px;
+        line-height: 1.3;
+        margin-bottom: 6px;
+    });
+}
+
+.vr-card__title {
+    font-family: 'Onest', sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.15;
+    color: #3A451E;
+    text-transform: capitalize;
+
+    .breakpoint-large-down({
+        font-size: 22px;
+    });
+
+    .breakpoint-small-down({
+        font-size: 20px;
+    });
+}
+
+// Dashed connecting lines between inner cards
+// Figma: x=211, y=230.69, w=879.89, h=211.81 in 1250x575 card
+.vr-card__lines {
+    position: absolute;
+    left: 16.88%;
+    top: 40.12%;
+    width: 70.39%;
+    height: 36.84%;
+    z-index: 3;
+    pointer-events: none;
+
+    .breakpoint-large-down({
+        display: none;
+    });
+}
+
+// Green rolling hills image — bottom of card
+// Figma: x=0, y=393, w=1281, h=383
+.vr-card__grass {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 102.5%;
+    height: auto;
+    z-index: 2;
+    pointer-events: none;
+
+    .breakpoint-large-down({
+        opacity: 0.4;
+    });
+}
+
+// --------------------------------------------------------------------------
+// Inner SVG Cards (absolute positioned within vr-card)
+// Positions derived from Figma (1250x575 card), converted to percentages
+// --------------------------------------------------------------------------
+
+.vr-card__inner {
+    position: absolute;
+    z-index: 6;
+    pointer-events: none;
+    height: auto;
+}
+
+// "Pick a Site" — left area
+// Figma: x=87, y=225, w=208, h=109
+.vr-card__inner--pick-site {
+    left: 6.96%;
+    top: 39.13%;
+    width: 16.64%;
+
+    // Mobile: row 1, col 1
+    .breakpoint-large-down({
+        left: 4%;
+        top: auto;
+        bottom: 42%;
+        width: 42%;
+    });
+}
+
+// "Collect Multimedia" — center-left, lower
+// Figma: x=315, y=324, w=161, h=104
+.vr-card__inner--collect {
+    left: 25.2%;
+    top: 56.35%;
+    width: 12.88%;
+
+    // Mobile: row 2, col 1
+    .breakpoint-large-down({
+        left: 4%;
+        top: auto;
+        bottom: 22%;
+        width: 42%;
+    });
+}
+
+// "Download and install LUMI" — center
+// Figma: x=476, y=254, w=165.29, h=62
+.vr-card__inner--lumi {
+    left: 38.08%;
+    top: 44.17%;
+    width: 13.22%;
+
+    // Mobile: row 1, col 2
+    .breakpoint-large-down({
+        left: 52%;
+        top: auto;
+        bottom: 42%;
+        width: 42%;
+    });
+}
+
+// "Add & Navigate between scenes" — center-right, lower
+// Figma: x=633, y=344, w=201, h=100
+.vr-card__inner--navigate {
+    left: 50.64%;
+    top: 59.83%;
+    width: 16.08%;
+
+    // Mobile: row 2, col 2
+    .breakpoint-large-down({
+        left: 52%;
+        top: auto;
+        bottom: 22%;
+        width: 42%;
+    });
+}
+
+// "Add Interactions" — right area
+// Figma: x=856, y=239, w=200, h=115
+.vr-card__inner--interactions {
+    left: 68.48%;
+    top: 41.57%;
+    width: 16%;
+
+    // Mobile: row 3, col 1
+    .breakpoint-large-down({
+        left: 4%;
+        top: auto;
+        bottom: 5%;
+        width: 42%;
+    });
+}
+
+// "Export Project as a SCORM Package" — bottom-right
+// Figma: x=973, y=394, w=196, h=91
+.vr-card__inner--export {
+    left: 77.84%;
+    top: 68.52%;
+    width: 15.68%;
+
+    // Mobile: row 3, col 2
+    .breakpoint-large-down({
+        left: 52%;
+        top: auto;
+        bottom: 5%;
+        width: 42%;
+    });
+}
+
+// ==========================================================================
+// Submit Guide Section (How To Submit Your Course Materials)
+// ==========================================================================
+
+.submit-guide-section {
+    padding: 0;
+    padding-bottom: 50px;
+
+    .breakpoint-large-down({
+        .row {
+            flex-direction: column;
+        }
+    });
+}
+
+// --------------------------------------------------------------------------
+// Submit Info (Left Column)
+// --------------------------------------------------------------------------
+
+.submit-info {
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    padding-right: 40px;
+
+    .breakpoint-large-down({
+        padding-right: 0;
+        gap: 40px;
+        margin-bottom: 30px;
+    });
+
+    .breakpoint-small-down({
+        gap: 30px;
+    });
+}
+
+.submit-info__text {
+    display: flex;
+    flex-direction: column;
+}
+
+.submit-info__title {
+    font-family: 'Onest', sans-serif;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: normal;
+    color: #262F0E;
+    text-transform: capitalize;
+    margin-bottom: 40px;
+
+    .breakpoint-large-down({
+        font-size: 28px;
+        margin-bottom: 24px;
+    });
+
+    .breakpoint-small-down({
+        font-size: 24px;
+        margin-bottom: 20px;
+    });
+}
+
+.submit-info__description {
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.55;
+    color: rgba(38, 47, 14, 0.65);
+
+    p + p {
+        margin-top: 1em;
+    }
+
+    .breakpoint-large-down({
+        font-size: 15px;
+    });
+}
+
+.submit-info__download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #719E05;
+    color: #FFFCF7;
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.25;
+    padding: 10px 15px;
+    border-radius: 8px;
+    height: 40px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    align-self: flex-start;
+    box-sizing: border-box;
+
+    &:hover {
+        background: darken(#719E05, 5%);
+        color: #FFFCF7;
+    }
+
+    .breakpoint-small-down({
+        align-self: stretch;
+        font-size: 16px;
+    });
+}
+
+// --------------------------------------------------------------------------
+// Submit Card (Right Column)
+// --------------------------------------------------------------------------
+
+.submit-card {
+    background: radial-gradient(104% 79% at center, #A3BDD7 0%, #F5F0E8 96.46%);
+    border-radius: 8px;
+    height: 575px;
+    position: relative;
+    overflow: hidden;
+
+    .breakpoint-large-down({
+        height: 400px;
+        margin-bottom: 30px;
+    });
+}
+
+// Glassmorphism decoration — top-right corner
+.submit-card__corner-tr {
+    position: absolute;
+    width: 431px;
+    height: 253px;
+    transform: rotate(44.44deg);
+    background: rgba(228, 232, 243, 0.40);
+    box-shadow: 0px 1.241px 2.481px 0px rgba(87, 90, 148, 0.10) inset;
+    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(25px);
+    border-radius: 50%;
+    right: -80px;
+    top: -80px;
+    z-index: 1;
+}
+
+// Butterfly image — right side, bottom area
+// Figma: right=0, top=340, w=223, h=347, horizontally flipped
+.submit-card__butterfly {
+    position: absolute;
+    right: 0;
+    top: 59.13%;
+    width: 35.68%;
+    height: auto;
+    z-index: 2;
+    pointer-events: none;
+    transform: scaleX(-1);
+}
+
+// "Coming in 2026" badge — bottom-left
+// Figma: x=0, y=493, w=185
+.submit-card__badge {
+    position: absolute;
+    bottom: 44px;
+    left: 0;
+    background: linear-gradient(103deg, #B0C536, #F5F0E8);
+    border-radius: 8px;
+    padding: 10px 15px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 185px;
+
+    span {
+        font-family: 'Onest', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        color: #3F4011;
+        line-height: 1.25;
+        text-align: center;
+    }
+
+    .breakpoint-large-down({
+        bottom: 20px;
+        width: 155px;
+        padding: 8px 12px;
+
+        span {
+            font-size: 12px;
+        }
+    });
+}
+
+// Text content — subtitle + title
+// Figma: centered, y=58, w=580 in 625x575 card
+.submit-card__content {
+    position: absolute;
+    left: 3.6%;
+    top: 58px;
+    width: 92.8%;
+    z-index: 5;
+    text-align: center;
+
+    .breakpoint-large-down({
+        top: 40px;
+        left: 3%;
+        width: 94%;
+    });
+}
+
+.submit-card__subtitle {
+    font-family: 'Public Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 40px;
+    color: #262F0E;
+    opacity: 0.45;
+    margin-bottom: 20px;
+
+    .breakpoint-large-down({
+        font-size: 16px;
+        line-height: 30px;
+        margin-bottom: 10px;
+    });
+}
+
+.submit-card__title {
+    font-family: 'Onest', sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    line-height: 1.15;
+    color: #262F0E;
+    text-transform: capitalize;
+
+    .breakpoint-large-down({
+        font-size: 28px;
+    });
+}
+
+// Dashed connecting lines between inner cards
+// Figma: centered at x=50%-18.21px, y=259.37, w=484.59, h=108.31 in 625x575 card
+.submit-card__lines {
+    position: absolute;
+    left: 8.32%;
+    top: 45.11%;
+    width: 77.53%;
+    height: 18.84%;
+    z-index: 3;
+    pointer-events: none;
+}
+
+// --------------------------------------------------------------------------
+// Inner SVG Cards (absolute positioned within submit-card)
+// Positions derived from Figma (625x575 card), converted to percentages
+// --------------------------------------------------------------------------
+
+.submit-card__inner {
+    position: absolute;
+    z-index: 6;
+    pointer-events: none;
+    height: auto;
+}
+
+// "Fill Submission Form" — left area
+// Figma: x=39, y=226, w=132.3, h=83
+.submit-card__inner--form {
+    left: 6.24%;
+    top: 39.30%;
+    width: 21.17%;
+}
+
+// "Add Course Details" — center
+// Figma: x=262, y=240, w=160, h=72
+.submit-card__inner--details {
+    left: 41.92%;
+    top: 41.74%;
+    width: 25.6%;
+}
+
+// "Upload Materials" — center-left, lower
+// Figma: x=110, y=327, w=152, h=60
+.submit-card__inner--upload {
+    left: 17.6%;
+    top: 56.87%;
+    width: 24.32%;
+}
+
+// "Confirm and Send" — right, lower
+// Figma: x=423, y=315, w=163, h=72
+.submit-card__inner--confirm {
+    left: 67.68%;
+    top: 54.78%;
+    width: 26.08%;
+}

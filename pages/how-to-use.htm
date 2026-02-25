@@ -7,73 +7,182 @@ robot_follow = "follow"
 header_image = "how-to.png"
 subtitle = "Get to know"
 
+[jumbotron how-use-intro]
+jumbotron = "how-use-intro"
+title = 0
+background = "transperant"
+templates = "template2"
+description_limit = 0
+
+[jumbotron how-use-derto]
+jumbotron = "how-use-derto"
+title = 0
+background = "transperant"
+templates = "template2"
+description_limit = 0
+
+[jumbotron how-submit-your-course-materials]
+jumbotron = "how-submit-your-course-materials"
+title = 0
+background = "transperant"
+templates = "template2"
+description_limit = 0
+
 [siteSearchInclude]
 
 ==
-<?php
 
-?>
-==
 {% component 'siteSearchInclude' %}
 
-<div class="container for_more_info">
-    <h3>
-        Find step-by-step How-To guides to help you interact with the DERTO and its resources in the best possible way, maximising the benefit for you and your students!
-    </h3>
+<div class="container-fluid">
+    {% component 'how-use-intro' %}
 </div>
 
-<div class="container how-to-use-derto guide-to">
-    <div class="container_bg">
-        <div class="top-left-corner-bg"></div>
-        <div class="bottom-right-corner-bg"></div>
-        <div class="green-flower-bg"></div>
-        <div class="subtitle">A Guide To</div>
-        <h2>How to use DERTO</h2>
-        <img src="{{'how-to-1.png'|media}}">
-        <div class="coming-soon-btn">
-            <span>Coming in January 2026</span>
+<section class="container-fluid how-to-guide-section" aria-labelledby="guide-to-title">
+    <div class="container">
+        <div class="row middle-md">
+            <div class="col-md-6 col-xs-12">
+                <div class="guide-card">
+                    <div class="guide-card__corner-tl"></div>
+                    <div class="guide-card__corner-br"></div>
+                    <img src="{{ 'assets/images/how-to/flower.png'|theme }}" alt="" role="presentation" class="guide-card__flower">
+                    <div class="guide-card__badge">
+                        <span>Coming in 2026</span>
+                    </div>
+                    <div class="guide-card__content">
+                        <p class="guide-card__subtitle">A Guide To</p>
+                        <h2 id="guide-to-title" class="guide-card__title">How To Use DERTO</h2>
+                    </div>
+                    <img src="{{ 'assets/images/how-to/connecting-lines.svg'|theme }}" alt="" role="presentation" class="guide-card__lines">
+                    <img src="{{ 'assets/images/how-to/access-derto-platform.svg'|theme }}" alt="" role="presentation" class="guide-card__inner guide-card__inner--platform">
+                    <img src="{{ 'assets/images/how-to/browse-resource-library.svg'|theme }}" alt="" role="presentation" class="guide-card__inner guide-card__inner--library">
+                    <img src="{{ 'assets/images/how-to/explore-visual-demo-sites.svg'|theme }}" alt="" role="presentation" class="guide-card__inner guide-card__inner--demo">
+                    <img src="{{ 'assets/images/how-to/access-moocs.svg'|theme }}" alt="" role="presentation" class="guide-card__inner guide-card__inner--moocs">
+                    <img src="{{ 'assets/images/how-to/download-use-materials.svg'|theme }}" alt="" role="presentation" class="guide-card__inner guide-card__inner--download">
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                {% component 'how-use-derto'%}
+            </div>
         </div>
     </div>
-</div>
+</section>
 
-<div class="container how-to-use-derto explore-options">
-    <div class="container_bg">
-        <div class="top-right-corner-bg"></div>
-        <div class="butterfly-bg"></div>
-        <div class="subtitle">Explore Your Options</div>
-        <h2>How-to submit your course materials</h2>
-        <img src="{{'how-to-2.png'|media}}">
-        <div class="coming-soon-btn">
-            <span>Coming in January 2026</span>
-        </div>
-    </div>
-</div>
 
-<div class="container how-to-use-derto">
-    <div class="row between-md around-xs how-to-use-derto-row">
-        <div class="col-md-6 col-xs-12 start-md around-xs how-to-use-item">
-            {% partial 'components/card' 
-                variant = 'purple'
-                subtitle = 'Get the Basics and Beyond on'
-                title = 'How-to make your own h5P files'
-                image = 'how-to-4.png'
-                showDownload = true
-                downloadHref = 'how_to_make_h5p.zip'
-                downloadLabel = 'Download Tutorial'
-            %}
-        </div>
-        <div class="col-md-6 col-xs-12 end-md around-xs">
-            {% partial 'components/card' 
-                variant = 'green'
-                subtitle = 'Explore Your Options'
-                title = 'How-to Make your own virtual demonstration site'
-                image = 'how-to-3.png'
-                showDownload = false
-                downloadHref = 'how_to_make_vr.zip'
-                downloadLabel = 'Download Tutorial'
-                showComingSoon = true
-                comingSoonLabel = 'Coming in january 2026'
-            %}
+<section class="container-fluid h5p-guide-section" aria-labelledby="h5p-title">
+    <div class="container for_more_info">
+        <h3>Intro Text for H5P and VR Demo Sites</h3>
+    </div>
+    <div class="container">
+        <div class="h5p-card">
+            <img src="{{ 'assets/images/how-to/purple-flower.png'|theme }}" alt="" role="presentation" class="h5p-card__flower">
+            <div class="h5p-card__badge">
+                <span>Coming in 2026</span>
+            </div>
+            <div class="h5p-card__content">
+                <p class="h5p-card__subtitle">Get the Basics and Beyond on</p>
+                <h2 id="h5p-title" class="h5p-card__title">How To Make H5P</h2>
+            </div>
+            <img src="{{ 'assets/images/how-to/connecting-lines-h5p.svg'|theme }}" alt="" role="presentation" class="h5p-card__lines">
+            <img src="{{ 'assets/images/how-to/download-install-lumi.svg'|theme }}" alt="" role="presentation" class="h5p-card__inner h5p-card__inner--lumi">
+            <img src="{{ 'assets/images/how-to/create-new-h5p.svg'|theme }}" alt="" role="presentation" class="h5p-card__inner h5p-card__inner--create">
+            <img src="{{ 'assets/images/how-to/edit-customize-your-content.svg'|theme }}" alt="" role="presentation" class="h5p-card__inner h5p-card__inner--edit">
+            <img src="{{ 'assets/images/how-to/save-or-export-your-file.svg'|theme }}" alt="" role="presentation" class="h5p-card__inner h5p-card__inner--save">
+            <div class="h5p-card__flags">
+                <nav class="h5p-card__flag-row" aria-label="Language versions">
+                    <a href="/topic/how-guides?language=Czech" class="h5p-card__flag-link" aria-label="Czech version">
+                        <img src="{{ 'assets/images/how-to/cz-flag.svg'|theme }}" alt="Czech">
+                    </a>
+                    <a href="/topic/how-guides?language=English" class="h5p-card__flag-link" aria-label="English version">
+                        <img src="{{ 'assets/images/how-to/en-flag.svg'|theme }}" alt="English">
+                    </a>
+                    <a href="/topic/how-guides?language=German" class="h5p-card__flag-link" aria-label="German version">
+                        <img src="{{ 'assets/images/how-to/ger-flag.svg'|theme }}" alt="German">
+                    </a>
+                    <a href="/topic/how-guides?language=Norwegian" class="h5p-card__flag-link" aria-label="Norwegian version">
+                        <img src="{{ 'assets/images/how-to/nor-flag.svg'|theme }}" alt="Norwegian">
+                    </a>
+                    <a href="/topic/how-guides?language=Spanish" class="h5p-card__flag-link" aria-label="Spanish version">
+                        <img src="{{ 'assets/images/how-to/esp-flag.svg'|theme }}" alt="Spanish">
+                    </a>
+                </nav>
+                <p class="h5p-card__flag-hint">Click on any language for the 'How-To' guide</p>
+            </div>
         </div>
     </div>
-</div>
+</section>
+
+
+<section class="container-fluid vr-guide-section" aria-labelledby="vr-title">
+    <div class="container for_more_info">
+        <h3>Intro Text for VR Demo Sites</h3>
+    </div>
+    <div class="container">
+        <div class="vr-card">
+            <div class="vr-card__badge">
+                <span>Coming in 2026</span>
+            </div>
+            <div class="vr-card__flags">
+                <nav class="vr-card__flag-row" aria-label="Language versions">
+                    <a href="/topic/how-guides?language=Czech" class="vr-card__flag-link" aria-label="Czech version">
+                        <img src="{{ 'assets/images/how-to/cz-flag.svg'|theme }}" alt="Czech">
+                    </a>
+                    <a href="/topic/how-guides?language=English" class="vr-card__flag-link" aria-label="English version">
+                        <img src="{{ 'assets/images/how-to/en-flag.svg'|theme }}" alt="English">
+                    </a>
+                    <a href="/topic/how-guides?language=German" class="vr-card__flag-link" aria-label="German version">
+                        <img src="{{ 'assets/images/how-to/ger-flag.svg'|theme }}" alt="German">
+                    </a>
+                    <a href="/topic/how-guides?language=Norwegian" class="vr-card__flag-link" aria-label="Norwegian version">
+                        <img src="{{ 'assets/images/how-to/nor-flag.svg'|theme }}" alt="Norwegian">
+                    </a>
+                    <a href="/topic/how-guides?language=Spanish" class="vr-card__flag-link" aria-label="Spanish version">
+                        <img src="{{ 'assets/images/how-to/esp-flag.svg'|theme }}" alt="Spanish">
+                    </a>
+                </nav>
+                <p class="vr-card__flag-hint">Click on any language for the 'How-To' guide</p>
+            </div>
+            <div class="vr-card__content">
+                <p class="vr-card__subtitle">Explore Your Options</p>
+                <h2 id="vr-title" class="vr-card__title">How-To Make Your Own Virtual Demonstration Site</h2>
+            </div>
+            <img src="{{ 'assets/images/how-to/connecting-lines-vr.svg'|theme }}" alt="" role="presentation" class="vr-card__lines">
+            <img src="{{ 'assets/images/how-to/pick-a-site.svg'|theme }}" alt="" role="presentation" class="vr-card__inner vr-card__inner--pick-site">
+            <img src="{{ 'assets/images/how-to/collect-multimedia.svg'|theme }}" alt="" role="presentation" class="vr-card__inner vr-card__inner--collect">
+            <img src="{{ 'assets/images/how-to/download-and-install-lumi.svg'|theme }}" alt="" role="presentation" class="vr-card__inner vr-card__inner--lumi">
+            <img src="{{ 'assets/images/how-to/Add-and-navigate-between-screens.svg'|theme }}" alt="" role="presentation" class="vr-card__inner vr-card__inner--navigate">
+            <img src="{{ 'assets/images/how-to/add-interactions.svg'|theme }}" alt="" role="presentation" class="vr-card__inner vr-card__inner--interactions">
+            <img src="{{ 'assets/images/how-to/export-projects-as-a-scrom.svg'|theme }}" alt="" role="presentation" class="vr-card__inner vr-card__inner--export">
+            <img src="{{ 'assets/images/how-to/green-grass.png'|theme }}" alt="" role="presentation" class="vr-card__grass">
+        </div>
+    </div>
+</section>
+
+
+<section class="container-fluid submit-guide-section" aria-labelledby="submit-title">
+    <div class="container">
+        <div class="row middle-md">
+            <div class="col-md-6 col-xs-12">
+                {%component 'how-submit-your-course-materials'%}
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="submit-card">
+                    <div class="submit-card__corner-tr"></div>
+                    <img src="{{ 'assets/images/how-to/butterfly-img.png'|theme }}" alt="" role="presentation" class="submit-card__butterfly">
+                    <div class="submit-card__badge">
+                        <span>Coming in 2026</span>
+                    </div>
+                    <div class="submit-card__content">
+                        <p class="submit-card__subtitle">Explore Your Options</p>
+                        <h2 id="submit-title" class="submit-card__title">How-To Submit Your Course Materials</h2>
+                    </div>
+                    <img src="{{ 'assets/images/how-to/connecting-lines-submit.svg'|theme }}" alt="" role="presentation" class="submit-card__lines">
+                    <img src="{{ 'assets/images/how-to/fill-submission.svg'|theme }}" alt="" role="presentation" class="submit-card__inner submit-card__inner--form">
+                    <img src="{{ 'assets/images/how-to/add-course-details.svg'|theme }}" alt="" role="presentation" class="submit-card__inner submit-card__inner--details">
+                    <img src="{{ 'assets/images/how-to/upload-materials.svg'|theme }}" alt="" role="presentation" class="submit-card__inner submit-card__inner--upload">
+                    <img src="{{ 'assets/images/how-to/confirm-and-send.svg'|theme }}" alt="" role="presentation" class="submit-card__inner submit-card__inner--confirm">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

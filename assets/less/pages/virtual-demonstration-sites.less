@@ -173,6 +173,62 @@
     }
 }
 
+.vds-how-to-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    text-align: center;
+}
+
+.vds-how-to-cta__title {
+    font-family: Onest;
+    font-weight: 600;
+    font-size: 28px;
+    color: #262F0E;
+    line-height: 1.45;
+}
+
+.vds-how-to-cta__description {
+    font-size: 18px;
+    color: rgba(38, 47, 14, 0.65);
+    line-height: 1.45;
+
+    .breakpoint-small-down({
+        font-size: 16px;
+    });
+}
+
+.vds-how-to-cta__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    background: #719E05;
+    color: #FFFCF7;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.3s ease;
+
+    &:hover {
+        background: #5F8704;
+        color: #FFFCF7;
+    }
+
+    &:after {
+        content: '';
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background: url('../images/how-to/arrow-icon.svg') no-repeat center center;
+        background-size: contain;
+        transform: scaleY(-1);
+    }
+}
+
 .demonstration-sites-detailed{
     .back-to{
         a{
