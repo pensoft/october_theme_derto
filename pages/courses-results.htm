@@ -1,8 +1,8 @@
 url = "/courses/results"
 layout = "default"
-title = "Course Results"
+title = "Resources"
 is_hidden = 0
-meta_description = "Courses Results"
+meta_description = "Resources Results"
 robot_index = "index"
 robot_follow = "follow"
 
@@ -36,8 +36,6 @@ minQueryLength = 2
                 </a>
                 
                 <div class="filter-groups">
-                    {% partial 'components/resource-filters' %}
-                    
                     <!-- Topic Filter -->
                     <div class="filter-group">
                         <button type="button" class="filter-trigger" id="topic-filter">
@@ -51,18 +49,7 @@ minQueryLength = 2
                         </div>
                     </div>
 
-                    <!-- Institution Filter -->
-                    <div class="filter-group">
-                        <button type="button" class="filter-trigger" id="department-filter">
-                            Institution <i class="filter-arrow"></i>
-                        </button>
-                        <div class="filter-options">
-                            <a href="#" class="filter-tag" data-filter="department" data-value="">All Institutions</a>
-                            {% for value, label in departments %}
-                                <a href="#" class="filter-tag" data-filter="department" data-value="{{ value }}">{{ label }}</a>
-                            {% endfor %}
-                        </div>
-                    </div>
+                    {% partial 'components/resource-filters' %}
                 </div>
             </div>
         </div>
@@ -72,7 +59,7 @@ minQueryLength = 2
     <section class="resource-library-results container">
         <div class="row">
             <div class="col-xs-12">
-                <h2>Course Results</h2>
+                <h2>Results</h2>
                 <div id="results-container" class="grouped-results-container">
                     {% partial 'components/grouped-resource-results' groupedResults=groupedResults %}
                 </div>

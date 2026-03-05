@@ -269,8 +269,11 @@
 .topics-menu{
     .topics-grid{
         display: flex;
-        justify-content: center;
+        justify-content: start;
         align-items: center;
+        .breakpoint-large-down({
+            justify-content: center;
+        });
     }
 
     .topic-img, .topic-name{
@@ -338,6 +341,11 @@
     
     .topics-grid > div:nth-child(4) .img-container:before{
         background: url('/themes/pensoft-derto/assets/images/plant-icon.svg') no-repeat center center;
+    }
+
+    .topics-grid > div:nth-child(5) .img-container:before{
+        background: url('/themes/pensoft-derto/assets/images/learn-s.svg') no-repeat center center;
+        background-size: 28px;
     }
 
     .topic-name{
