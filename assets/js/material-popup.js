@@ -408,7 +408,7 @@
                     e.preventDefault();
                     downloadGalleryAsZip();
                 };
-                downloadText.textContent = 'Download Gallery (ZIP)';
+                downloadText.textContent = 'Download Resource (ZIP)';
                 downloadSection.style.display = 'block';
             } else if (currentMaterial.document_file) {
                     const rawUrl = currentMaterial.document_file;
@@ -444,7 +444,7 @@
                         downloadBtn.href = absoluteUrl;
                         downloadBtn.target = '_blank';
                         downloadBtn.setAttribute('rel', 'noopener noreferrer');
-                        downloadText.textContent = 'Preview Document';
+                        downloadText.textContent = 'Preview Resource';
                         downloadSection.style.display = 'block';
                     } else {
                         // Direct download for office documents and other non-previewable files
@@ -452,7 +452,7 @@
                         downloadBtn.target = '_self';
                         // Hint download when possible (may be ignored cross-origin)
                         downloadBtn.setAttribute('download', '');
-                        downloadText.textContent = 'Download';
+                        downloadText.textContent = 'Download Resource';
                         downloadSection.style.display = 'block';
                     }
             } else {
