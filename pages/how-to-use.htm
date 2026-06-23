@@ -28,8 +28,16 @@ background = "transperant"
 templates = "template2"
 description_limit = 0
 
-[jumbotron how-use-text]
-jumbotron = "how-use-text"
+[jumbotron intro-text-h5p-and-virtual-demonstration]
+jumbotron = "intro-text-h5p-and-virtual-demonstration"
+title = 0
+background = "transperant"
+templates = "template2"
+description_limit = 0
+
+
+[jumbotron intro-text-virtual-demonstration-sites]
+jumbotron = "intro-text-virtual-demonstration-sites"
 title = 0
 background = "transperant"
 templates = "template2"
@@ -77,7 +85,7 @@ description_limit = 0
 
 
 <section class="container-fluid h5p-guide-section" aria-labelledby="h5p-title">
-    {% component 'how-use-text' %}
+    {% component 'intro-text-h5p-and-virtual-demonstration' %}
     <div class="container">
         <div class="h5p-card">
             <img src="{{ 'assets/images/how-to/purple-flower.png'|theme }}" alt="" role="presentation" class="h5p-card__flower">
@@ -119,9 +127,7 @@ description_limit = 0
 
 
 <section class="container-fluid vr-guide-section" aria-labelledby="vr-title">
-    <div class="container for_more_info">
-        <h3>Intro Text for Virtual Demonstration Sites</h3>
-    </div>
+    {% component 'intro-text-virtual-demonstration-sites' %}
     <div class="container">
         <div class="vr-card">
             <div class="vr-card__badge">
