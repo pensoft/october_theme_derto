@@ -28,6 +28,13 @@ background = "transperant"
 templates = "template2"
 description_limit = 0
 
+[jumbotron how-use-text]
+jumbotron = "how-use-text"
+title = 0
+background = "transperant"
+templates = "template2"
+description_limit = 0
+
 [siteSearchInclude]
 
 ==
@@ -70,9 +77,7 @@ description_limit = 0
 
 
 <section class="container-fluid h5p-guide-section" aria-labelledby="h5p-title">
-    <div class="container for_more_info">
-        <h3>Intro Text for H5P and Virtual Demonstration Sites</h3>
-    </div>
+    {% component 'how-use-text' %}
     <div class="container">
         <div class="h5p-card">
             <img src="{{ 'assets/images/how-to/purple-flower.png'|theme }}" alt="" role="presentation" class="h5p-card__flower">
