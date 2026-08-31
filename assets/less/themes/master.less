@@ -108,8 +108,49 @@ h1, h2{
 }
 
 
+// Backend "Edit" shortcuts emitted by the Pensoft components (jumbotron,
+// library, partners, accordions) for logged-in backend users. Hidden by
+// default; revealed for jumbotrons only -- the <p> the component prints is
+// the next sibling of the jumbotron template root (.banner in template1/3,
+// .jumbotron-item in template2). To enable it for the other plugins too,
+// drop the rule below and style .edit-link on its own.
 p:has(.edit-link){
     display: none!important;
+}
+
+.banner + p:has(.edit-link),
+.jumbotron-item + p:has(.edit-link){
+    display: block!important;
+    max-width: 1200px;
+    margin: -12px auto 0;
+    padding: 0 0.5rem;
+    text-align: right;
+}
+
+.edit-link{
+    display: inline-block;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #719E05;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.7;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color 0.2s ease;
+
+    &:before{
+        content: '\270E';
+        margin-right: 4px;
+        text-decoration: none;
+    }
+
+    &:hover,
+    &:focus{
+        color: #628A02;
+        text-decoration: underline;
+    }
 }
 
 .head{
